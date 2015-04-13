@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 //        return false;
 //    }
 
-    public boolean checkUser(String email, String password) {
+    public static boolean checkUser(String email, String password) { // todo: make this method non-static
         for (BaseUser user : TestingSystem.USER_LIST) {
             if (user.getEmail().equals(email)) {
                 if (user.getPasswordHash().equals(password)) {

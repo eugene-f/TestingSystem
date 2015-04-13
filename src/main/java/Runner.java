@@ -4,9 +4,11 @@ import org.boon.Boon;
 
 public class Runner {
 
+    public static Platform platform;
+
     public static void main(String[] args) {
         System.out.println("Testing System");
-        Platform platform = PlatformFactory.createPlatform();
+        platform = PlatformFactory.createPlatform();
         System.out.println(Boon.toPrettyJsonWithTypes(platform));
     }
 
