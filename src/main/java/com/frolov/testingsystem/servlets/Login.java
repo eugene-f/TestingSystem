@@ -1,5 +1,7 @@
 package com.frolov.testingsystem.servlets;
 
+import com.frolov.testingsystem.entities.user.BaseUser;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +20,8 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
 
         if (checkUser(email, password)) {
-            response.sendRedirect("/main");
+//            response.sendRedirect("/main");
+            response.sendRedirect("/account");
         } else {
             printWriter.println("Error");
         }
@@ -29,10 +32,22 @@ public class Login extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+//    public boolean checkUser(String email, String password) {
+//        if ("admin@test.com".equals(email)) {
+//            if ("admin".equals(password)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
     public boolean checkUser(String email, String password) {
-        if ("admin@test.com".equals(email)) {
-            if ("admin".equals(password)) {
-                return true;
+        for (BaseUser user : TestingSystem.USER_LIST) {
+            if (user.email.equals(email)) {
+                if (user.passwordHash.equals(password)) {
+                    TestingSystem.USER = user;
+                    return true;
+                }
             }
         }
         return false;
