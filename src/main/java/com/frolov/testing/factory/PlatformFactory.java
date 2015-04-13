@@ -1,7 +1,7 @@
-package com.frolov.testingsystem.factories;
+package com.frolov.testing.factory;
 
-import com.frolov.testingsystem.entities.Discipline;
-import com.frolov.testingsystem.entities.Platform;
+import com.frolov.testing.entity.Discipline;
+import com.frolov.testing.entity.Platform;
 import com.thedeanda.lorem.Lorem;
 
 import java.util.ArrayList;
@@ -17,15 +17,15 @@ public class PlatformFactory {
     public static Platform createPlatform() {
         Platform platform = new Platform();
 
-        platform.tutorList = new ArrayList<>();
-        platform.studentList = new ArrayList<>();
-        platform.disciplineList = new ArrayList<>();
-        platform.testList = new ArrayList<>();
+        platform.setTutors(new ArrayList<>());
+        platform.setStudents(new ArrayList<>());
+        platform.setDisciplines(new ArrayList<>());
+        platform.setTests(new ArrayList<>());
 
-        platform.tutorList.addAll(UserFactory.createTutorList(tutorsCount));
-        platform.studentList.addAll(UserFactory.createStudentList(studentsCount));
-        platform.disciplineList.addAll(PlatformFactory.createDisciplineList(disciplineCount));
-        platform.testList.addAll(TestFactory.createTestList(testsCount));
+        platform.getTutors().addAll(UserFactory.createTutorList(tutorsCount));
+        platform.getStudents().addAll(UserFactory.createStudentList(studentsCount));
+        platform.getDisciplines().addAll(PlatformFactory.createDisciplineList(disciplineCount));
+        platform.getTests().addAll(TestFactory.createTestList(testsCount));
 
         return platform;
     }
@@ -33,8 +33,8 @@ public class PlatformFactory {
     public static Discipline createDiscipline() {
         Discipline discipline = new Discipline();
 
-        discipline.name = Lorem.getWords(1, 3);
-        discipline.testList = new ArrayList<>();
+        discipline.setName(Lorem.getWords(1, 3));
+        discipline.setTests(new ArrayList<>());
 
         return discipline;
     }

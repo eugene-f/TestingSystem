@@ -1,9 +1,9 @@
-package com.frolov.testingsystem.factories;
+package com.frolov.testing.factory;
 
-import com.frolov.testingsystem.Utils;
-import com.frolov.testingsystem.entities.test.Answer;
-import com.frolov.testingsystem.entities.test.Question;
-import com.frolov.testingsystem.entities.test.Test;
+import com.frolov.testing.Util;
+import com.frolov.testing.entity.test.Answer;
+import com.frolov.testing.entity.test.Question;
+import com.frolov.testing.entity.test.Test;
 import com.thedeanda.lorem.Lorem;
 
 import java.util.ArrayList;
@@ -14,13 +14,13 @@ public class TestFactory {
     public static Test createTest() {
         Test test = new Test();
 
-        test.author = null;
-        test.discipline = null;
-        test.questionList = new ArrayList<>();
-        test.resultList = new ArrayList<>();
-        test.time = (Utils.RANDOM.nextInt(7) + 3) * 10;
-        test.isActive = false;
-        test.isDeleted = false;
+        test.setAuthor(null);
+        test.setDiscipline(null);
+        test.setQuestions(new ArrayList<>());
+        test.setCompletedSessions(new ArrayList<>());
+        test.setMinutesToPass((byte) ((Util.RANDOM.nextInt(7) + 3) * 10));
+        test.setActive(false);
+        test.setDeleted(false);
 
         return test;
     }
@@ -38,12 +38,9 @@ public class TestFactory {
     public static Question createQuestion() {
         Question question = new Question();
 
-        question.test = null;
-        question.content = Lorem.getWords(3, 7);
-        question.answerList = new ArrayList<>();
-        question.trueAnswer = null;
-        question.trueAnswerList = new ArrayList<>();
-        question.isDeleted = false;
+        question.setContent(Lorem.getWords(3, 7));
+        question.setAnswers(new ArrayList<>());
+        question.setDeleted(false);
 
         return question;
     }
@@ -61,10 +58,9 @@ public class TestFactory {
     public static Answer createAnswer() {
         Answer answer = new Answer();
 
-        answer.question = null;
-        answer.content = Lorem.getWords(3, 5);
-        answer.isTrue = false;
-        answer.isDeleted = false;
+        answer.setContent(Lorem.getWords(3, 5));
+        answer.setCorrect(false);
+        answer.setDeleted(false);
 
         return answer;
     }

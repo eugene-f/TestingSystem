@@ -1,8 +1,8 @@
-package com.frolov.testingsystem.servlets;
+package com.frolov.testing.servlet;
 
-import com.frolov.testingsystem.entities.Platform;
-import com.frolov.testingsystem.entities.user.BaseUser;
-import com.frolov.testingsystem.factories.PlatformFactory;
+import com.frolov.testing.entity.Platform;
+import com.frolov.testing.entity.user.BaseUser;
+import com.frolov.testing.factory.PlatformFactory;
 import org.boon.Boon;
 
 import javax.servlet.ServletException;
@@ -28,8 +28,8 @@ public class TestingSystem extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter printWriter = response.getWriter();
-        USER_LIST.addAll(PLATFORM.tutorList);
-        USER_LIST.addAll(PLATFORM.studentList);
+        USER_LIST.addAll(PLATFORM.getTutors());
+        USER_LIST.addAll(PLATFORM.getStudents());
         printWriter.println(Boon.toPrettyJson(PLATFORM));
     }
 }

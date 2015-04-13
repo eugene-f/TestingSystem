@@ -7,7 +7,7 @@
 
     <!--<servlet>-->
         <!--<servlet-name>Index</servlet-name>-->
-        <!--<servlet-class>com.frolov.testingsystem.servlets.Index</servlet-class>-->
+        <!--<servlet-class>com.frolov.testing.servlet.Index</servlet-class>-->
     <!--</servlet>-->
 
 </web-app>

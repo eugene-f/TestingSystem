@@ -1,5 +1,5 @@
-import com.frolov.testingsystem.entities.Platform;
-import com.frolov.testingsystem.factories.PlatformFactory;
+import com.frolov.testing.entity.Platform;
+import com.frolov.testing.factory.PlatformFactory;
 import org.boon.Boon;
 
 public class Runner {

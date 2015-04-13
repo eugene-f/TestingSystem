@@ -1,7 +1,7 @@
-package com.frolov.testingsystem.servlets;
+package com.frolov.testing.servlet;
 
-import com.frolov.testingsystem.entities.user.Student;
-import com.frolov.testingsystem.factories.UserFactory;
+import com.frolov.testing.entity.user.Student;
+import com.frolov.testing.factory.UserFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +38,9 @@ public class Registration extends HttpServlet {
 
     private void createUser(String firstName, String lastName, String email, String password) {
         Student student = UserFactory.createStudent();
-        student.firstName = firstName;
-        student.lastName = lastName;
-        student.email = email;
-        student.passwordHash = password;
+        student.setFirstName(firstName);
+        student.setLastName(lastName);
+        student.setEmail(email);
+        student.setPasswordHash(password);
     }
 }

@@ -1,6 +1,6 @@
-package com.frolov.testingsystem.servlets;
+package com.frolov.testing.servlet;
 
-import com.frolov.testingsystem.entities.user.BaseUser;
+import com.frolov.testing.entity.user.BaseUser;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,8 +43,8 @@ public class Login extends HttpServlet {
 
     public boolean checkUser(String email, String password) {
         for (BaseUser user : TestingSystem.USER_LIST) {
-            if (user.email.equals(email)) {
-                if (user.passwordHash.equals(password)) {
+            if (user.getEmail().equals(email)) {
+                if (user.getPasswordHash().equals(password)) {
                     TestingSystem.USER = user;
                     return true;
                 }
