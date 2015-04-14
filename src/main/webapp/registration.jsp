@@ -11,6 +11,8 @@
         <input type="email" name="email" placeholder="E-mail"><br>
         <input type="password" name="password" placeholder="Password"><br>
         <input type="password" name="confirmPassword" placeholder="Confirm Password"><br>
+        <input type="radio" name="userType" value="tutor">Tutor<br>
+        <input type="radio" name="userType" value="student">Student<br>
         <input type="submit" value="Reg"><br>
     </form>
 </body>

@@ -1,6 +1,8 @@
 package com.frolov.testing.servlet;
 
+import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
+import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.factory.UserFactory;
 
 import javax.servlet.RequestDispatcher;
@@ -22,12 +24,17 @@ public class Registration extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+        String userType = request.getParameter("userType");
 
         if (password.equals(confirmPassword)) {
-            createUser(firstName, lastName, email, password);
-            response.sendRedirect("/main");
+            if (checkEmail(email)) { // todo: or (   getUserByEmail(email) == null   )
+                createUser(firstName, lastName, email, password, userType);
+                response.sendRedirect("/main");
+            } else {
+                printWriter.println("Error Email");
+            }
         } else {
-            printWriter.println("Error");
+            printWriter.println("Error Password");
         }
     }
 
@@ -36,11 +43,34 @@ public class Registration extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    private void createUser(String firstName, String lastName, String email, String password) {
-        Student student = UserFactory.createStudent();
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setEmail(email);
-        student.setPasswordHash(password);
+    private void createUser(String firstName, String lastName, String email, String password, String userType) {
+        BaseUser user = null;
+        switch (userType) {
+            case "tutor": user = UserFactory.createTutor(); break;
+            case "student": user = UserFactory.createStudent(); break;
+            default: return;
+        }
+        if (user != null) {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setPasswordHash(password);
+            switch (userType) {
+                case "tutor": TestingSystem.PLATFORM.getTutors().add((Tutor) user); break;
+                case "student": TestingSystem.PLATFORM.getStudents().add((Student) user); break;
+                default: return;
+            }
+            TestingSystem.USER_LIST.add(user);
+        }
     }
+
+    private boolean checkEmail(String email) {
+        for (BaseUser user : TestingSystem.USER_LIST) {
+            if (user.getEmail().equals(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

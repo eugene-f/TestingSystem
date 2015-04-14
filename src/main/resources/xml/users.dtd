@@ -1,0 +1,16 @@
+<!ENTITY tutor "tutor">
+<!ENTITY student "student">
+<!ENTITY true "true">
+<!ENTITY false "false">
+
+<!ELEMENT users (user)>
+<!ELEMENT user (uuid, firstName, lastName, email, passwordHash, deleted)>
+<!ATTLIST user
+          id ID #REQUIRED
+          type (&tutor; | &student;) #REQUIRED>
+<!ELEMENT uuid (#PCDATA)>
+<!ELEMENT firstName (#PCDATA)>
+<!ELEMENT lastName (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT passwordHash (#PCDATA)>
+<!ELEMENT deleted (&false; | &true;)>

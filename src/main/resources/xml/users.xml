@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE users SYSTEM "users.dtd">
+<users xmlns="http://testing.frolov.com/resources/xml/users/"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="users.xsd">
+    <user type="tutor" id="608519104">
+        <uuid>d05443bb-3861-4def-8459-dabbda2585a1</uuid>
+        <firstName>Terrie</firstName>
+        <lastName>Hahn</lastName>
+        <email>Terrie_Hahn@gmail.com</email>
+        <passwordHash>28473</passwordHash>
+        <deleted>false</deleted>
+    </user>
+    <user type="student" id="1092639626">
+        <uuid>c6adae89-c16e-40e2-8a32-6d82422d8f8f</uuid>
+        <firstName>Alyssa</firstName>
+        <lastName>Merritt</lastName>
+        <email>Alyssa_Merritt@gmail.com</email>
+        <passwordHash>04021</passwordHash>
+        <deleted>false</deleted>
+    </user>
+</users>

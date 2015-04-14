@@ -2,6 +2,7 @@ package com.frolov.testing;
 
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Tutor;
+import com.frolov.testing.servlet.Login;
 import com.frolov.testing.servlet.TestingSystem;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class LoginTest {
 
         TestingSystem.USER_LIST.add(user);
 
-        assertTrue(com.frolov.testing.servlet.Login.checkUser("Robert_Ray@gmail.com", "0123456789"));
+        assertTrue(Login.checkUser("Robert_Ray@gmail.com", "0123456789"));
 
     }
 

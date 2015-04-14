@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://testing.frolov.com/resurces/xml/xsd/user/">
+    <element name="users">
+        <complexType>
+            <sequence>
+                <element name="user" type="user_type" minOccuts="0" maxOccuts="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType>
+        <sequence>
+            <element name="uuid" type="string"/>
+            <element name="first_name" type="string"/>
+            <element name="last_name" type="string"/>
+            <element name="email" type="string"/>
+            <element name="deleted" type="string"/>
+        </sequence>
+        <attribute name="type" type="string" use="required"/>
+        <attribute name="id" type="string" use="required"/>
+    </complexType>
+</schema>
