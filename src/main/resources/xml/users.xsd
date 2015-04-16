@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://testing.frolov.com/resurces/xml/xsd/user/">
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
     <element name="users">
         <complexType>
             <sequence>
-                <element name="user" type="user_type" minOccuts="0" maxOccuts="unbounded"/>
+                <element name="user" type="usert" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
         </complexType>
     </element>
-    <complexType>
-        <sequence>
+    <complexType name="usert">
+        <sequence minOccurs="1" maxOccurs="1">
             <element name="uuid" type="string"/>
             <element name="first_name" type="string"/>
             <element name="last_name" type="string"/>

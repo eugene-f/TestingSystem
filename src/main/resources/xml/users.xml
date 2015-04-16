@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE users SYSTEM "users.dtd">
+<!--<!DOCTYPE users SYSTEM "users.dtd">-->
 <users xmlns="http://testing.frolov.com/resources/xml/users/"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="users.xsd">
+       xsi:schemaLocation="http://testing.frolov.com/resources/xml/users/ users.xsd">
     <user type="tutor" id="608519104">
         <uuid>d05443bb-3861-4def-8459-dabbda2585a1</uuid>
         <firstName>Terrie</firstName>
