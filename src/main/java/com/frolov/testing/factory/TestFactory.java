@@ -15,6 +15,7 @@ public class TestFactory {
         Test test = new Test();
 
         test.setAuthor(null);
+        test.setName(Lorem.getWords(3, 7));
         test.setDiscipline(null);
         test.setQuestions(new ArrayList<>());
         test.setCompletedSessions(new ArrayList<>());

@@ -1,6 +1,7 @@
 package com.frolov.testing.servlet;
 
 import com.frolov.testing.entity.user.BaseUser;
+import com.frolov.testing.jdbc.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "Login", urlPatterns = "/login")
 public class Login extends HttpServlet {
@@ -41,6 +43,15 @@ public class Login extends HttpServlet {
             }
         }
         return false;
+//        try {
+//            BaseUser byEmail = new UserDao().findByEmail(email);
+//            if (byEmail.getPasswordHash().equals(password)) {
+//                return true;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
     }
 
 }

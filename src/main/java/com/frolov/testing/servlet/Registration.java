@@ -4,6 +4,7 @@ import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.factory.UserFactory;
+import com.frolov.testing.jdbc.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "Registration", urlPatterns = "/registration")
 public class Registration extends HttpServlet {
@@ -61,6 +63,11 @@ public class Registration extends HttpServlet {
                 default: return;
             }
             TestingSystem.USER_LIST.add(user);
+//            try {
+//                new UserDao().insert(user);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 

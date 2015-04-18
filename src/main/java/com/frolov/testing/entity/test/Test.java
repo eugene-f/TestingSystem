@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Test extends BaseEntity {
 
     private Tutor author; // todo: make final
+    private String name;
     private Discipline discipline;
     private List<Question> questions;
     private byte minutesToPass;
@@ -47,6 +48,14 @@ public class Test extends BaseEntity {
 
     public void setAuthor(Tutor author) {
         this.author = author;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Discipline getDiscipline() {

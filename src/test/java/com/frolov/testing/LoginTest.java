@@ -17,7 +17,6 @@ public class LoginTest {
 
         BaseUser user = new Tutor();
         user.setId(1);
-        user.setUuid(UUID.randomUUID());
         user.setFirstName("Robert");
         user.setLastName("Ray");
         user.setEmail("Robert_Ray@gmail.com");
