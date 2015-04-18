@@ -1,6 +1,7 @@
 package com.frolov.testing.factory;
 
 import com.frolov.testing.Util;
+import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.thedeanda.lorem.Lorem;
@@ -11,15 +12,21 @@ import java.util.UUID;
 
 public class UserFactory {
 
+    public static BaseUser initUser(BaseUser user) {
+
+        user.setId(Math.abs(Util.RANDOM.nextInt()));
+        user.setFirstName(Lorem.getFirstName());
+        user.setLastName(Lorem.getLastName());
+        user.setEmail(user.getFirstName() + "_" + user.getLastName() + "@gmail.com");
+        user.setPasswordHash(Lorem.getZipCode());
+
+        return user;
+    }
+
     public static Tutor createTutor() {
         Tutor tutor = new Tutor();
 
-        tutor.setId(Math.abs(Util.RANDOM.nextInt()));
-        tutor.setUuid(UUID.randomUUID());
-        tutor.setFirstName(Lorem.getFirstName());
-        tutor.setLastName(Lorem.getLastName());
-        tutor.setEmail(tutor.getFirstName() + "_" + tutor.getLastName() + "@gmail.com");
-        tutor.setPasswordHash(Lorem.getZipCode());
+        initUser(tutor);
 
         tutor.setTests(new ArrayList<>());
         tutor.setCompletedSessions(new ArrayList<>());
@@ -40,12 +47,7 @@ public class UserFactory {
     public static Student createStudent() {
         Student student = new Student();
 
-        student.setId(Math.abs(Util.RANDOM.nextInt()));
-        student.setUuid(UUID.randomUUID());
-        student.setFirstName(Lorem.getFirstName());
-        student.setLastName(Lorem.getLastName());
-        student.setEmail(student.getFirstName() + "_" + student.getLastName() + "@gmail.com");
-        student.setPasswordHash(Lorem.getZipCode());
+        initUser(student);
 
         student.setCompletedSessions(new ArrayList<>());
         student.setToPassTests(new ArrayList<>());

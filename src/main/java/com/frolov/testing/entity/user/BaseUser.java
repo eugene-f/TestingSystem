@@ -1,31 +1,39 @@
 package com.frolov.testing.entity.user;
 
+import com.frolov.testing.entity.BaseEntity;
+
 import java.util.UUID;
 
-public abstract class BaseUser {
+public abstract class BaseUser extends BaseEntity {
 
-    private int id;
-    private UUID uuid;
     private String firstName;
     private String lastName;
     private String email;
     private String passwordHash;
-    private boolean deleted;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @Override
     public UUID getUuid() {
-        return uuid;
+        return super.getUuid();
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return super.isDeleted();
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        super.setDeleted(deleted);
     }
 
     public String getFirstName() {
@@ -58,14 +66,6 @@ public abstract class BaseUser {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
 }

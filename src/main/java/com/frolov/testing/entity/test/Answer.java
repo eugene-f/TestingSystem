@@ -1,10 +1,38 @@
 package com.frolov.testing.entity.test;
 
-public class Answer {
+import com.frolov.testing.entity.BaseEntity;
+
+import java.util.UUID;
+
+public class Answer extends BaseEntity {
 
     private String content;
-    private boolean correct;
-    private boolean deleted;
+    private boolean correct; // todo: delete
+
+    @Override
+    public UUID getUuid() {
+        return super.getUuid();
+    }
+
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return super.isDeleted();
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        super.setDeleted(deleted);
+    }
 
     public String getContent() {
         return content;
@@ -20,14 +48,6 @@ public class Answer {
 
     public void setCorrect(boolean correct) {
         this.correct = correct;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
 }

@@ -1,18 +1,44 @@
 package com.frolov.testing.entity.test;
 
+import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.user.Student;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
-public class Session {
+public class Session extends BaseEntity {
 
-    private Test test;
-    private Student student;
+    private Test test;  // todo: make final
+    private Student student;  // todo: make final
+    private Date startDate;  // todo: make final
     private Map<Question, Answer> completedQuestionAnswerMap;
-    private Date startDate;
     private byte result;
-    private boolean deleted;
+
+    @Override
+    public UUID getUuid() {
+        return super.getUuid();
+    }
+
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return super.isDeleted();
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        super.setDeleted(deleted);
+    }
 
     public Test getTest() {
         return test;
@@ -30,14 +56,6 @@ public class Session {
         this.student = student;
     }
 
-    public Map<Question, Answer> getCompletedQuestionAnswerMap() {
-        return completedQuestionAnswerMap;
-    }
-
-    public void setCompletedQuestionAnswerMap(Map<Question, Answer> completedQuestionAnswerMap) {
-        this.completedQuestionAnswerMap = completedQuestionAnswerMap;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -46,20 +64,20 @@ public class Session {
         this.startDate = startDate;
     }
 
+    public Map<Question, Answer> getCompletedQuestionAnswerMap() {
+        return completedQuestionAnswerMap;
+    }
+
+    public void setCompletedQuestionAnswerMap(Map<Question, Answer> completedQuestionAnswerMap) {
+        this.completedQuestionAnswerMap = completedQuestionAnswerMap;
+    }
+
     public byte getResult() {
         return result;
     }
 
     public void setResult(byte result) {
         this.result = result;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 
 }

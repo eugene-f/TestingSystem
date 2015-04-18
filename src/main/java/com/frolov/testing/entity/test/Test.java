@@ -1,19 +1,45 @@
 package com.frolov.testing.entity.test;
 
+import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.Discipline;
 import com.frolov.testing.entity.user.Tutor;
 
 import java.util.List;
+import java.util.UUID;
 
-public class Test {
+public class Test extends BaseEntity {
 
-    private Tutor author;
+    private Tutor author; // todo: make final
     private Discipline discipline;
     private List<Question> questions;
-    private List<Session> completedSessions; // todo: delete
     private byte minutesToPass;
-    private boolean active;
-    private boolean deleted;
+    private boolean active = false;
+    private List<Session> completedSessions; // todo: delete
+
+    @Override
+    public UUID getUuid() {
+        return super.getUuid();
+    }
+
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return super.isDeleted();
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        super.setDeleted(deleted);
+    }
 
     public Tutor getAuthor() {
         return author;
@@ -39,14 +65,6 @@ public class Test {
         this.questions = questions;
     }
 
-    public List<Session> getCompletedSessions() {
-        return completedSessions;
-    }
-
-    public void setCompletedSessions(List<Session> completedSessions) {
-        this.completedSessions = completedSessions;
-    }
-
     public byte getMinutesToPass() {
         return minutesToPass;
     }
@@ -63,12 +81,12 @@ public class Test {
         this.active = active;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public List<Session> getCompletedSessions() {
+        return completedSessions;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setCompletedSessions(List<Session> completedSessions) {
+        this.completedSessions = completedSessions;
     }
 
 }

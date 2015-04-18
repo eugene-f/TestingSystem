@@ -5,27 +5,34 @@ import com.frolov.testing.entity.test.Test;
 import java.util.List;
 import java.util.UUID;
 
-public class Discipline {
+public class Discipline extends BaseEntity {
 
-    private int id;
-    private UUID uuid;
     private String name;
     private List<Test> tests;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @Override
     public UUID getUuid() {
-        return uuid;
+        return super.getUuid();
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return super.isDeleted();
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        super.setDeleted(deleted);
     }
 
     public String getName() {
