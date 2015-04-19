@@ -11,7 +11,7 @@
         <input type="number" name="minutesToPass" placeholder="Minutes to pass"><br>
         <input type="number" name="questionCount" placeholder="Question count"><br>
         <input type="number" name="answerCount" placeholder="Answer count"><br>
-        <input type="checkbox" name="active">Active<br>
+        <input type="checkbox" name="publicated">Publicate<br>
         <input type="submit" value="Create"><br>
     </form>
 </body>

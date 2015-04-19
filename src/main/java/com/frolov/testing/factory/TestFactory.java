@@ -20,7 +20,7 @@ public class TestFactory {
         test.setQuestions(new ArrayList<>());
         test.setCompletedSessions(new ArrayList<>());
         test.setMinutesToPass((byte) ((Util.RANDOM.nextInt(7) + 3) * 10));
-        test.setActive(false);
+        test.setPublicated(false);
         test.setDeleted(false);
 
         return test;

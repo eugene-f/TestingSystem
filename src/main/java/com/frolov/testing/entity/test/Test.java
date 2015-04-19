@@ -14,7 +14,7 @@ public class Test extends BaseEntity {
     private Discipline discipline;
     private List<Question> questions;
     private byte minutesToPass;
-    private boolean active = false;
+    private boolean publicated = false;
     private List<Session> completedSessions; // todo: delete
 
     @Override
@@ -82,12 +82,12 @@ public class Test extends BaseEntity {
         this.minutesToPass = minutesToPass;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isPublicated() {
+        return publicated;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPublicated(boolean publicated) {
+        this.publicated = publicated;
     }
 
     public List<Session> getCompletedSessions() {
