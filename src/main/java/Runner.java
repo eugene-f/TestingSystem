@@ -17,17 +17,9 @@ public class Runner {
 //        System.out.println(Boon.toPrettyJsonWithTypes(platform));
 
         UserDao userDao = new UserDao();
-
         userDao.insert(UserFactory.createStudent());
-        userDao.insert(UserFactory.createStudent());
-        userDao.insert(UserFactory.createStudent());
-        userDao.insert(UserFactory.createStudent());
-        userDao.insert(UserFactory.createStudent());
-        userDao.insert(UserFactory.createStudent());
-        userDao.insert(UserFactory.createStudent());
-
-        BaseUser byEmail = userDao.findByEmail("Robbie_Marks@gmail.com");
-        System.out.println(Boon.toPrettyJson(byEmail));
+        BaseUser user = userDao.findByEmail("Robbie_Marks@gmail.com");
+        System.out.println(Boon.toPrettyJson(user));
     }
 
 }

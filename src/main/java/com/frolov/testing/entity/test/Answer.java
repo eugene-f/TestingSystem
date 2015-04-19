@@ -15,12 +15,12 @@ public class Answer extends BaseEntity {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return super.getId();
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         super.setId(id);
     }
 

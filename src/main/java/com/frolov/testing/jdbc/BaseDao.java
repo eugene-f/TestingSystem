@@ -2,7 +2,9 @@ package com.frolov.testing.jdbc;
 
 import com.frolov.testing.entity.BaseEntity;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public abstract class BaseDao<T extends BaseEntity> {
@@ -13,11 +15,21 @@ public abstract class BaseDao<T extends BaseEntity> {
     protected static final String USER = database.getString("username");
     protected static final String PASSWORD = database.getString("password");
 
-//    public abstract void create(T entity);
-//    public abstract void read(T entity);
-//    public abstract void update(T entity);
-//    public abstract void delete(T entity);
+    Connection connection;
 
+    public BaseDao() {
+        try {
+            Class.forName(DRIVER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        connection.close();
+    }
 
 //    public abstract List<T> getAll();
     public abstract int insert(T entity);

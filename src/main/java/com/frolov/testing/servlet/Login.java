@@ -34,6 +34,11 @@ public class Login extends HttpServlet {
     }
 
     public static boolean checkUser(String email, String password) { // todo: make this method non-static
+//        return checkUserInMemory(email, password);
+        return checkUserInDatabase(email, password);
+    }
+
+    private static boolean checkUserInMemory(String email, String password) {
         for (BaseUser user : TestingSystem.USER_LIST) {
             if (user.getEmail().equals(email)) {
                 if (user.getPasswordHash().equals(password)) {
@@ -43,15 +48,15 @@ public class Login extends HttpServlet {
             }
         }
         return false;
-//        try {
-//            BaseUser byEmail = new UserDao().findByEmail(email);
-//            if (byEmail.getPasswordHash().equals(password)) {
-//                return true;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
+    }
+
+    public static boolean checkUserInDatabase(String email, String password) { // todo: make this method non-static
+        BaseUser user = new UserDao().findByEmail(email);
+        if (user.getPasswordHash().equals(password)) {
+            TestingSystem.USER = user;
+            return true;
+        }
+        return false;
     }
 
 }

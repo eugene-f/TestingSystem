@@ -63,11 +63,7 @@ public class Registration extends HttpServlet {
                 default: return;
             }
             TestingSystem.USER_LIST.add(user);
-//            try {
-//                new UserDao().insert(user);
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
+            new UserDao().insert(user);
         }
     }
 

@@ -5,18 +5,18 @@ import java.util.UUID;
 public abstract class BaseEntity {
 
     protected final UUID uuid = UUID.randomUUID();
-    protected int id;
+    protected Integer id = null;
     private boolean deleted = false;
 
     public UUID getUuid() {
         return uuid;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
