@@ -1,11 +1,8 @@
 import com.frolov.testing.entity.Platform;
 import com.frolov.testing.entity.user.BaseUser;
-import com.frolov.testing.factory.PlatformFactory;
 import com.frolov.testing.factory.UserFactory;
 import com.frolov.testing.jdbc.UserDao;
 import org.boon.Boon;
-
-import java.sql.SQLException;
 
 public class Runner {
 

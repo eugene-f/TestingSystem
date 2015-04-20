@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 @WebServlet(name = "Registration", urlPatterns = "/registration")
 public class Registration extends HttpServlet {
@@ -33,10 +32,10 @@ public class Registration extends HttpServlet {
                 createUser(firstName, lastName, email, password, userType);
                 response.sendRedirect("/main");
             } else {
-                printWriter.println("Error Email");
+                printWriter.println("This email is already registered in the system\n");
             }
         } else {
-            printWriter.println("Error Password");
+            printWriter.println("Password does not match");
         }
     }
 

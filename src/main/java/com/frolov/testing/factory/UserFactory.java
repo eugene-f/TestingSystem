@@ -8,7 +8,6 @@ import com.thedeanda.lorem.Lorem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class UserFactory {
 
@@ -28,7 +27,7 @@ public class UserFactory {
 
         initUser(tutor);
 
-        tutor.setTests(new ArrayList<>());
+        tutor.setTests(TestFactory.createTestList(1));
         tutor.setCompletedSessions(new ArrayList<>());
 
         return tutor;
@@ -50,7 +49,7 @@ public class UserFactory {
         initUser(student);
 
         student.setCompletedSessions(new ArrayList<>());
-        student.setToPassTests(new ArrayList<>());
+        student.setToPassTests(TestFactory.createTestList(1));
         student.setCurrentSession(null);
 
         return student;

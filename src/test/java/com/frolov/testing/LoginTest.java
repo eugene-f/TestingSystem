@@ -6,8 +6,6 @@ import com.frolov.testing.servlet.Login;
 import com.frolov.testing.servlet.TestingSystem;
 import org.junit.Test;
 
-import java.util.UUID;
-
 import static org.junit.Assert.*;
 
 public class LoginTest {

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 @WebServlet(name = "Login", urlPatterns = "/login")
 public class Login extends HttpServlet {
@@ -24,7 +23,7 @@ public class Login extends HttpServlet {
         if (checkUser(email, password)) {
             response.sendRedirect("/account");
         } else {
-            printWriter.println("Error");
+            printWriter.println("You have entered incorrect email or password");
         }
     }
 
@@ -42,7 +41,7 @@ public class Login extends HttpServlet {
         for (BaseUser user : TestingSystem.USER_LIST) {
             if (user.getEmail().equals(email)) {
                 if (user.getPasswordHash().equals(password)) {
-                    TestingSystem.USER = user;
+                    TestingSystem.CURRENT_USER = user;
                     return true;
                 }
             }
@@ -53,7 +52,7 @@ public class Login extends HttpServlet {
     public static boolean checkUserInDatabase(String email, String password) { // todo: make this method non-static
         BaseUser user = new UserDao().findByEmail(email);
         if (user.getPasswordHash().equals(password)) {
-            TestingSystem.USER = user;
+            TestingSystem.CURRENT_USER = user;
             return true;
         }
         return false;

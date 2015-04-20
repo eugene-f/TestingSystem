@@ -8,6 +8,8 @@ import java.sql.*;
 
 public class UserDao extends BaseDao<BaseUser> {
 
+    public Connection connection;
+
     private static final String TABLE_NAME = "USERS";
 
     private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORDHASH) VALUES (NULL, ?, ?, ?, ?)";
@@ -15,8 +17,12 @@ public class UserDao extends BaseDao<BaseUser> {
     private static final String FIND_BY_EMAIL = "SELECT * FROM " + TABLE_NAME + " WHERE EMAIL = ?";
     private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
 
+//    public UserDao(Connection connection) {
+//        this.connection = connection;
+//    }
+
     @Override
-    public int insert(BaseUser entity) {
+    public Integer insert(BaseUser entity) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
 
@@ -33,11 +39,11 @@ public class UserDao extends BaseDao<BaseUser> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return null;
     }
 
     @Override
-    public BaseUser findById(int id) {
+    public BaseUser findById(Integer id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
 
@@ -85,7 +91,7 @@ public class UserDao extends BaseDao<BaseUser> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
 

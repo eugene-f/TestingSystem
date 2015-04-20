@@ -18,6 +18,6 @@ public class Account extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter printWriter = response.getWriter();
-        printWriter.println(Boon.toPrettyJson(TestingSystem.USER));
+        printWriter.println(Boon.toPrettyJson(TestingSystem.CURRENT_USER));
     }
 }

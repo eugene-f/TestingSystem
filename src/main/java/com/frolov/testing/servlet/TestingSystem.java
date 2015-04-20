@@ -20,7 +20,7 @@ public class TestingSystem extends HttpServlet {
 
     public static final Platform PLATFORM = PlatformFactory.createPlatform();
     public static final List<BaseUser> USER_LIST = new ArrayList<>();
-    public static BaseUser USER;
+    public static BaseUser CURRENT_USER;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

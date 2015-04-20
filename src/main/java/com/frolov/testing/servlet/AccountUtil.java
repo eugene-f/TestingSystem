@@ -24,7 +24,7 @@ public class AccountUtil {
         BaseUser user = getUserByEmail(email);
         if (user != null) {
             if (checkPasswordByUser(user, password)) {
-                TestingSystem.USER = user;
+                TestingSystem.CURRENT_USER = user;
                 // User is validated
                 return true;
             } else {
@@ -37,8 +37,8 @@ public class AccountUtil {
         }
     }
 
-    static void createUser(String firstName, String lastName, String email, String password, String userType) {
-        BaseUser user;
+    static BaseUser createUser(String firstName, String lastName, String email, String password, String userType) {
+        BaseUser user = null;
         switch (userType) {
             case "tutor":
                 user = UserFactory.createTutor();
@@ -47,7 +47,7 @@ public class AccountUtil {
                 user = UserFactory.createStudent();
                 break;
             default:
-                return;
+                break;
         }
         if (user != null) {
             user.setFirstName(firstName);
@@ -62,10 +62,11 @@ public class AccountUtil {
                     TestingSystem.PLATFORM.getStudents().add((Student) user);
                     break;
                 default:
-                    return;
+                    break;
             }
             TestingSystem.USER_LIST.add(user);
         }
+        return user;
     }
 
 }

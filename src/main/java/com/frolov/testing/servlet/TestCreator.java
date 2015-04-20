@@ -16,7 +16,7 @@ public class TestCreator extends HttpServlet {
         String minutesToPass = request.getParameter("minutesToPass");
         String questionCount = request.getParameter("questionCount");
         String answerCount = request.getParameter("answerCount");
-        String active = request.getParameter("active");
+        String publicated = request.getParameter("publicated");
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/create_questions.jsp");
         request.setAttribute("question_count", questionCount);

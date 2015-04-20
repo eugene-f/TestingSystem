@@ -4,8 +4,8 @@ import java.util.UUID;
 
 public abstract class BaseEntity {
 
-    protected final UUID uuid = UUID.randomUUID();
-    protected Integer id = null;
+    private final UUID uuid = UUID.randomUUID();
+    private Integer id = null;
     private boolean deleted = false;
 
     public UUID getUuid() {
