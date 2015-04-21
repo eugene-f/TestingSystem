@@ -1,31 +1,33 @@
 package com.frolov.testing.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.frolov.testing.dao.xml.XmlDaoFactory;
 
-public class DaoFactory {
+import java.util.EnumMap;
 
-    private static final DaoFactory instance = new DaoFactory();
-    private static final String URL = "jdbc:h2:database";
-    private static final String USERNAME = "sa";
-    private static final String PASSWORD = "sa";
+public abstract class DaoFactory {
 
-    private DaoFactory() {
+    private static DaoFactory instance;
+
+    static EnumMap<Type, DaoFactory> factories = new EnumMap<Type, DaoFactory>(Type.class);
+
+    static {
+        factories.put(Type.Jdbc, JdbcDaoFactory.getInstance());
+        factories.put(Type.Xml, XmlDaoFactory.getInstance());
     }
 
-    public static DaoFactory getInstance() {
-        return instance;
-    }
-
-    public JdbcUserDao createJdbcUserDao() throws DaoException {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
-            throw new DaoException("Соединение не установлено", e);
+    public static DaoFactory getInstance(Type type) {
+/*        switch (type) {
+            case Jdbc: return JdbcDaoFactory.getInstance();
+            case Xml: return XmlDaoFactory.getInstance();
         }
-        return new JdbcUserDao(connection);
+        return instance;*/
+        return factories.get(type);
     }
+
+    private enum Type {
+        Jdbc, Xml
+    }
+
+    public abstract  <T extends JdbcBaseDao> T create(Class<T> aClass);
 
 }

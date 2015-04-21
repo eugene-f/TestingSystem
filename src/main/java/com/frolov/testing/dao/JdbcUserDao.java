@@ -6,19 +6,20 @@ import java.sql.Connection;
 
 public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
-    private Connection connection;
+    private static final String TABLE_NAME = "USERS";
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORDHASH) VALUES (NULL, ?, ?, ?, ?)";
 
     public JdbcUserDao(Connection connection) {
-        this.connection = connection;
+        super(connection);
     }
 
     @Override
-    public BaseUser create(BaseUser entity) throws DaoException {
+    public BaseUser insert(BaseUser entity) throws DaoException {
         return null;
     }
 
     @Override
-    public BaseUser read(Long id) throws DaoException {
+    public BaseUser findById(Long id) throws DaoException {
         return null;
     }
 
@@ -28,7 +29,12 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
     }
 
     @Override
-    public boolean delete(Long id) throws DaoException {
+    public boolean deleteById(Long id) throws DaoException {
         return false;
+    }
+
+    @Override
+    public BaseUser findByEmail(String email) throws DaoException{
+        return null;
     }
 }

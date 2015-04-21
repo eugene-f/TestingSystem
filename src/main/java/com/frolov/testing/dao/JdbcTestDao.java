@@ -2,15 +2,21 @@ package com.frolov.testing.dao;
 
 import com.frolov.testing.entity.test.Test;
 
+import java.sql.Connection;
+
 public class JdbcTestDao extends JdbcBaseDao<Test> implements TestDao {
 
+    public JdbcTestDao(Connection connection) {
+        super(connection);
+    }
+
     @Override
-    public Test create(Test entity) throws DaoException {
+    public Test insert(Test entity) throws DaoException {
         return null;
     }
 
     @Override
-    public Test read(Long id) throws DaoException {
+    public Test findById(Long id) throws DaoException {
         return null;
     }
 
@@ -20,7 +26,7 @@ public class JdbcTestDao extends JdbcBaseDao<Test> implements TestDao {
     }
 
     @Override
-    public boolean delete(Long id) throws DaoException {
+    public boolean deleteById(Long id) throws DaoException {
         return false;
     }
 

@@ -11,6 +11,6 @@ public abstract class BaseDao<T extends BaseEntity> {
 //    public abstract boolean markAsDeleted(Integer id);
 //    public abstract boolean markAsDeleted(T entity);
     public abstract boolean delete(Integer id);
-//    public abstract boolean delete(T entity);
+//    public abstract boolean deleteById(T entity);
 
 }
