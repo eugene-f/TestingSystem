@@ -21,12 +21,12 @@ public class Session extends BaseEntity {
     }
 
     @Override
-    public Integer getId() {
+    public Long getId() {
         return super.getId();
     }
 
     @Override
-    public void setId(Integer id) {
+    public void setId(Long id) {
         super.setId(id);
     }
 
