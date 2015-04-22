@@ -1,14 +1,10 @@
 package com.frolov.testing.dao;
 
-import com.frolov.testing.dao.xml.XmlDaoFactory;
-
 import java.util.EnumMap;
 
 public abstract class DaoFactory {
 
-    private static DaoFactory instance;
-
-    static EnumMap<Type, DaoFactory> factories = new EnumMap<Type, DaoFactory>(Type.class);
+    private static EnumMap<Type, DaoFactory> factories = new EnumMap<Type, DaoFactory>(Type.class);
 
     static {
         factories.put(Type.Jdbc, JdbcDaoFactory.getInstance());
@@ -16,18 +12,18 @@ public abstract class DaoFactory {
     }
 
     public static DaoFactory getInstance(Type type) {
-/*        switch (type) {
-            case Jdbc: return JdbcDaoFactory.getInstance();
-            case Xml: return XmlDaoFactory.getInstance();
-        }
-        return instance;*/
+//        switch (type) {
+//            case Jdbc: return JdbcDaoFactory.getInstance();
+//            case Xml: return XmlDaoFactory.getInstance();
+//        }
+//        return instance;
         return factories.get(type);
     }
 
-    private enum Type {
+    public abstract <T extends JdbcBaseDao> T create(Class<T> daoClass); // fixme: this not working in XmlDaoFactory, because <T extends JdbcBaseDao>
+
+    public enum Type {
         Jdbc, Xml
     }
-
-    public abstract  <T extends JdbcBaseDao> T create(Class<T> aClass);
 
 }

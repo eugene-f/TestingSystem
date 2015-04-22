@@ -21,7 +21,7 @@ public class Runner {
 //        BaseUser user = userDao.findByEmail("Robbie_Marks@gmail.com");
 //        System.out.println(Boon.toPrettyJson(user));
 
-        UserDao UserDao = DaoFactory.getInstance().create(JdbcUserDao.class);
+        UserDao UserDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
         UserDao.findById(137L);
     }
 

@@ -13,7 +13,7 @@ public class UserFactory {
 
     public static BaseUser initUser(BaseUser user) {
 
-        user.setId(Math.abs(Util.RANDOM.nextInt()));
+        user.setId(Math.abs(Util.RANDOM.nextLong()));
         user.setFirstName(Lorem.getFirstName());
         user.setLastName(Lorem.getLastName());
         user.setEmail(user.getFirstName() + "_" + user.getLastName() + "@gmail.com");

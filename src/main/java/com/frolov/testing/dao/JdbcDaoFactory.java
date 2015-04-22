@@ -1,7 +1,5 @@
 package com.frolov.testing.dao;
 
-import com.frolov.testing.jdbc.BaseDao;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,17 +18,17 @@ public class JdbcDaoFactory extends DaoFactory {
         return instance;
     }
 
-/*    public JdbcUserDao createJdbcUserDao() throws DaoException {
-        Connection connection = null;
-        connection = getConnection();
-        return new JdbcUserDao(connection);
-    }
-
-    public JdbcTestDao createJdbcTestDao() throws DaoException {
-        Connection connection = null;
-        connection = getConnection();
-        return new JdbcTestDao(connection);
-    }*/
+//    public JdbcUserDao createJdbcUserDao() throws DaoException { // fixme: old JdbcUserDao creator;
+//        Connection connection = null;
+//        connection = getConnection();
+//        return new JdbcUserDao(connection);
+//    }
+//
+//    public JdbcTestDao createJdbcTestDao() throws DaoException { // fixme: old JdbcTestDao creator;
+//        Connection connection = null;
+//        connection = getConnection();
+//        return new JdbcTestDao(connection);
+//    }
 
     private Connection getConnection() {
         Connection connection;
@@ -42,20 +40,21 @@ public class JdbcDaoFactory extends DaoFactory {
         return connection;
     }
 
-    public <T extends JdbcBaseDao> T create(Class<T> aClass) {
-        T t;
+    @Override
+    public <T extends JdbcBaseDao> T create(Class<T> daoClass) {
+        T dao;
         try {
-            t = aClass.newInstance();
-/*        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }*/
+            dao = daoClass.newInstance();
+//        } catch (InstantiationException e) { // fixme: unknown exceptions
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
         } catch (Exception e) {
-            throw new DaoException("Невозможно создать DAO для класса" + aClass, e);
+            throw new DaoException("Невозможно создать DAO для класса" + daoClass, e);
         }
-        t.setConnection(getConnection());
-        return t;
+        dao.setConnection(getConnection());
+        return dao;
     }
 
 }

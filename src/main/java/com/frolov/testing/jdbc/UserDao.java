@@ -82,7 +82,7 @@ public class UserDao extends BaseDao<BaseUser> {
     private Student createStudent(ResultSet resultSet) throws SQLException {
         resultSet.next();
         Student student = UserFactory.createStudent();
-        student.setId(resultSet.getInt("ID"));
+        student.setId(resultSet.getLong("ID"));
         student.setFirstName(resultSet.getString("FIRSTNAME"));
         student.setLastName(resultSet.getString("LASTNAME"));
         student.setEmail(resultSet.getString("EMAIL"));

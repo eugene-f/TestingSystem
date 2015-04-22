@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 
 public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 
+    public static final String URL = "jdbc:h2:database";
     private /*final*/ Connection connection;
 
     public JdbcBaseDao(/*Connection connection*/) {
@@ -21,16 +22,24 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
         this.connection = connection;
     }
 
-    public static final String URL = "jdbc:h2:database";
-
     public abstract T insert(T entity) throws DaoException;
+
     public abstract T findById(Long id) throws DaoException;
+
+    public abstract Iterable<T> getAll() throws DaoException;
+
     public abstract T update(T entity) throws DaoException;
+
     public abstract boolean deleteById(Long id) throws DaoException;
 
-    public abstract void mapStoE(PreparedStatement preparedStatement, T entity) throws DaoException;
-    public abstract T mapEtoS(T entity, PreparedStatement preparedStatement) throws DaoException;
-
     public abstract String getTableName();
+
+//    public abstract void mapStatementToEntity(PreparedStatement preparedStatement, T entity) throws DaoException;
+
+//    public abstract T mapEntityToStatement(T entity, PreparedStatement preparedStatement) throws DaoException;
+
+    public abstract T mapStatementToEntity(PreparedStatement preparedStatement) throws DaoException;
+
+    public abstract PreparedStatement mapEntityToStatement(T entity) throws DaoException;
 
 }
