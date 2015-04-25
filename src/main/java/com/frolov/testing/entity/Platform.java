@@ -1,5 +1,6 @@
 package com.frolov.testing.entity;
 
+import com.frolov.testing.entity.test.Discipline;
 import com.frolov.testing.entity.test.Test;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;

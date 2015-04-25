@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public abstract class BaseUser extends BaseEntity {
 
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String firstName; // todo: make final
+    private String lastName; // todo: make final
+    private String email; // todo: make final
     private String passwordHash;
 
     @Override

@@ -1,6 +1,6 @@
 package com.frolov.testing.factory;
 
-import com.frolov.testing.entity.Discipline;
+import com.frolov.testing.entity.test.Discipline;
 import com.frolov.testing.entity.Platform;
 import com.thedeanda.lorem.Lorem;
 

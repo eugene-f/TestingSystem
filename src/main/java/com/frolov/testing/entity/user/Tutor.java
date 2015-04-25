@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class Tutor extends BaseUser {
 
-    private List<Test> tests;
+    private List<Test> createdTests;
     private List<Session> completedSessions;
 
     @Override
@@ -76,12 +76,12 @@ public class Tutor extends BaseUser {
         super.setPasswordHash(passwordHash);
     }
 
-    public List<Test> getTests() {
-        return tests;
+    public List<Test> getCreatedTests() {
+        return createdTests;
     }
 
-    public void setTests(List<Test> tests) {
-        this.tests = tests;
+    public void setCreatedTests(List<Test> createdTests) {
+        this.createdTests = createdTests;
     }
 
     public List<Session> getCompletedSessions() {

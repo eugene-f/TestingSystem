@@ -1,5 +1,6 @@
-package com.frolov.testing.entity;
+package com.frolov.testing.entity.test;
 
+import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.test.Test;
 
 import java.util.List;

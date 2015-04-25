@@ -1,7 +1,6 @@
 package com.frolov.testing.entity.test;
 
 import com.frolov.testing.entity.BaseEntity;
-import com.frolov.testing.entity.Discipline;
 import com.frolov.testing.entity.user.Tutor;
 
 import java.util.List;

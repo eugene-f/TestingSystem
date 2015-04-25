@@ -27,7 +27,7 @@ public class UserFactory {
 
         initUser(tutor);
 
-        tutor.setTests(TestFactory.createTestList(1));
+        tutor.setCreatedTests(TestFactory.createTestList(1));
         tutor.setCompletedSessions(new ArrayList<>());
 
         return tutor;

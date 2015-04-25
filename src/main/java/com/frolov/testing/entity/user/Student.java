@@ -11,6 +11,7 @@ public class Student extends BaseUser {
     private List<Session> completedSessions;
     private Session currentSession;
     private List<Test> toPassTests;
+    // todo: add faculty and group
 
     @Override
     public UUID getUuid() {
