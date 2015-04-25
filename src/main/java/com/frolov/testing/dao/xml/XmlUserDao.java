@@ -36,19 +36,4 @@ public class XmlUserDao extends XmlBaseDao<BaseUser> implements UserDao {
         return null;
     }
 
-    @Override
-    public BaseUser findByFirstName(String firstName) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public BaseUser findByLastName(String lastName) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public BaseUser findByFullName(String fullName) throws DaoException {
-        return null;
-    }
-
 }

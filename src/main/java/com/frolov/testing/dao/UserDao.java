@@ -21,10 +21,10 @@ public interface UserDao extends Dao<BaseUser> {
 
     BaseUser findByEmail(String email) throws DaoException;
 
-    BaseUser findByFirstName(String firstName) throws DaoException;
+//    BaseUser findByFirstName(String firstName) throws DaoException;
 
-    BaseUser findByLastName(String lastName) throws DaoException;
+//    BaseUser findByLastName(String lastName) throws DaoException;
 
-    BaseUser findByFullName(String fullName) throws DaoException;
+//    BaseUser findByFullName(String fullName) throws DaoException;
 
 }
