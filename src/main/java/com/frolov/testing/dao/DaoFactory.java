@@ -1,5 +1,7 @@
 package com.frolov.testing.dao;
 
+import com.frolov.testing.dao.xml.XmlDaoFactory;
+
 import java.util.EnumMap;
 
 public abstract class DaoFactory {
@@ -12,18 +14,17 @@ public abstract class DaoFactory {
     }
 
     public static DaoFactory getInstance(Type type) {
-//        switch (type) {
-//            case Jdbc: return JdbcDaoFactory.getInstance();
-//            case Xml: return XmlDaoFactory.getInstance();
-//        }
-//        return instance;
         return factories.get(type);
     }
 
-    public abstract <T extends JdbcBaseDao> T create(Class<T> daoClass); // fixme: this not working in XmlDaoFactory, because <T extends JdbcBaseDao>
+    public abstract <T extends /*JdbcBaseDao*/ Dao> T create(Class<T> daoClass);
 
     public enum Type {
         Jdbc, Xml
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getInstance(Type.Jdbc));
     }
 
 }

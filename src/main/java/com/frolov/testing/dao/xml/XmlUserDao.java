@@ -1,5 +1,7 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.xml;
 
+import com.frolov.testing.dao.DaoException;
+import com.frolov.testing.dao.UserDao;
 import com.frolov.testing.entity.user.BaseUser;
 
 public class XmlUserDao extends XmlBaseDao<BaseUser> implements UserDao {

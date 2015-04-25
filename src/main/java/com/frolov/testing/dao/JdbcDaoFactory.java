@@ -3,15 +3,26 @@ package com.frolov.testing.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class JdbcDaoFactory extends DaoFactory {
 
+//    Connection connection;
+
     private static final JdbcDaoFactory instance = new JdbcDaoFactory();
-    private static final String URL = "jdbc:h2:database";
-    private static final String USERNAME = "sa";
-    private static final String PASSWORD = "sa";
+//    private static final ResourceBundle database = ResourceBundle.getBundle("database");
+    private static final String DRIVER = "org.h2.Driver"; // DRIVER = database.getString("driver_class");
+    private static final String URL = "jdbc:h2:file:D:/Work/Project/IdeaProjects/TestingSystem/database"; // URL = database.getString("url");
+//    private static final String URL = "jdbc:h2:mem"; // URL = database.getString("url");
+    private static final String USERNAME = "sa"; // USER = database.getString("username");
+    private static final String PASSWORD = "sa"; // PASSWORD = database.getString("password");
 
     private JdbcDaoFactory() {
+        try {
+            Class.forName(DRIVER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static JdbcDaoFactory getInstance() {
@@ -19,15 +30,11 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
 //    public JdbcUserDao createJdbcUserDao() throws DaoException { // fixme: old JdbcUserDao creator;
-//        Connection connection = null;
-//        connection = getConnection();
-//        return new JdbcUserDao(connection);
+//        return new JdbcUserDao(getConnection());
 //    }
-//
+
 //    public JdbcTestDao createJdbcTestDao() throws DaoException { // fixme: old JdbcTestDao creator;
-//        Connection connection = null;
-//        connection = getConnection();
-//        return new JdbcTestDao(connection);
+//        return new JdbcTestDao(getConnection());
 //    }
 
     private Connection getConnection() {
@@ -40,21 +47,42 @@ public class JdbcDaoFactory extends DaoFactory {
         return connection;
     }
 
+//    @Override
+//    public <T extends JdbcBaseDao> T create(Class<T> daoClass) {
+//        T dao;
+//        try {
+//            dao = daoClass.newInstance();
+////        } catch (InstantiationException e) { // fixme: exceptions
+////            e.printStackTrace();
+////        } catch (IllegalAccessException e) {
+////            e.printStackTrace();
+////        }
+//        } catch (Exception e) {
+//            throw new DaoException("Невозможно создать DAO для класса" + daoClass, e);
+//        }
+//        dao.setConnection(getConnection());
+//        return dao;
+//    }
+
     @Override
-    public <T extends JdbcBaseDao> T create(Class<T> daoClass) {
+    public <T extends Dao> T create(Class<T> daoClass) {
         T dao;
         try {
             dao = daoClass.newInstance();
-//        } catch (InstantiationException e) { // fixme: unknown exceptions
+//        } catch (InstantiationException e) { // fixme: exceptions
 //            e.printStackTrace();
 //        } catch (IllegalAccessException e) {
 //            e.printStackTrace();
 //        }
         } catch (Exception e) {
-            throw new DaoException("Невозможно создать DAO для класса" + daoClass, e);
+            throw new DaoException("Невозможно создать DAO для класса " + daoClass, e);
         }
-        dao.setConnection(getConnection());
+        ((JdbcBaseDao) dao).setConnection(getConnection());
         return dao;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getInstance().create(JdbcUserDao.class));
     }
 
 }

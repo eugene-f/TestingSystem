@@ -7,9 +7,24 @@ import java.sql.PreparedStatement;
 
 public class JdbcTestDao extends JdbcBaseDao<Test> implements TestDao {
 
-//    public JdbcTestDao(Connection connection) { // fixme: unknown constructor;
-//        super(connection);
-//    }
+    private static final String TABLE_NAME = "TESTS";
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (ID, AUTHOR_ID, COMPLETED_SESSIONS_IDS, DISCIPLINE_ID, MINUTES_TO_PASS, NAME, PUBLICATED, QUESTIONS_IDS) VALUES (NULL, ?, ?, ?, ?)";
+    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
+
+    @Override
+    public Connection getConnection() {
+        return super.getConnection();
+    }
+
+    @Override
+    public void setConnection(Connection connection) {
+        super.setConnection(connection);
+    }
+
+    @Override
+    public String getTableName() {
+        return null;
+    }
 
     @Override
     public Test insert(Test entity) throws DaoException {
@@ -36,18 +51,4 @@ public class JdbcTestDao extends JdbcBaseDao<Test> implements TestDao {
         return false;
     }
 
-    @Override
-    public String getTableName() {
-        return null;
-    }
-
-    @Override
-    public Test mapStatementToEntity(PreparedStatement preparedStatement) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public PreparedStatement mapEntityToStatement(Test entity) throws DaoException {
-        return null;
-    }
 }

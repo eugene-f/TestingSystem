@@ -1,4 +1,4 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.xml;
 
 import com.frolov.testing.dao.Dao;
 import com.frolov.testing.dao.DaoException;

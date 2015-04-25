@@ -1,4 +1,8 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.xml;
+
+import com.frolov.testing.dao.Dao;
+import com.frolov.testing.dao.DaoException;
+import com.frolov.testing.dao.DaoFactory;
 
 public class XmlDaoFactory extends DaoFactory {
 
@@ -20,14 +24,19 @@ public class XmlDaoFactory extends DaoFactory {
 //        } catch (IllegalAccessException e) {
 //            e.printStackTrace();
         } catch (Exception e) {
-            throw new DaoException("Невозможно создать DAO для класса", e);
+            throw new DaoException("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ DAO пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", e);
         }
         return dao;
     }
 
     @Override
-    public <T extends JdbcBaseDao> T create(Class<T> daoClass) {
+    public <T extends /*JdbcBaseDao*/ Dao> T create(Class<T> daoClass) {
         return null;
     }
+
+//    @Override
+//    public <T extends Dao> T create(Class<T> daoClass) {
+//        return null;
+//    }
 
 }
