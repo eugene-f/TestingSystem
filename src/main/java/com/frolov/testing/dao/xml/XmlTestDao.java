@@ -31,4 +31,14 @@ public class XmlTestDao extends XmlBaseDao<Test> implements TestDao {
         return false;
     }
 
+    @Override
+    public Iterable<Test> fintByName(String name) throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Test> fintByAuthorId(Long id) throws DaoException {
+        return null;
+    }
+
 }

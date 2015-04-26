@@ -21,17 +21,17 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
         this.connection = connection;
     }
 
+    public abstract String getTableName();
+
+    public abstract Iterable<T> getAll() throws DaoException;
+
     public abstract T insert(T entity) throws DaoException;
 
     public abstract T findById(Long id) throws DaoException;
 
-    public abstract Iterable<T> getAll() throws DaoException;
-
     public abstract T update(T entity) throws DaoException;
 
     public abstract boolean deleteById(Long id) throws DaoException;
-
-    public abstract String getTableName();
 
 //    public abstract void mapStatementToEntity(PreparedStatement preparedStatement, T entity) throws DaoException;
 

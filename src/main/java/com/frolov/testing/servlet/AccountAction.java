@@ -56,6 +56,7 @@ public class AccountAction {
             BaseUser user = getUserByEmailFromDatabase(email);
             if (checkPasswordByUser(user, password)) {
                 setCurrentUserToMemory(user); // User is validated
+                return true;
             } // Incorrect password
         } // User not fond
         return false;

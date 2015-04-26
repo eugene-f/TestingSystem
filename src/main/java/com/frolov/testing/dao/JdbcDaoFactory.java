@@ -10,12 +10,11 @@ public class JdbcDaoFactory extends DaoFactory {
 //    Connection connection;
 
     private static final JdbcDaoFactory instance = new JdbcDaoFactory();
-//    private static final ResourceBundle database = ResourceBundle.getBundle("database");
+    private static final ResourceBundle database = ResourceBundle.getBundle("database");
     private static final String DRIVER = "org.h2.Driver"; // DRIVER = database.getString("driver_class");
-    private static final String URL = "jdbc:h2:file:D:/Work/Project/IdeaProjects/TestingSystem/database"; // URL = database.getString("url");
-//    private static final String URL = "jdbc:h2:mem"; // URL = database.getString("url");
-    private static final String USERNAME = "sa"; // USER = database.getString("username");
-    private static final String PASSWORD = "sa"; // PASSWORD = database.getString("password");
+    private static final String URL = database.getString("url");
+    private static final String USERNAME = database.getString("username");
+    private static final String PASSWORD = database.getString("password");
 
     private JdbcDaoFactory() {
         try {

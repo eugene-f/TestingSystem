@@ -3,6 +3,8 @@ package com.frolov.testing.dao.xml;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.UserDao;
 import com.frolov.testing.entity.user.BaseUser;
+import com.frolov.testing.entity.user.Student;
+import com.frolov.testing.entity.user.Tutor;
 
 public class XmlUserDao extends XmlBaseDao<BaseUser> implements UserDao {
 
@@ -33,6 +35,31 @@ public class XmlUserDao extends XmlBaseDao<BaseUser> implements UserDao {
 
     @Override
     public BaseUser findByEmail(String email) throws DaoException {
+        return null;
+    }
+
+    @Override
+    public BaseUser findByFirstName(String firstName) throws DaoException {
+        return null;
+    }
+
+    @Override
+    public BaseUser findByLastName(String lastName) throws DaoException {
+        return null;
+    }
+
+    @Override
+    public BaseUser findByFullName(String fullName) throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Tutor> getTutors() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Student> getStudents() throws DaoException {
         return null;
     }
 
