@@ -4,10 +4,11 @@ import com.frolov.testing.entity.BaseEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 
-    private /*final*/ Connection connection;
+    private /*final*/ Connection connection; // todo: make final
 
 //    public JdbcBaseDao(Connection connection) {
 //        this.connection = connection;
@@ -40,5 +41,40 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 //    public abstract T mapStatementToEntity(PreparedStatement preparedStatement) throws DaoException;
 
 //    public abstract PreparedStatement mapEntityToStatement(T entity) throws DaoException;
+
+    public Connection beginTransaction() throws DaoException {
+        try {
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new DaoException("beginTransaction", e);
+        }
+        return connection;
+    }
+    public Connection commitTransaction() throws DaoException  {
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            throw new DaoException("commitTransaction", e);
+        }
+        return connection;
+    }
+    public Connection rollbackTransaction() throws DaoException  {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            throw new DaoException("rollbackTransaction", e);
+        }
+        return connection;
+    }
+    public Connection endTransaction() throws DaoException  {
+        rollbackTransaction();
+        try {
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            throw new DaoException("endTransaction", e);
+        }
+        return connection;
+    }
 
 }
