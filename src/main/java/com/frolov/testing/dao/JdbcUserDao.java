@@ -9,42 +9,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     private static final String TABLE_NAME = "USERS";
-
-    private static final String INSERT = "INSERT INTO " + TABLE_NAME +
-            " (ID, ROLE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD_HASH, DELETED) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
-
-    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME +
-            " WHERE ID = ?";
-
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (ID, ROLE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD_HASH, DELETED) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
     private static final String GET_ALL = "SELECT * FROM " + TABLE_NAME;
-
     private static final String UPDATE = ""; // todo: write update script
-
-    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME +
-            " WHERE ID = ?";
-
-    private static final String FIND_BY_EMAIL = "SELECT * FROM " + TABLE_NAME +
-            " WHERE EMAIL = ?";
-
-    private static final String FIND_BY_FIRST_NAME = "SELECT * FROM " + TABLE_NAME +
-            " WHERE FIRST_NAME = ?";
-
-    private static final String FIND_BY_LAST_NAME = "SELECT * FROM " + TABLE_NAME +
-            " WHERE LAST_NAME = ?";
-
-    private static final String FIND_BY_FULL_NAME = "SELECT * FROM " + TABLE_NAME +
-            " WHERE EMAIL = ?"; // todo: write find script
-
-    private static final String GET_TUTORS = "SELECT * FROM " + TABLE_NAME +
-            " WHERE ROLE = com.frolov.testing.entity.user.Tutor";
-
-    private static final String GET_STUDENTS = "SELECT * FROM " + TABLE_NAME +
-            " WHERE ROLE = com.frolov.testing.entity.user.Student";
+    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
+    private static final String FIND_BY_EMAIL = "SELECT * FROM " + TABLE_NAME + " WHERE EMAIL = ?";
+    private static final String FIND_BY_FIRST_NAME = "SELECT * FROM " + TABLE_NAME + " WHERE FIRST_NAME = ?";
+    private static final String FIND_BY_LAST_NAME = "SELECT * FROM " + TABLE_NAME + " WHERE LAST_NAME = ?";
+    private static final String FIND_BY_FULL_NAME = "SELECT * FROM " + TABLE_NAME + " WHERE EMAIL = ?"; // todo: write find script
+    private static final String GET_TUTORS = "SELECT * FROM " + TABLE_NAME + " WHERE ROLE = com.frolov.testing.entity.user.Tutor";
+    private static final String GET_STUDENTS = "SELECT * FROM " + TABLE_NAME + " WHERE ROLE = com.frolov.testing.entity.user.Student";
 
     @Override
     public Connection getConnection() {
@@ -63,15 +47,9 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public Iterable<BaseUser> getAll() throws DaoException {
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(GET_ALL);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<BaseUser> userList = new ArrayList<>();
-            while (resultSet.next()) {
-                userList.add(JdbcMapper.mapResultToUser(resultSet, null));
-            }
-            preparedStatement.close();
-            return userList;
+            return JdbcMapper.map(resultSet);
         } catch (SQLException e) {
             throw new DaoException();
         }
@@ -80,11 +58,9 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public BaseUser insert(BaseUser entity) throws DaoException {
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT)) {
             JdbcMapper.mapUserToStatment(entity, preparedStatement);
             preparedStatement.execute();
-            preparedStatement.close();
 //            return entity; // fixme: make User return
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,13 +70,10 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public BaseUser findById(Long id) throws DaoException {
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_ID);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            BaseUser user = JdbcMapper.mapResultToUser(resultSet, null);
-            preparedStatement.close();
-            return user;
+            return JdbcMapper.mapResultToUser(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,10 +82,8 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public BaseUser update(BaseUser entity) throws DaoException {
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(UPDATE);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(UPDATE)) {
             preparedStatement.execute();
-            preparedStatement.close();
         } catch (SQLException e) {
             throw new DaoException();
         }
@@ -121,12 +92,9 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public boolean deleteById(Long id) throws DaoException {
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(DELETE_BY_ID);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(DELETE_BY_ID)) {
             preparedStatement.setLong(1, id);
-            boolean execute = preparedStatement.execute();
-            preparedStatement.close();
-            return execute;
+            return preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,13 +103,10 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public BaseUser findByEmail(String email) throws DaoException {
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL);
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            BaseUser user = JdbcMapper.mapResultToUser(resultSet, null);
-            preparedStatement.close();
-            return user;
+            return JdbcMapper.mapResultToUser(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,26 +115,46 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     @Override
     public BaseUser findByFirstName(String firstName) throws DaoException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FIRST_NAME)) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public BaseUser findByLastName(String lastName) throws DaoException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_LAST_NAME)) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public BaseUser findByFullName(String fullName) throws DaoException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FULL_NAME)) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public Iterable<Tutor> getTutors() throws DaoException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_TUTORS)) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public Iterable<Student> getStudents() throws DaoException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_STUDENTS)) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

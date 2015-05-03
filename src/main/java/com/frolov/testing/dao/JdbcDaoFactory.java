@@ -46,25 +46,8 @@ public class JdbcDaoFactory extends DaoFactory {
         return connection;
     }
 
-//    @Override
-//    public <T extends JdbcBaseDao> T create(Class<T> daoClass) {
-//        T dao;
-//        try {
-//            dao = daoClass.newInstance();
-////        } catch (InstantiationException e) { // fixme: exceptions
-////            e.printStackTrace();
-////        } catch (IllegalAccessException e) {
-////            e.printStackTrace();
-////        }
-//        } catch (Exception e) {
-//            throw new DaoException("Невозможно создать DAO для класса" + daoClass, e);
-//        }
-//        dao.setConnection(getConnection());
-//        return dao;
-//    }
-
     @Override
-    public <T extends Dao> T create(Class<T> daoClass) {
+    public <T extends /*JdbcBaseDao*/ Dao> T create(Class<T> daoClass) {
         T dao;
         try {
             dao = daoClass.newInstance();

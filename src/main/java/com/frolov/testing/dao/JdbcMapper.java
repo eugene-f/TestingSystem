@@ -1,13 +1,21 @@
 package com.frolov.testing.dao;
 
+import com.frolov.testing.entity.BaseEntity;
+import com.frolov.testing.entity.test.Test;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.factory.UserFactory;
+import org.h2.engine.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class JdbcMapper {
 
@@ -21,7 +29,7 @@ public class JdbcMapper {
         return statement;
     }
 
-    public static BaseUser mapResultToUser(ResultSet resultSet, BaseUser user) throws SQLException {
+    public static BaseUser mapResultToUser(ResultSet resultSet) throws SQLException {
         BaseUser baseUser = null;
         resultSet.next();
         switch (resultSet.getString("ROLE")) {
@@ -36,6 +44,14 @@ public class JdbcMapper {
             baseUser.setDeleted(resultSet.getBoolean("DELETED"));
         }
         return baseUser;
+    }
+
+    public static List<BaseUser> map(ResultSet resultSet) throws SQLException {
+        List<BaseUser> userList = new ArrayList<>();
+        while (resultSet.next()) {
+            userList.add(mapResultToUser(resultSet));
+        }
+        return userList;
     }
 
 }
