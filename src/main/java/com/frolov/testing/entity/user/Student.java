@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public class Student extends BaseUser {
 
+//    private Group group;
     private List<Session> completedSessions;
     private Session currentSession;
     private List<Test> toPassTests;
@@ -77,6 +78,14 @@ public class Student extends BaseUser {
     public void setPasswordHash(String passwordHash) {
         super.setPasswordHash(passwordHash);
     }
+
+//    public Group getGroup() {
+//        return group;
+//    }
+//
+//    public void setGroup(Group group) {
+//        this.group = group;
+//    }
 
     public List<Session> getCompletedSessions() {
         return completedSessions;
