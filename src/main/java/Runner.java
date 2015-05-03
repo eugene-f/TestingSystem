@@ -1,3 +1,4 @@
+import com.frolov.testing.ConnectionPool;
 import com.frolov.testing.dao.*;
 import com.frolov.testing.entity.Platform;
 import com.frolov.testing.entity.user.BaseUser;
@@ -6,15 +7,18 @@ import org.boon.Boon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
+
 public class Runner {
 
     private static final Logger logger = LoggerFactory.getLogger(Runner.class);
     public static Platform platform;
 
     public static void main(String[] args) {
-        createPlatformEmulation();
+//        createPlatformEmulation();
 //        testDao();
-        showLoggerConfig();
+//        showLoggerConfig();
+        testConnectionPool();
     }
 
     private static void showLoggerConfig() {
@@ -38,6 +42,28 @@ public class Runner {
         platform = PlatformFactory.createPlatform();
         System.out.println(Boon.toPrettyJsonWithTypes(platform));
         logger.info("Platform Emulated");
+    }
+
+    private static void testConnectionPool() {
+        ConnectionPool instance1 = ConnectionPool.getInstance();
+        ConnectionPool instance2 = ConnectionPool.getInstance();
+
+        System.out.println(instance1.hashCode());
+        System.out.println(instance2.hashCode());
+        System.out.println(instance1.equals(instance2));
+
+        try {
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
