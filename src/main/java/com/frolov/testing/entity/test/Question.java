@@ -19,6 +19,11 @@ public class Question extends BaseEntity {
     private List<Answer> answers; // todo: select solution
     private Answer correctAnswer; // todo: select solution
 
+    public Question(Long id, Test test) {
+        super(id);
+        this.test = test;
+    }
+
     public Question(Long id, Test test, String content) {
         super(id);
         this.test = test;
@@ -60,5 +65,4 @@ public class Question extends BaseEntity {
     public void setCorrectAnswer(Answer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
-
 }

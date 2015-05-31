@@ -41,5 +41,4 @@ public class Group extends BaseEntity {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
-
 }

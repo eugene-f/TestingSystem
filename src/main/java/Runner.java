@@ -16,13 +16,13 @@ public class Runner {
     public static Platform platform;
 
     public static void main(String[] args) {
-//        createPlatformEmulation();
-//        testDao();
-//        showLoggerConfig();
+        emulatePlatform();
+        testJdbcDao();
+        showLoggerConfiguration();
         testConnectionPool();
     }
 
-    private static void showLoggerConfig() {
+    private static void showLoggerConfiguration() {
         System.out.println("logger.isTraceEnabled(): " + logger.isTraceEnabled());
         System.out.println("logger.isDebugEnabled(): " + logger.isDebugEnabled());
         System.out.println("logger.isInfoEnabled(): " + logger.isInfoEnabled());
@@ -30,7 +30,14 @@ public class Runner {
         System.out.println("logger.isErrorEnabled(): " + logger.isErrorEnabled());
     }
 
-    private static void testDao() {
+    private static void emulatePlatform() {
+        System.out.println("Testing System");
+        platform = PlatformFactory.createPlatform();
+        System.out.println(Boon.toPrettyJsonWithTypes(platform));
+        logger.info("Platform Emulated");
+    }
+
+    private static void testJdbcDao() {
         DaoFactory instance = DaoFactory.getInstance(DaoFactory.Type.Jdbc);
         JdbcUserDao jdbcUserDao = instance.create(JdbcUserDao.class);
         jdbcUserDao.setConnection(jdbcUserDao.getConnection());
@@ -38,20 +45,15 @@ public class Runner {
         System.out.println(Boon.toPrettyJson(byEmail));
     }
 
-    private static void createPlatformEmulation() {
-        System.out.println("Testing System");
-        platform = PlatformFactory.createPlatform();
-        System.out.println(Boon.toPrettyJsonWithTypes(platform));
-        logger.info("Platform Emulated");
-    }
-
     private static void testConnectionPool() {
         ConnectionPool instance1 = ConnectionPool.getInstance();
         ConnectionPool instance2 = ConnectionPool.getInstance();
+        ConnectionPool instance3 = ConnectionPool.getInstance();
 
         System.out.println(instance1.hashCode());
         System.out.println(instance2.hashCode());
-        System.out.println(instance1.equals(instance2));
+        System.out.println(instance3.hashCode());
+        System.out.println(instance1.equals(instance3));
 
         try {
             instance1.getConnection().close();

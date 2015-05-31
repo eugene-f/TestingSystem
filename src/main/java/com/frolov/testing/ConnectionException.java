@@ -21,4 +21,5 @@ public class ConnectionException extends RuntimeException {
     protected ConnectionException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+
 }

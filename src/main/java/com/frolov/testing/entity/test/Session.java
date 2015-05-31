@@ -15,7 +15,7 @@ public class Session extends BaseEntity {
 
     private final Test test;
     private final Student student;
-    private final Date startDate = new Date();
+    private final Date startDate = new Date(); // todo: add finishd time
     private Map<Question, Answer> studentAnswers = new HashMap<>(); // todo: select solution
     private Byte result;
     private boolean finished;
@@ -61,5 +61,4 @@ public class Session extends BaseEntity {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
-
 }

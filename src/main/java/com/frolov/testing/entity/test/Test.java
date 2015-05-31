@@ -17,8 +17,19 @@ public class Test extends BaseEntity {
     private String name;
     private Discipline discipline;
     private List<Question> questions = new ArrayList<>();
-    private Config config;
+    private Configuration configuration;
     private boolean publicated = false;
+
+    public Test(Long id, Tutor author) {
+        super(id);
+        this.author = author;
+    }
+
+    public Test(Long id, Tutor author, String name) {
+        super(id);
+        this.author = author;
+        this.name = name;
+    }
 
     public Test(Long id, Tutor author, String name, Discipline discipline) {
         super(id);
@@ -55,12 +66,12 @@ public class Test extends BaseEntity {
         this.questions = questions;
     }
 
-    public Config getConfig() {
-        return config;
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
-    public void setConfig(Config config) {
-        this.config = config;
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     public boolean isPublicated() {

@@ -4,6 +4,7 @@ import com.frolov.testing.entity.test.Session;
 import com.frolov.testing.entity.test.Test;
 import com.frolov.testing.entity.user.structure.Department;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,13 +14,28 @@ import java.util.List;
  */
 public class Tutor extends BaseUser {
 
+    private static final Type type = Type.Tutor;
     private final Department department;
-    private List<Test> createdTests;
-    private List<Session> completedSessions;
+    private List<Test> createdTests = new ArrayList<>();
+    private List<Session> completedSessions = new ArrayList<>();
 
-    public Tutor(Long id, String firstName, String lastName, String email, String passwordHash, Department department) {
-        super(id, firstName, lastName, email, passwordHash);
+    public Tutor(Long id, String email, Department department) {
+        super(id, email);
         this.department = department;
+    }
+
+    public Tutor(Long id, String email, String passwordHash, Department department) {
+        super(id, email, passwordHash);
+        this.department = department;
+    }
+
+    public Tutor(Long id, String email, String firstName, String lastName, String passwordHash, Department department) {
+        super(id, email, firstName, lastName, passwordHash);
+        this.department = department;
+    }
+
+    public static Type getType() {
+        return type;
     }
 
     public Department getDepartment() {
@@ -41,5 +57,4 @@ public class Tutor extends BaseUser {
     public void setCompletedSessions(List<Session> completedSessions) {
         this.completedSessions = completedSessions;
     }
-
 }

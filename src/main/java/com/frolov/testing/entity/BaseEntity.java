@@ -3,7 +3,7 @@ package com.frolov.testing.entity;
 import java.util.UUID;
 
 /**
- * Базовая сущьность от которой наследуютсе все остальные сущьности системы
+ * Базовая сущьность от которой наследуютсе другие сущьности системы
  */
 public abstract class BaseEntity {
 

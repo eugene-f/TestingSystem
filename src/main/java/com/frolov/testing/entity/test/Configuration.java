@@ -6,9 +6,8 @@ import com.frolov.testing.entity.BaseEntity;
  * Содержит параметры прохождения тестирования
  * Которые задаются тьютором перед публикацией теста
  */
-public class Config extends BaseEntity {
+public class Configuration extends BaseEntity {
 
-    private final Test test;
     private byte minutesToPass;
     private int questionCountToView; //Количество вопросов из теста
     private boolean shuffleQuestion; //Перемешивание вопросов
@@ -16,13 +15,18 @@ public class Config extends BaseEntity {
     private boolean showCorrect; //Показ правильных ответов
     private boolean takeAgain; //Возможность пересдачи
 
-    public Config(Long id, Test test) {
+    public Configuration(Long id) {
         super(id);
-        this.test = test;
     }
 
-    public Test getTest() {
-        return test;
+    public Configuration(Long id, byte minutesToPass, int questionCountToView, boolean shuffleQuestion, boolean shuffleAnswer, boolean showCorrect, boolean takeAgain) {
+        super(id);
+        this.minutesToPass = minutesToPass;
+        this.questionCountToView = questionCountToView;
+        this.shuffleQuestion = shuffleQuestion;
+        this.shuffleAnswer = shuffleAnswer;
+        this.showCorrect = showCorrect;
+        this.takeAgain = takeAgain;
     }
 
     public byte getMinutesToPass() {
@@ -72,5 +76,4 @@ public class Config extends BaseEntity {
     public void setTakeAgain(boolean takeAgain) {
         this.takeAgain = takeAgain;
     }
-
 }

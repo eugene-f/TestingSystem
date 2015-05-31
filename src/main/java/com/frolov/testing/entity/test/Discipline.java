@@ -1,11 +1,9 @@
 package com.frolov.testing.entity.test;
 
 import com.frolov.testing.entity.BaseEntity;
-import com.frolov.testing.entity.test.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Контейнер для классификации тестов по определенным темат

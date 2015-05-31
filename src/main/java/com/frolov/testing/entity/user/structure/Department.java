@@ -40,5 +40,4 @@ public class Department extends BaseEntity {
     public void setTutors(List<Tutor> tutors) {
         this.tutors = tutors;
     }
-
 }
