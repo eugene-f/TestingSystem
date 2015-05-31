@@ -1,4 +1,4 @@
-package com.frolov.testing.servlet;
+package com.frolov.testing.action;
 
 import com.frolov.testing.dao.DaoFactory;
 import com.frolov.testing.dao.jdbc.JdbcUserDao;
@@ -6,8 +6,9 @@ import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.factory.UserFactory;
+import com.frolov.testing.servlet.TestingSystem;
 
-public class AccountAction {
+public class Account {
 
     private static void addUserToDatabase(BaseUser user) {
         DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class).insert(user);
@@ -22,7 +23,7 @@ public class AccountAction {
         TestingSystem.CURRENT_USER = user;
     }
 
-    static boolean checkUserByEmail(String email) {
+    public static boolean checkUserByEmail(String email) {
         return getUserByEmail(email) != null;
     }
 

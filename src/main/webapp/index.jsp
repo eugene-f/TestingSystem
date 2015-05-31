@@ -8,9 +8,7 @@
 <body>
     <h1>Testing System</h1>
     <h5>${text}</h5>
-
     <br><hr><br>
-
     <a href="/login">Login</a><br>
     <a href="/registration">Registration</a><br>
 </body>

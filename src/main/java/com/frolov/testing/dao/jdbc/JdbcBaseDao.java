@@ -7,7 +7,11 @@ import com.frolov.testing.entity.BaseEntity;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+// todo: add mapping methods
+
 public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
+
+    private String tableName;
 
     private /*final*/ Connection connection; // todo: make final
 
@@ -35,13 +39,7 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 
     public abstract boolean deleteById(Long id) throws DaoException;
 
-//    public abstract void mapStatementToEntity(PreparedStatement preparedStatement, T entity) throws DaoException;
 
-//    public abstract T mapEntityToStatement(T entity, PreparedStatement preparedStatement) throws DaoException;
-
-//    public abstract T mapStatementToEntity(PreparedStatement preparedStatement) throws DaoException;
-
-//    public abstract PreparedStatement mapEntityToStatement(T entity) throws DaoException;
 
     public Connection beginTransaction() throws DaoException {
         try {
@@ -69,7 +67,7 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
         return connection;
     }
     public Connection endTransaction() throws DaoException  {
-        rollbackTransaction();
+        rollbackTransaction(); // move to try block
         try {
             connection.setAutoCommit(true);
         } catch (SQLException e) {

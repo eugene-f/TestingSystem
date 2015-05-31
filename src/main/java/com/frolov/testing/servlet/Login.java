@@ -1,5 +1,7 @@
 package com.frolov.testing.servlet;
 
+import com.frolov.testing.action.Account;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,7 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if (AccountAction.login(email, password)) {
+        if (Account.login(email, password)) {
             response.sendRedirect("/account");
         } else {
             printWriter.println("You have entered incorrect email or password");

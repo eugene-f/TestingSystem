@@ -2,7 +2,7 @@ package com.frolov.testing;
 
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Tutor;
-import com.frolov.testing.servlet.Login;
+import com.frolov.testing.action.Account;
 import com.frolov.testing.servlet.TestingSystem;
 import org.junit.Test;
 
@@ -13,17 +13,11 @@ public class LoginTest {
     @Test
     public void login() {
 
-        BaseUser user = new Tutor();
-        user.setId(1L);
-        user.setFirstName("Robert");
-        user.setLastName("Ray");
-        user.setEmail("Robert_Ray@gmail.com");
-        user.setPasswordHash("0123456789");
-        user.setDeleted(false);
-
+        BaseUser user = new Tutor(
+                null, "Robert", "Ray", "Robert_Ray@gmail.com", "qwerty", null
+        );
         TestingSystem.USER_LIST.add(user);
-
-//        assertTrue(Login.checkUser("Robert_Ray@gmail.com", "0123456789"));
+        assertTrue(Account.checkUserByEmail(user.getEmail()));
 
     }
 

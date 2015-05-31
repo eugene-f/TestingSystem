@@ -15,17 +15,38 @@ import java.sql.SQLException;
 public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 
     private static final String TABLE_NAME = "USERS";
-    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " (ID, ROLE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD_HASH, DELETED) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
-    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
+
+    private static final String INSERT = "INSERT INTO " + TABLE_NAME + " " +
+            "(ID, ROLE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD_HASH, DELETED) " +
+            "VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+
+    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE ID = ?";
+
     private static final String GET_ALL = "SELECT * FROM " + TABLE_NAME;
+
     private static final String UPDATE = ""; // todo: write update script
-    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
-    private static final String FIND_BY_EMAIL = "SELECT * FROM " + TABLE_NAME + " WHERE EMAIL = ?";
-    private static final String FIND_BY_FIRST_NAME = "SELECT * FROM " + TABLE_NAME + " WHERE FIRST_NAME = ?";
-    private static final String FIND_BY_LAST_NAME = "SELECT * FROM " + TABLE_NAME + " WHERE LAST_NAME = ?";
-    private static final String FIND_BY_FULL_NAME = "SELECT * FROM " + TABLE_NAME + " WHERE EMAIL = ?"; // todo: write find script
-    private static final String GET_TUTORS = "SELECT * FROM " + TABLE_NAME + " WHERE ROLE = com.frolov.testing.entity.user.Tutor";
-    private static final String GET_STUDENTS = "SELECT * FROM " + TABLE_NAME + " WHERE ROLE = com.frolov.testing.entity.user.Student";
+
+    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME + " " +
+            " WHERE ID = ?";
+
+    private static final String FIND_BY_EMAIL = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE EMAIL = ?";
+
+    private static final String FIND_BY_FIRST_NAME = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE FIRST_NAME = ?";
+
+    private static final String FIND_BY_LAST_NAME = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE LAST_NAME = ?";
+
+    private static final String FIND_BY_FULL_NAME = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE EMAIL = ?"; // todo: write find script
+
+    private static final String GET_TUTORS = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE ROLE = com.frolov.testing.entity.user.Tutor";
+
+    private static final String GET_STUDENTS = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE ROLE = com.frolov.testing.entity.user.Student";
 
     @Override
     public Connection getConnection() {

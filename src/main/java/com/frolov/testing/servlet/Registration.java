@@ -1,5 +1,7 @@
 package com.frolov.testing.servlet;
 
+import com.frolov.testing.action.Account;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +24,8 @@ public class Registration extends HttpServlet {
         String userType = request.getParameter("userType");
 
         if (password.equals(confirmPassword)) {
-            if (AccountAction.getUserByEmail(email) == null) {
-                AccountAction.createUser(firstName, lastName, email, password, userType);
+            if (Account.getUserByEmail(email) == null) {
+                Account.createUser(firstName, lastName, email, password, userType);
                 response.sendRedirect("/account");
             } else {
                 printWriter.println("This email is already registered in the system\n");
