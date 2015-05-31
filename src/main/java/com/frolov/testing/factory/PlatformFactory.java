@@ -31,9 +31,8 @@ public class PlatformFactory {
     }
 
     public static Discipline createDiscipline() {
-        Discipline discipline = new Discipline();
+        Discipline discipline = new Discipline(null, Lorem.getWords(1, 3));
 
-        discipline.setName(Lorem.getWords(1, 3));
         discipline.setTests(new ArrayList<>());
 
         return discipline;

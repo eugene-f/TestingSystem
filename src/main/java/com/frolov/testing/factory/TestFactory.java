@@ -1,6 +1,5 @@
 package com.frolov.testing.factory;
 
-import com.frolov.testing.Util;
 import com.frolov.testing.entity.test.Answer;
 import com.frolov.testing.entity.test.Question;
 import com.frolov.testing.entity.test.Test;
@@ -12,14 +11,9 @@ import java.util.List;
 public class TestFactory {
 
     public static Test createTest() {
-        Test test = new Test();
+        Test test = new Test(null, null, Lorem.getWords(3, 7), null);
 
-        test.setAuthor(null);
-        test.setName(Lorem.getWords(3, 7));
-        test.setDiscipline(null);
         test.setQuestions(new ArrayList<>());
-        test.setCompletedSessions(new ArrayList<>());
-        test.setMinutesToPass((byte) ((Util.RANDOM.nextInt(7) + 3) * 10));
         test.setPublicated(false);
         test.setDeleted(false);
 
@@ -37,9 +31,8 @@ public class TestFactory {
     }
 
     public static Question createQuestion() {
-        Question question = new Question();
+        Question question = new Question(null, null, Lorem.getWords(3, 7));
 
-        question.setContent(Lorem.getWords(3, 7));
         question.setAnswers(new ArrayList<>());
         question.setDeleted(false);
 
@@ -57,9 +50,8 @@ public class TestFactory {
     }
 
     public static Answer createAnswer() {
-        Answer answer = new Answer();
+        Answer answer = new Answer(null, null, Lorem.getWords(3, 5));
 
-        answer.setContent(Lorem.getWords(3, 5));
         answer.setCorrect(false);
         answer.setDeleted(false);
 

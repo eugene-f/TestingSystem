@@ -1,5 +1,6 @@
 package com.frolov.testing.dao;
 
+import com.frolov.testing.dao.jdbc.JdbcDaoFactory;
 import com.frolov.testing.dao.xml.XmlDaoFactory;
 
 import java.util.EnumMap;
@@ -21,10 +22,6 @@ public abstract class DaoFactory {
 
     public enum Type {
         Jdbc, Xml
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getInstance(Type.Jdbc));
     }
 
 }

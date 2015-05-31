@@ -4,36 +4,27 @@ import com.frolov.testing.entity.BaseEntity;
 
 import java.util.UUID;
 
+/**
+ * Пользователь системы
+ * Разделяется на несколько типов:
+ * --- Администратор = регистрирует тьюторов и лаборантов
+ * --- Тьютор = создает тесты, просматривает результаты
+ * --- Лаборант = просматривает результаты // todo: добавить
+ * --- Студент = проходит тестирование
+ */
 public abstract class BaseUser extends BaseEntity {
 
-    private String firstName; // todo: make final
-    private String lastName; // todo: make final
-    private String email; // todo: make final
+    private String firstName;
+    private String lastName;
+    private final String email; // todo: make synchronized registration
     private String passwordHash;
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
-    }
-
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
+    public BaseUser(Long id, String firstName, String lastName, String email, String passwordHash) {
+        super(id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.passwordHash = passwordHash;
     }
 
     public String getFirstName() {
@@ -54,10 +45,6 @@ public abstract class BaseUser extends BaseEntity {
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPasswordHash() {

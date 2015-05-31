@@ -3,37 +3,30 @@ package com.frolov.testing.entity.test;
 import com.frolov.testing.entity.BaseEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Вопрос для теста
+ * Содержит списов вариантов ответа
+ * Содержит верный ответ
+ */
 public class Question extends BaseEntity {
 
+    private final Test test;
     private String content;
-    private List<Answer> answers;
-    private Answer trueAnswer; // todo: delete
+    private Map<Answer, Boolean> answersMap; // todo: select solution
+    private List<Answer> answers; // todo: select solution
+    private Answer correctAnswer; // todo: select solution
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
+    public Question(Long id, Test test, String content) {
+        super(id);
+        this.test = test;
+        this.content = content;
     }
 
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
+    public Test getTest() {
+        return test;
     }
 
     public String getContent() {
@@ -44,6 +37,14 @@ public class Question extends BaseEntity {
         this.content = content;
     }
 
+    public Map<Answer, Boolean> getAnswersMap() {
+        return answersMap;
+    }
+
+    public void setAnswersMap(Map<Answer, Boolean> answersMap) {
+        this.answersMap = answersMap;
+    }
+
     public List<Answer> getAnswers() {
         return answers;
     }
@@ -52,12 +53,12 @@ public class Question extends BaseEntity {
         this.answers = answers;
     }
 
-    public Answer getTrueAnswer() {
-        return trueAnswer;
+    public Answer getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setTrueAnswer(Answer trueAnswer) {
-        this.trueAnswer = trueAnswer;
+    public void setCorrectAnswer(Answer correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 
 }

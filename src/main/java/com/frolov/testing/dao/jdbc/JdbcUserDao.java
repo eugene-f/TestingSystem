@@ -1,5 +1,8 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.jdbc;
 
+import com.frolov.testing.dao.DaoException;
+import com.frolov.testing.dao.UserDao;
+import com.frolov.testing.dao.mapper.JdbcMapper;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
@@ -8,12 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.function.Supplier;
 
 public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
 

@@ -4,34 +4,24 @@ import com.frolov.testing.entity.BaseEntity;
 
 import java.util.UUID;
 
+/**
+ * Ответ на вопрос
+ * Может быть верным или нет
+ */
 public class Answer extends BaseEntity {
 
+    private final Question question;
     private String content;
-    private boolean correct; // todo: delete
+    private boolean correct; // todo: select solution
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
+    public Answer(Long id, Question question, String content) {
+        super(id);
+        this.question = question;
+        this.content = content;
     }
 
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
+    public Question getQuestion() {
+        return question;
     }
 
     public String getContent() {

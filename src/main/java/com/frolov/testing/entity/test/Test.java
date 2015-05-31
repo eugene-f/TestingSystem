@@ -3,50 +3,32 @@ package com.frolov.testing.entity.test;
 import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.user.Tutor;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+/**
+ * Создается тьютором, который является его автором
+ * Содержит список вопросов
+ * Принадлежить определенной категории
+ */
 public class Test extends BaseEntity {
 
-    private Tutor author; // todo: make final
+    private final Tutor author;
     private String name;
     private Discipline discipline;
-    private List<Question> questions;
-    private byte minutesToPass;
+    private List<Question> questions = new ArrayList<>();
+    private Config config;
     private boolean publicated = false;
-    private List<Session> completedSessions; // todo: delete
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
-    }
-
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
+    public Test(Long id, Tutor author, String name, Discipline discipline) {
+        super(id);
+        this.author = author;
+        this.name = name;
+        this.discipline = discipline;
     }
 
     public Tutor getAuthor() {
         return author;
-    }
-
-    public void setAuthor(Tutor author) {
-        this.author = author;
     }
 
     public String getName() {
@@ -73,12 +55,12 @@ public class Test extends BaseEntity {
         this.questions = questions;
     }
 
-    public byte getMinutesToPass() {
-        return minutesToPass;
+    public Config getConfig() {
+        return config;
     }
 
-    public void setMinutesToPass(byte minutesToPass) {
-        this.minutesToPass = minutesToPass;
+    public void setConfig(Config config) {
+        this.config = config;
     }
 
     public boolean isPublicated() {
@@ -87,14 +69,6 @@ public class Test extends BaseEntity {
 
     public void setPublicated(boolean publicated) {
         this.publicated = publicated;
-    }
-
-    public List<Session> getCompletedSessions() {
-        return completedSessions;
-    }
-
-    public void setCompletedSessions(List<Session> completedSessions) {
-        this.completedSessions = completedSessions;
     }
 
 }

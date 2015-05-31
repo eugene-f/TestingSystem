@@ -1,21 +1,14 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.mapper;
 
-import com.frolov.testing.entity.BaseEntity;
-import com.frolov.testing.entity.test.Test;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
-import com.frolov.testing.factory.UserFactory;
-import org.h2.engine.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
 public class JdbcMapper {
 
@@ -33,13 +26,16 @@ public class JdbcMapper {
         BaseUser baseUser = null;
         resultSet.next();
         switch (resultSet.getString("ROLE")) {
-            case "com.frolov.testing.entity.user.Tutor": baseUser = new Tutor(); break;
-            case "com.frolov.testing.entity.user.Student": baseUser = new Student(); break;
+            case "com.frolov.testing.entity.user.Tutor": baseUser = new Tutor(
+                    null, null, null, null, null, null
+                    ); break;
+            case "com.frolov.testing.entity.user.Student": baseUser = new Student(
+                    null, null, null, null, null, null
+                    ); break;
         }
         if (baseUser != null) {
             baseUser.setId(resultSet.getLong("ID"));
             baseUser.setFirstName(resultSet.getString("FIRST_NAME"));
-            baseUser.setEmail(resultSet.getString("EMAIL"));
             baseUser.setPasswordHash(resultSet.getString("PASSWORD_HASH"));
             baseUser.setDeleted(resultSet.getBoolean("DELETED"));
         }

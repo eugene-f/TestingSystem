@@ -1,9 +1,10 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.jdbc;
 
+import com.frolov.testing.dao.Dao;
+import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.entity.BaseEntity;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {

@@ -2,78 +2,28 @@ package com.frolov.testing.entity.user;
 
 import com.frolov.testing.entity.test.Session;
 import com.frolov.testing.entity.test.Test;
+import com.frolov.testing.entity.user.structure.Department;
 
 import java.util.List;
-import java.util.UUID;
 
+/**
+ * Создает тесты
+ * Просмативает результаты прохождения созданных тестов
+ * Назначать группам или отдельным студентам тесты для прохождения
+ */
 public class Tutor extends BaseUser {
 
+    private final Department department;
     private List<Test> createdTests;
     private List<Session> completedSessions;
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
+    public Tutor(Long id, String firstName, String lastName, String email, String passwordHash, Department department) {
+        super(id, firstName, lastName, email, passwordHash);
+        this.department = department;
     }
 
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
-    }
-
-    @Override
-    public String getFirstName() {
-        return super.getFirstName();
-    }
-
-    @Override
-    public void setFirstName(String firstName) {
-        super.setFirstName(firstName);
-    }
-
-    @Override
-    public String getLastName() {
-        return super.getLastName();
-    }
-
-    @Override
-    public void setLastName(String lastName) {
-        super.setLastName(lastName);
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public void setEmail(String email) {
-        super.setEmail(email);
-    }
-
-    @Override
-    public String getPasswordHash() {
-        return super.getPasswordHash();
-    }
-
-    @Override
-    public void setPasswordHash(String passwordHash) {
-        super.setPasswordHash(passwordHash);
+    public Department getDepartment() {
+        return department;
     }
 
     public List<Test> getCreatedTests() {

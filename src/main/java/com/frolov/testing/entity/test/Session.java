@@ -4,80 +4,62 @@ import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.user.Student;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Содержит информацию о текущем тестировании и его результатах
+ */
 public class Session extends BaseEntity {
 
-    private Test test;  // todo: make final
-    private Student student;  // todo: make final
-    private Date startDate;  // todo: make final
-    private Map<Question, Answer> completedQuestionAnswerMap;
-    private byte result;
+    private final Test test;
+    private final Student student;
+    private final Date startDate = new Date();
+    private Map<Question, Answer> studentAnswers = new HashMap<>(); // todo: select solution
+    private Byte result;
+    private boolean finished;
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
-    }
-
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
+    public Session(Long id, Test test, Student student) {
+        super(id);
+        this.test = test;
+        this.student = student;
     }
 
     public Test getTest() {
         return test;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
-    }
-
     public Student getStudent() {
         return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 
     public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public Map<Question, Answer> getStudentAnswers() {
+        return studentAnswers;
     }
 
-    public Map<Question, Answer> getCompletedQuestionAnswerMap() {
-        return completedQuestionAnswerMap;
+    public void setStudentAnswers(Map<Question, Answer> studentAnswers) {
+        this.studentAnswers = studentAnswers;
     }
 
-    public void setCompletedQuestionAnswerMap(Map<Question, Answer> completedQuestionAnswerMap) {
-        this.completedQuestionAnswerMap = completedQuestionAnswerMap;
-    }
-
-    public byte getResult() {
+    public Byte getResult() {
         return result;
     }
 
-    public void setResult(byte result) {
+    public void setResult(Byte result) {
         this.result = result;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 
 }

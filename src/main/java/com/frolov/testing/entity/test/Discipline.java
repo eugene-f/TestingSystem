@@ -3,37 +3,22 @@ package com.frolov.testing.entity.test;
 import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.test.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Контейнер для классификации тестов по определенным темат
+ * Содержит список тестов данной категории
+ */
 public class Discipline extends BaseEntity {
 
     private String name;
-    private List<Test> tests;
+    private List<Test> tests = new ArrayList<>();
 
-    @Override
-    public UUID getUuid() {
-        return super.getUuid();
-    }
-
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return super.isDeleted();
-    }
-
-    @Override
-    public void setDeleted(boolean deleted) {
-        super.setDeleted(deleted);
+    public Discipline(Long id, String name) {
+        super(id);
+        this.name = name;
     }
 
     public String getName() {

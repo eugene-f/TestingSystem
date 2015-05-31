@@ -1,7 +1,9 @@
 package com.frolov.testing.factory;
 
 import com.frolov.testing.Util;
-import com.frolov.testing.entity.user.BaseUser;
+import com.frolov.testing.entity.user.structure.Department;
+import com.frolov.testing.entity.user.structure.Faculty;
+import com.frolov.testing.entity.user.structure.Group;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.thedeanda.lorem.Lorem;
@@ -11,21 +13,22 @@ import java.util.List;
 
 public class UserFactory {
 
-    public static BaseUser initUser(BaseUser user) {
-
-        user.setId(Math.abs(Util.RANDOM.nextLong()));
-        user.setFirstName(Lorem.getFirstName());
-        user.setLastName(Lorem.getLastName());
-        user.setEmail(user.getFirstName() + "_" + user.getLastName() + "@gmail.com");
-        user.setPasswordHash(Lorem.getZipCode());
-
-        return user;
-    }
-
     public static Tutor createTutor() {
-        Tutor tutor = new Tutor();
-
-        initUser(tutor);
+        Tutor tutor = new Tutor(
+                Math.abs(Util.RANDOM.nextLong()),
+                Lorem.getFirstName(),
+                Lorem.getLastName(),
+                Lorem.getFirstName() + "_" + Lorem.getLastName() + "@gmail.com",
+                Lorem.getZipCode(),
+                new Department(
+                        null,
+                        new Faculty(
+                                null,
+                                Lorem.getWords(3, 5)
+                        ),
+                        Lorem.getWords(3, 5)
+                )
+        );
 
         tutor.setCreatedTests(TestFactory.createTestList(1));
         tutor.setCompletedSessions(new ArrayList<>());
@@ -44,13 +47,22 @@ public class UserFactory {
     }
 
     public static Student createStudent() {
-        Student student = new Student();
-
-        initUser(student);
-
-        student.setCompletedSessions(new ArrayList<>());
+        Student student = new Student(
+                Math.abs(Util.RANDOM.nextLong()),
+                Lorem.getFirstName(),
+                Lorem.getLastName(),
+                Lorem.getFirstName() + "_" + Lorem.getLastName() + "@gmail.com",
+                Lorem.getZipCode(),
+                new Group(
+                        null,
+                        new Faculty(
+                                null,
+                                Lorem.getWords(3, 5)
+                        ),
+                        Lorem.getWords(3, 5)
+                )
+        );
         student.setToPassTests(TestFactory.createTestList(1));
-        student.setCurrentSession(null);
 
         return student;
     }

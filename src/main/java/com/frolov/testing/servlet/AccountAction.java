@@ -1,7 +1,7 @@
 package com.frolov.testing.servlet;
 
 import com.frolov.testing.dao.DaoFactory;
-import com.frolov.testing.dao.JdbcUserDao;
+import com.frolov.testing.dao.jdbc.JdbcUserDao;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
@@ -72,7 +72,6 @@ public class AccountAction {
         if (user != null) {
             user.setFirstName(firstName);
             user.setLastName(lastName);
-            user.setEmail(email);
             user.setPasswordHash(password);
             switch (userType) {
                 case "tutor": TestingSystem.PLATFORM.getTutors().add((Tutor) user); break;
