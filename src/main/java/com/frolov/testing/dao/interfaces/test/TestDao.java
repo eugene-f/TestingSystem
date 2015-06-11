@@ -1,5 +1,8 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.interfaces.test;
 
+import com.frolov.testing.dao.DaoException;
+import com.frolov.testing.dao.interfaces.Dao;
+import com.frolov.testing.entity.test.Discipline;
 import com.frolov.testing.entity.test.Test;
 
 public interface TestDao extends Dao<Test> {
@@ -18,6 +21,8 @@ public interface TestDao extends Dao<Test> {
 
     @Override
     boolean deleteById(Long id) throws DaoException;
+
+    Iterable<Test> fintByDiscipline(Discipline discipline) throws DaoException;
 
     Iterable<Test> fintByName(String name) throws DaoException;
 

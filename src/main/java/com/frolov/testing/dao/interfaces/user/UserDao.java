@@ -1,5 +1,7 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.interfaces.user;
 
+import com.frolov.testing.dao.DaoException;
+import com.frolov.testing.dao.interfaces.Dao;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;

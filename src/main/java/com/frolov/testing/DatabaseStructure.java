@@ -1,6 +1,6 @@
 package com.frolov.testing;
 
-public class DatabaseStructure {
+public abstract class DatabaseStructure {
 
     public class ANSWERS {
         public static final String TABLE = "ANSWERS";

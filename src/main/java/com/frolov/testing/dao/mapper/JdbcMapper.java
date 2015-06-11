@@ -42,7 +42,7 @@ public class JdbcMapper {
         return baseUser;
     }
 
-    public static List<BaseUser> map(ResultSet resultSet) throws SQLException {
+    public static List<BaseUser> mapResultSetToBaseUserList(ResultSet resultSet) throws SQLException {
         List<BaseUser> userList = new ArrayList<>();
         while (resultSet.next()) {
             userList.add(mapResultToUser(resultSet));

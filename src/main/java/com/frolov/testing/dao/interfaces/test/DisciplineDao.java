@@ -1,5 +1,7 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.interfaces.test;
 
+import com.frolov.testing.dao.DaoException;
+import com.frolov.testing.dao.interfaces.Dao;
 import com.frolov.testing.entity.test.Discipline;
 
 public interface DisciplineDao extends Dao<Discipline> {
@@ -19,6 +21,6 @@ public interface DisciplineDao extends Dao<Discipline> {
     @Override
     boolean deleteById(Long id) throws DaoException;
 
-    Iterable<Discipline> findByName(String name) throws DaoException;
+    Discipline findByName(String name) throws DaoException;
 
 }

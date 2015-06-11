@@ -1,5 +1,6 @@
-package com.frolov.testing.dao;
+package com.frolov.testing.dao.interfaces;
 
+import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.entity.BaseEntity;
 
 public interface Dao<T extends BaseEntity> {

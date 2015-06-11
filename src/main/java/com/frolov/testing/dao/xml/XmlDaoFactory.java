@@ -1,6 +1,6 @@
 package com.frolov.testing.dao.xml;
 
-import com.frolov.testing.dao.Dao;
+import com.frolov.testing.dao.interfaces.Dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.DaoFactory;
 

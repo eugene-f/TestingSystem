@@ -2,7 +2,7 @@ package com.frolov.testing;
 
 import java.util.Random;
 
-public class Util {
+public abstract class ConstantContainer {
 
     public static final Random RANDOM = new Random();
 

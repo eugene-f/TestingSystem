@@ -21,6 +21,8 @@ import java.util.List;
  */
 public class Platform {
 
+    // todo: delete
+
     private List<User> users;
     private List<Admin> admins;
     private List<Faculty> faculties;

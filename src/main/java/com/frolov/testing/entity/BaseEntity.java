@@ -35,4 +35,6 @@ public abstract class BaseEntity {
         this.deleted = deleted;
     }
 
+    // todo: add equals() and hashCode()
+
 }

@@ -11,7 +11,8 @@ import com.frolov.testing.entity.BaseEntity;
  */
 public abstract class BaseUser extends BaseEntity {
 
-    private final String email; // todo: make synchronized registration
+    // todo: make synchronized registration
+    private final String email; // todo: rename to 'login'
     private String firstName;
     private String lastName;
     private String passwordHash;

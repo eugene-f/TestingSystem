@@ -1,6 +1,6 @@
 package com.frolov.testing.factory;
 
-import com.frolov.testing.Util;
+import com.frolov.testing.ConstantContainer;
 import com.frolov.testing.entity.user.structure.Department;
 import com.frolov.testing.entity.user.structure.Faculty;
 import com.frolov.testing.entity.user.structure.Group;
@@ -15,7 +15,7 @@ public class UserFactory {
 
     public static Tutor createTutor() {
         Tutor tutor = new Tutor(
-                Math.abs(Util.RANDOM.nextLong()),
+                Math.abs(ConstantContainer.RANDOM.nextLong()),
                 Lorem.getFirstName(),
                 Lorem.getLastName(),
                 Lorem.getFirstName() + "_" + Lorem.getLastName() + "@gmail.com",
@@ -48,7 +48,7 @@ public class UserFactory {
 
     public static Student createStudent() {
         Student student = new Student(
-                Math.abs(Util.RANDOM.nextLong()),
+                Math.abs(ConstantContainer.RANDOM.nextLong()),
                 Lorem.getFirstName(),
                 Lorem.getLastName(),
                 Lorem.getFirstName() + "_" + Lorem.getLastName() + "@gmail.com",

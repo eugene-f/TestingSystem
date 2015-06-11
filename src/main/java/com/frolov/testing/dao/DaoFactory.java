@@ -1,5 +1,6 @@
 package com.frolov.testing.dao;
 
+import com.frolov.testing.dao.interfaces.Dao;
 import com.frolov.testing.dao.jdbc.JdbcDaoFactory;
 import com.frolov.testing.dao.xml.XmlDaoFactory;
 

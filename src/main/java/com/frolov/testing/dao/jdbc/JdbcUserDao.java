@@ -1,7 +1,7 @@
 package com.frolov.testing.dao.jdbc;
 
 import com.frolov.testing.dao.DaoException;
-import com.frolov.testing.dao.UserDao;
+import com.frolov.testing.dao.interfaces.user.UserDao;
 import com.frolov.testing.dao.mapper.JdbcMapper;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
@@ -48,14 +48,8 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
     private static final String GET_STUDENTS = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE ROLE = com.frolov.testing.entity.user.Student";
 
-    @Override
-    public Connection getConnection() {
-        return super.getConnection();
-    }
-
-    @Override
-    public void setConnection(Connection connection) {
-        super.setConnection(connection);
+    public JdbcUserDao(Connection connection) {
+        super(connection);
     }
 
     @Override
@@ -67,7 +61,7 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
     public Iterable<BaseUser> getAll() throws DaoException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            return JdbcMapper.map(resultSet);
+            return JdbcMapper.mapResultSetToBaseUserList(resultSet);
         } catch (SQLException e) {
             throw new DaoException();
         }
@@ -79,7 +73,7 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT)) {
             JdbcMapper.mapUserToStatment(entity, preparedStatement);
             preparedStatement.execute();
-//            return entity; // fixme: make User return
+//            return entity; // fixme: return User with Id
         } catch (SQLException e) {
             e.printStackTrace();
         }
