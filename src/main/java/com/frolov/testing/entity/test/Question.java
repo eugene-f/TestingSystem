@@ -15,19 +15,13 @@ public class Question extends BaseEntity {
 
     private final Test test;
     private String content;
-    private Map<Answer, Boolean> answersMap; // todo: select solution
-    private List<Answer> answers; // todo: select solution
-    private Answer correctAnswer; // todo: select solution
+    private Map<Answer, Boolean> answersMap;
+    private List<Answer> answers;
+    private Answer correctAnswer;
+    // todo: select solution
 
-    public Question(Long id, Test test) {
-        super(id);
+    public Question(Test test) {
         this.test = test;
-    }
-
-    public Question(Long id, Test test, String content) {
-        super(id);
-        this.test = test;
-        this.content = content;
     }
 
     public Test getTest() {

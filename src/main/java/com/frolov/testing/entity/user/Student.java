@@ -2,7 +2,7 @@ package com.frolov.testing.entity.user;
 
 import com.frolov.testing.entity.test.Session;
 import com.frolov.testing.entity.test.Test;
-import com.frolov.testing.entity.user.structure.Group;
+import com.frolov.testing.entity.structure.Group;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,31 +15,22 @@ import java.util.List;
  */
 public class Student extends BaseUser {
 
-    private static final Type type = Type.Student;
+    private static final UserType TYPE_STUDENT = UserType.Student;
     private final Group group;
     private List<Session> sessions = new ArrayList<>();
     private List<Test> toPassTests = new ArrayList<>();
 
-    public Student(Long id, String email, Group group) {
-        super(id, email);
+    public Student(String email, Group group) {
+        super(TYPE_STUDENT, email);
         this.group = group;
     }
 
-    public Student(Long id, String email, String passwordHash, Group group) {
-        super(id, email, passwordHash);
+    public Student(String email, String passwordHash, Group group) {
+        super(TYPE_STUDENT, email, passwordHash);
         this.group = group;
     }
 
-    public Student(Long id, String email, String firstName, String lastName, String passwordHash, Group group) {
-        super(id, email, firstName, lastName, passwordHash);
-        this.group = group;
-    }
-
-    public static Type getType() {
-        return type;
-    }
-
-    public Group getGroup() {
+   public Group getGroup() {
         return group;
     }
 

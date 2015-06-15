@@ -6,7 +6,6 @@ import com.frolov.testing.entity.user.Student;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Содержит информацию о текущем тестировании и его результатах
@@ -15,13 +14,12 @@ public class Session extends BaseEntity {
 
     private final Test test;
     private final Student student;
-    private final Date startDate = new Date(); // todo: add finishd time
+    private final Date startDate = new Date(); // todo: add finished time
     private Map<Question, Answer> studentAnswers = new HashMap<>(); // todo: select solution
-    private Byte result;
+    private Byte percentResult;
     private boolean finished;
 
-    public Session(Long id, Test test, Student student) {
-        super(id);
+    public Session(Test test, Student student) {
         this.test = test;
         this.student = student;
     }
@@ -46,12 +44,12 @@ public class Session extends BaseEntity {
         this.studentAnswers = studentAnswers;
     }
 
-    public Byte getResult() {
-        return result;
+    public Byte getPercentResult() {
+        return percentResult;
     }
 
-    public void setResult(Byte result) {
-        this.result = result;
+    public void setPercentResult(Byte percentResult) {
+        this.percentResult = percentResult;
     }
 
     public boolean isFinished() {

@@ -3,6 +3,7 @@ package com.frolov.testing.factory;
 import com.frolov.testing.entity.test.Answer;
 import com.frolov.testing.entity.test.Question;
 import com.frolov.testing.entity.test.Test;
+import com.frolov.testing.entity.user.Tutor;
 import com.thedeanda.lorem.Lorem;
 
 import java.util.ArrayList;
@@ -11,12 +12,16 @@ import java.util.List;
 public class TestFactory {
 
     public static Test createTest() {
-        Test test = new Test(null, null, Lorem.getWords(3, 7), null);
-
-        test.setQuestions(new ArrayList<>());
+        Tutor tutor = new Tutor("123@123.123", null);
+        tutor.setId((long) 123);
+        Test test = new Test(tutor);
+        test.setId(null);
+        test.setName(Lorem.getWords(3, 5));
+        test.setDiscipline(null);
+        test.setQuestions(null);
+        test.setConfiguration(null);
         test.setPublicated(false);
         test.setDeleted(false);
-
         return test;
     }
 
@@ -31,7 +36,7 @@ public class TestFactory {
     }
 
     public static Question createQuestion() {
-        Question question = new Question(null, null, Lorem.getWords(3, 7));
+        Question question = new Question(null);
 
         question.setAnswers(new ArrayList<>());
         question.setDeleted(false);
@@ -50,7 +55,7 @@ public class TestFactory {
     }
 
     public static Answer createAnswer() {
-        Answer answer = new Answer(null, null, Lorem.getWords(3, 5));
+        Answer answer = new Answer(null);
 
         answer.setCorrect(false);
         answer.setDeleted(false);

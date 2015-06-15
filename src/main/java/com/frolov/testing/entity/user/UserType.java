@@ -1,6 +1,6 @@
 package com.frolov.testing.entity.user;
 
-public enum Type {
+public enum UserType {
 
     Admin, Tutor, Student
 

@@ -14,8 +14,7 @@ public class Discipline extends BaseEntity {
     private String name;
     private List<Test> tests = new ArrayList<>();
 
-    public Discipline(Long id, String name) {
-        super(id);
+    public Discipline(String name) {
         this.name = name;
     }
 

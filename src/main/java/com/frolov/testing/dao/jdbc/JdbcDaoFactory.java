@@ -1,8 +1,9 @@
 package com.frolov.testing.dao.jdbc;
 
-import com.frolov.testing.dao.interfaces.Dao;
+import com.frolov.testing.dao.Dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.DaoFactory;
+import com.frolov.testing.dao.jdbc.dao.JdbcUserDao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

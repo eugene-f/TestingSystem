@@ -1,6 +1,6 @@
 package com.frolov.testing.dao.jdbc;
 
-import com.frolov.testing.dao.interfaces.Dao;
+import com.frolov.testing.dao.Dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.entity.BaseEntity;
 
@@ -14,6 +14,9 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
     private String tableName; // todo: make abstract
 
     private /*final*/ Connection connection; // todo: make final
+
+    public JdbcBaseDao() {
+    }
 
     public JdbcBaseDao(Connection connection) {
         setConnection(connection);

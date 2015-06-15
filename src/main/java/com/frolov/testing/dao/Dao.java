@@ -1,4 +1,4 @@
-package com.frolov.testing.dao.interfaces;
+package com.frolov.testing.dao;
 
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.entity.BaseEntity;

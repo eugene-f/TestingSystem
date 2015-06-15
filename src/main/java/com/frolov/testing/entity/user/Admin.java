@@ -5,22 +5,10 @@ package com.frolov.testing.entity.user;
  */
 public class Admin extends BaseUser {
 
-    private static final Type type = Type.Admin;
+    private static final UserType TYPE_ADMIN = UserType.Admin;
 
-    public Admin(Long id, String email) {
-        super(id, email);
-    }
-
-    public Admin(Long id, String email, String passwordHash) {
-        super(id, email, passwordHash);
-    }
-
-    public Admin(Long id, String email, String firstName, String lastName, String passwordHash) {
-        super(id, email, firstName, lastName, passwordHash);
-    }
-
-    public static Type getType() {
-        return type;
+    public Admin(String email) {
+        super(TYPE_ADMIN, email);
     }
 
 }

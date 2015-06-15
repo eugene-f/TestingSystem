@@ -1,4 +1,4 @@
-package com.frolov.testing.entity.user.structure;
+package com.frolov.testing.entity.structure;
 
 import com.frolov.testing.entity.BaseEntity;
 import com.frolov.testing.entity.user.Student;
@@ -16,8 +16,7 @@ public class Group extends BaseEntity {
     private String name;
     private List<Student> students = new ArrayList<>();
 
-    public Group(Long id, Faculty faculty, String name) {
-        super(id);
+    public Group(Faculty faculty, String name) {
         this.faculty = faculty;
         this.name = name;
     }

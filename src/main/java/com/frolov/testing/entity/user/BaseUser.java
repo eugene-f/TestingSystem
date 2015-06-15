@@ -12,28 +12,27 @@ import com.frolov.testing.entity.BaseEntity;
 public abstract class BaseUser extends BaseEntity {
 
     // todo: make synchronized registration
+    private final UserType type;
     private final String email; // todo: rename to 'login'
     private String firstName;
     private String lastName;
     private String passwordHash;
 
-    public BaseUser(Long id, String email) { // todo: delete
-        super(id);
+    // todo: make constructor with all class fields
+
+    public BaseUser(UserType type, String email) {
+        this.type = type;
         this.email = email;
     }
 
-    public BaseUser(Long id, String email, String passwordHash) { // todo: delete
-        super(id);
+    public BaseUser(UserType type, String email, String passwordHash) {
+        this.type = type;
         this.email = email;
         this.passwordHash = passwordHash;
     }
 
-    public BaseUser(Long id, String email, String firstName, String lastName, String passwordHash) {
-        super(id);
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.passwordHash = passwordHash;
+    public UserType getType() {
+        return type;
     }
 
     public String getEmail() {

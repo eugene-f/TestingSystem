@@ -1,9 +1,8 @@
 package com.frolov.testing.factory;
 
-import com.frolov.testing.ConstantContainer;
-import com.frolov.testing.entity.user.structure.Department;
-import com.frolov.testing.entity.user.structure.Faculty;
-import com.frolov.testing.entity.user.structure.Group;
+import com.frolov.testing.entity.structure.Department;
+import com.frolov.testing.entity.structure.Faculty;
+import com.frolov.testing.entity.structure.Group;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.thedeanda.lorem.Lorem;
@@ -15,17 +14,9 @@ public class UserFactory {
 
     public static Tutor createTutor() {
         Tutor tutor = new Tutor(
-                Math.abs(ConstantContainer.RANDOM.nextLong()),
-                Lorem.getFirstName(),
-                Lorem.getLastName(),
                 Lorem.getFirstName() + "_" + Lorem.getLastName() + "@gmail.com",
-                Lorem.getZipCode(),
                 new Department(
-                        null,
-                        new Faculty(
-                                null,
-                                Lorem.getWords(3, 5)
-                        ),
+                        new Faculty(Lorem.getWords(3, 5)),
                         Lorem.getWords(3, 5)
                 )
         );
@@ -48,17 +39,9 @@ public class UserFactory {
 
     public static Student createStudent() {
         Student student = new Student(
-                Math.abs(ConstantContainer.RANDOM.nextLong()),
-                Lorem.getFirstName(),
-                Lorem.getLastName(),
                 Lorem.getFirstName() + "_" + Lorem.getLastName() + "@gmail.com",
-                Lorem.getZipCode(),
                 new Group(
-                        null,
-                        new Faculty(
-                                null,
-                                Lorem.getWords(3, 5)
-                        ),
+                        new Faculty(Lorem.getWords(3, 5)),
                         Lorem.getWords(3, 5)
                 )
         );

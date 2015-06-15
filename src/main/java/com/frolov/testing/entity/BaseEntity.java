@@ -11,9 +11,12 @@ public abstract class BaseEntity {
     private Long id;
     private boolean deleted = false;
 
-    public BaseEntity(Long id) {
-        this.id = id;
+    public BaseEntity() {
     }
+
+//    public BaseEntity(Long id) {
+//        this.id = id;
+//    }
 
     public UUID getUuid() {
         return uuid;

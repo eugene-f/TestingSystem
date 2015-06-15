@@ -14,22 +14,8 @@ public class Answer extends BaseEntity {
     private String content;
     private boolean correct; // todo: select solution
 
-    public Answer(Long id, Question question) {
-        super(id);
+    public Answer(Question question) {
         this.question = question;
-    }
-
-    public Answer(Long id, Question question, String content) {
-        super(id);
-        this.question = question;
-        this.content = content;
-    }
-
-    public Answer(Long id, Question question, String content, boolean correct) {
-        super(id);
-        this.question = question;
-        this.content = content;
-        this.correct = correct;
     }
 
     public Question getQuestion() {

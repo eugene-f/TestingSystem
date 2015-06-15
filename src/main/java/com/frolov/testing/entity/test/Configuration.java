@@ -8,25 +8,20 @@ import com.frolov.testing.entity.BaseEntity;
  */
 public class Configuration extends BaseEntity {
 
+    private final Test test;
     private byte minutesToPass;
-    private int questionCountToView; //Количество вопросов из теста
-    private boolean shuffleQuestion; //Перемешивание вопросов
-    private boolean shuffleAnswer; //Перемешивание вариантов ответов
-    private boolean showCorrect; //Показ правильных ответов
-    private boolean takeAgain; //Возможность пересдачи
+    private byte questionCountToView; // Количество вопросов из теста
+    private boolean shuffleQuestion; // Перемешивание вопросов
+    private boolean shuffleAnswer; // Перемешивание вариантов ответов
+    private boolean showCorrect; // Показ правильных ответов
+    private boolean takeAgain; // Возможность пересдачи
 
-    public Configuration(Long id) {
-        super(id);
+    public Configuration(Test test) {
+        this.test = test;
     }
 
-    public Configuration(Long id, byte minutesToPass, int questionCountToView, boolean shuffleQuestion, boolean shuffleAnswer, boolean showCorrect, boolean takeAgain) {
-        super(id);
-        this.minutesToPass = minutesToPass;
-        this.questionCountToView = questionCountToView;
-        this.shuffleQuestion = shuffleQuestion;
-        this.shuffleAnswer = shuffleAnswer;
-        this.showCorrect = showCorrect;
-        this.takeAgain = takeAgain;
+    public Test getTest() {
+        return test;
     }
 
     public byte getMinutesToPass() {
@@ -37,11 +32,11 @@ public class Configuration extends BaseEntity {
         this.minutesToPass = minutesToPass;
     }
 
-    public int getQuestionCountToView() {
+    public byte getQuestionCountToView() {
         return questionCountToView;
     }
 
-    public void setQuestionCountToView(int questionCountToView) {
+    public void setQuestionCountToView(byte questionCountToView) {
         this.questionCountToView = questionCountToView;
     }
 

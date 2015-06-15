@@ -2,7 +2,7 @@ package com.frolov.testing.entity.user;
 
 import com.frolov.testing.entity.test.Session;
 import com.frolov.testing.entity.test.Test;
-import com.frolov.testing.entity.user.structure.Department;
+import com.frolov.testing.entity.structure.Department;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,28 +14,19 @@ import java.util.List;
  */
 public class Tutor extends BaseUser {
 
-    private static final Type type = Type.Tutor;
+    private static final UserType TYPE_TUTOR = UserType.Tutor;
     private final Department department;
     private List<Test> createdTests = new ArrayList<>();
     private List<Session> completedSessions = new ArrayList<>();
 
-    public Tutor(Long id, String email, Department department) {
-        super(id, email);
+    public Tutor(String email, Department department) {
+        super(TYPE_TUTOR, email);
         this.department = department;
     }
 
-    public Tutor(Long id, String email, String passwordHash, Department department) {
-        super(id, email, passwordHash);
+    public Tutor(String email, String passwordHash, Department department) {
+        super(TYPE_TUTOR, email, passwordHash);
         this.department = department;
-    }
-
-    public Tutor(Long id, String email, String firstName, String lastName, String passwordHash, Department department) {
-        super(id, email, firstName, lastName, passwordHash);
-        this.department = department;
-    }
-
-    public static Type getType() {
-        return type;
     }
 
     public Department getDepartment() {

@@ -1,7 +1,7 @@
 package com.frolov.testing.action;
 
 import com.frolov.testing.dao.DaoFactory;
-import com.frolov.testing.dao.jdbc.JdbcUserDao;
+import com.frolov.testing.dao.jdbc.dao.JdbcUserDao;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
@@ -27,7 +27,7 @@ public class Account {
         return getUserByEmail(email) != null;
     }
 
-    static BaseUser getUserByEmail(String email) {
+    public static BaseUser getUserByEmail(String email) {
 //        return getUserByEmailFromMemory(email);
         return getUserByEmailFromDatabase(email);
     }
@@ -50,7 +50,7 @@ public class Account {
         return user.getPasswordHash().equals(password);
     }
 
-    static boolean login(String email, String password) {
+    public static boolean login(String email, String password) {
 //        BaseUser user = getUserByEmailFromMemory(email);
 //        if (user != null) {
         if (checkUserByEmail(email)) {
@@ -63,7 +63,7 @@ public class Account {
         return false;
     }
 
-    static BaseUser createUser(String firstName, String lastName, String email, String password, String userType) {
+    public static BaseUser createUser(String firstName, String lastName, String email, String password, String userType) {
         BaseUser user = null;
         switch (userType) {
             case "tutor": user = UserFactory.createTutor(); break;

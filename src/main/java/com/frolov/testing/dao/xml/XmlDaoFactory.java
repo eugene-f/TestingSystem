@@ -1,6 +1,6 @@
 package com.frolov.testing.dao.xml;
 
-import com.frolov.testing.dao.interfaces.Dao;
+import com.frolov.testing.dao.Dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.DaoFactory;
 
@@ -24,7 +24,7 @@ public class XmlDaoFactory extends DaoFactory {
 //        } catch (IllegalAccessException e) {
 //            e.printStackTrace();
         } catch (Exception e) {
-            throw new DaoException("���������� ������� DAO ��� ������", e);
+            throw new DaoException("XmlDaoFactory.createXmlDao()", e);
         }
         return dao;
     }

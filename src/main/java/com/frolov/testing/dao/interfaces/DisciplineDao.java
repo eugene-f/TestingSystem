@@ -1,7 +1,7 @@
-package com.frolov.testing.dao.interfaces.test;
+package com.frolov.testing.dao.interfaces;
 
 import com.frolov.testing.dao.DaoException;
-import com.frolov.testing.dao.interfaces.Dao;
+import com.frolov.testing.dao.Dao;
 import com.frolov.testing.entity.test.Discipline;
 
 public interface DisciplineDao extends Dao<Discipline> {

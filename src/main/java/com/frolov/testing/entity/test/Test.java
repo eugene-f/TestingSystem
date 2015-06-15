@@ -20,22 +20,8 @@ public class Test extends BaseEntity {
     private Configuration configuration;
     private boolean publicated = false;
 
-    public Test(Long id, Tutor author) {
-        super(id);
+    public Test(Tutor author) {
         this.author = author;
-    }
-
-    public Test(Long id, Tutor author, String name) {
-        super(id);
-        this.author = author;
-        this.name = name;
-    }
-
-    public Test(Long id, Tutor author, String name, Discipline discipline) {
-        super(id);
-        this.author = author;
-        this.name = name;
-        this.discipline = discipline;
     }
 
     public Tutor getAuthor() {
