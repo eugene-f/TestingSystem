@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 
-    private String tableName; // todo: make abstract
+    private /*final*/ String tableName; // todo: make abstract
 
     private /*final*/ Connection connection; // todo: make final
 

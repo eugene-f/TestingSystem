@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface JdbcMapper<T extends BaseEntity> {
 
-    public PreparedStatement mapToStatement(T entity, PreparedStatement statement);
-    public T mapToEntity(ResultSet set);
-    public default List<T> mapToEntityList(ResultSet set) throws SQLException {
+    PreparedStatement mapToStatement(T entity, PreparedStatement statement);
+
+    T mapToEntity(ResultSet set);
+
+    default List<T> mapToEntityList(ResultSet set) throws SQLException {
         List<T> list = new ArrayList<>();
         while (set.next()) { // fixme: double set iteration
 //            set.previous();
