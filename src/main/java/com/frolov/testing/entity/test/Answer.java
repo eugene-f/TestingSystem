@@ -2,8 +2,6 @@ package com.frolov.testing.entity.test;
 
 import com.frolov.testing.entity.BaseEntity;
 
-import java.util.UUID;
-
 /**
  * Ответ на вопрос
  * Может быть верным или нет

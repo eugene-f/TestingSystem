@@ -35,7 +35,7 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
     private static final String FIND_BY_LAST_NAME = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE LAST_NAME = ?";
     private static final String FIND_BY_FULL_NAME = "SELECT * FROM " + TABLE_NAME + " " +
-            " WHERE EMAIL = ?"; // todo: write find script
+            " WHERE FULL_NAME = ?"; // todo: write find script
     private static final String GET_TUTORS = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE TYPE_ID = ?";
     private static final String GET_STUDENTS = "SELECT * FROM " + TABLE_NAME + " " +
@@ -124,7 +124,10 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
 
     @Override
     public BaseUser findByFirstName(String firstName) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FIRST_NAME)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+            preparedStatement.setString(1, firstName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return mapToEntity(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,7 +136,10 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
 
     @Override
     public BaseUser findByLastName(String lastName) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_LAST_NAME)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+            preparedStatement.setString(1, lastName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return mapToEntity(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,7 +148,10 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
 
     @Override
     public BaseUser findByFullName(String fullName) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FULL_NAME)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+            preparedStatement.setString(1, fullName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return mapToEntity(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,8 +159,12 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
     }
 
     @Override
+    @Deprecated
     public Iterable<Tutor> getTutors() throws DaoException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_TUTORS)) {
+            preparedStatement.setLong(1, UserType.Tutor.ordinal());
+            ResultSet resultSet = preparedStatement.executeQuery();
+//            return mapToEntityList(resultSet); // fixme: cast types
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -159,8 +172,12 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
     }
 
     @Override
+    @Deprecated
     public Iterable<Student> getStudents() throws DaoException {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_STUDENTS)) {
+            preparedStatement.setLong(1, UserType.Student.ordinal());
+            ResultSet resultSet = preparedStatement.executeQuery();
+//            return mapToEntityList(resultSet); // fixme: cast types
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -198,12 +215,12 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
                     baseUser = new Student(null, null);
                     break;
             }
-            if (baseUser != null) {
+//            if (baseUser != null) { // todo: delete if check because all type values be cased
                 baseUser.setId(set.getLong("ID"));
                 baseUser.setFirstName(set.getString("FIRST_NAME"));
                 baseUser.setPasswordHash(set.getString("PASSWORD_HASH"));
                 baseUser.setDeleted(set.getBoolean("DELETED"));
-            }
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

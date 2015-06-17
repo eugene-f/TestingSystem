@@ -7,7 +7,7 @@ import java.util.EnumMap;
 
 public abstract class DaoFactory {
 
-    private static EnumMap<Type, DaoFactory> factories = new EnumMap<Type, DaoFactory>(Type.class);
+    private static EnumMap<Type, DaoFactory> factories = new EnumMap<>(Type.class);
 
     static {
         factories.put(Type.Jdbc, JdbcDaoFactory.getInstance());
