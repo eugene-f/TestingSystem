@@ -24,7 +24,7 @@ public class Registration extends HttpServlet {
         String userType = request.getParameter("userType");
 
         if (password.equals(confirmPassword)) {
-            if (Account.getUserByEmail(email) == null) {
+            if (Account.dbGetUserByEmail(email) == null) {
                 Account.createUser(firstName, lastName, email, password, userType);
                 response.sendRedirect("/account");
             } else {

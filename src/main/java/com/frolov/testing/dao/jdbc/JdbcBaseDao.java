@@ -3,6 +3,8 @@ package com.frolov.testing.dao.jdbc;
 import com.frolov.testing.dao.Dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.entity.BaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,6 +12,8 @@ import java.sql.SQLException;
 // todo: add mapping methods
 
 public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
+
+    protected static final Logger logger = LoggerFactory.getLogger(JdbcBaseDao.class);
 
     private /*final*/ String tableName; // todo: make abstract
 

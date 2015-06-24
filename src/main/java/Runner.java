@@ -1,4 +1,4 @@
-import com.frolov.testing.ConnectionPool;
+import com.frolov.testing.connection.ConnectionPool;
 import com.frolov.testing.dao.*;
 import com.frolov.testing.dao.jdbc.dao.JdbcUserDao;
 import com.frolov.testing.entity.Platform;

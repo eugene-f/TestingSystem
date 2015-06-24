@@ -7,60 +7,45 @@ import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.factory.UserFactory;
 import com.frolov.testing.servlet.TestingSystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Account {
 
-    private static void addUserToDatabase(BaseUser user) {
-        DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class).insert(user);
-//        new JdbcUserDao().insert(user);
-    }
+    private static final Logger logger = LoggerFactory.getLogger(Account.class);
+    private static final JdbcUserDao JDBC_USER_DAO = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
+    public static BaseUser currentUser = null;
 
-    private static void addUserToMemory(BaseUser user) {
-        TestingSystem.USER_LIST.add(user);
-    }
-
-    private static void setCurrentUserToMemory(BaseUser user) {
-        TestingSystem.CURRENT_USER = user;
+    public static boolean login(String email, String password) {
+        BaseUser user = dbGetUserByEmail(email);
+        if (user != null) {
+            if (checkPasswordByUser(user, password)) {
+                currentUser = user;
+                logger.info("Пользователь вошел в систему");
+                return true;
+            } else {
+                logger.info("Не верный пароль");
+            }
+        } else {
+            logger.info("Такого пользователя не существует");
+        }
+        return false;
     }
 
     public static boolean checkUserByEmail(String email) {
-        return getUserByEmail(email) != null;
+        return dbGetUserByEmail(email) != null;
     }
 
-    public static BaseUser getUserByEmail(String email) {
-//        return getUserByEmailFromMemory(email);
-        return getUserByEmailFromDatabase(email);
-    }
-
-    private static BaseUser getUserByEmailFromMemory(String email) {
-        for (BaseUser user : TestingSystem.USER_LIST) {
-            if (user.getEmail().equals(email)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    private static BaseUser getUserByEmailFromDatabase(String email) {
-        JdbcUserDao jdbcUserDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class); // todo: up
-        return jdbcUserDao.findByEmail(email);
+    public static BaseUser dbGetUserByEmail(String email) {
+        return JDBC_USER_DAO.findByEmail(email);
     }
 
     static boolean checkPasswordByUser(BaseUser user, String password) {
         return user.getPasswordHash().equals(password);
     }
 
-    public static boolean login(String email, String password) {
-//        BaseUser user = getUserByEmailFromMemory(email);
-//        if (user != null) {
-        if (checkUserByEmail(email)) {
-            BaseUser user = getUserByEmailFromDatabase(email);
-            if (checkPasswordByUser(user, password)) {
-                setCurrentUserToMemory(user); // User is validated
-                return true;
-            } // Incorrect password
-        } // User not fond
-        return false;
+    private static void dbInsertUser(BaseUser user) {
+        JDBC_USER_DAO.insert(user);
     }
 
     public static BaseUser createUser(String firstName, String lastName, String email, String password, String userType) {
@@ -68,7 +53,7 @@ public class Account {
         switch (userType) {
             case "tutor": user = UserFactory.createTutor(); break;
             case "student": user = UserFactory.createStudent(); break;
-            default: break; // return;
+            // return;
         }
         if (user != null) {
             user.setFirstName(firstName);
@@ -79,9 +64,9 @@ public class Account {
                 case "student": TestingSystem.PLATFORM.getStudents().add((Student) user); break;
                 default: break; // return;
             }
-            addUserToMemory(user);
-            addUserToDatabase(user);
-            setCurrentUserToMemory(user);
+//            addUserToMemory(user);
+            dbInsertUser(user);
+//            setCurrentUserToMemory(user);
         }
         return user;
     }

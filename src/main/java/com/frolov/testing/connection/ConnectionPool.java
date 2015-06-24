@@ -1,15 +1,12 @@
-package com.frolov.testing;
+package com.frolov.testing.connection;
 
-import com.frolov.testing.dao.DaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ConnectionPool {
@@ -19,7 +16,6 @@ public class ConnectionPool {
     private static final ConnectionPool instance = new ConnectionPool();
 
     private static final ResourceBundle database = ResourceBundle.getBundle("database");
-    private static final String DRIVER = database.getString("driver_class");
     private static final String URL = database.getString("url");
     private static final String USERNAME = database.getString("username");
     private static final String PASSWORD = database.getString("password");
@@ -28,18 +24,7 @@ public class ConnectionPool {
     private static final int CONNECTION_COUNT = 5;
 
     static {
-        try {
-            Driver driver = (Driver) Class.forName(DRIVER).newInstance();
-            DriverManager.registerDriver(driver);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        JdbcDaoFactory.loadDriverClass();
         initConnections();
     }
 
@@ -54,13 +39,16 @@ public class ConnectionPool {
     }
 
     private static Connection createConnection() {
+//        Connection connection;
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             logger.info("con create");
-            return connection;
+            return connection; //
         } catch (SQLException e) {
             throw new ConnectionException("Не возможно создать соединение", e);
+//            throw new DaoException("Соединение не установлено", e);
         }
+//        return connection;
     }
 
     private boolean checkConnection(Connection connection) {
@@ -72,7 +60,7 @@ public class ConnectionPool {
                     }
                 }
             } catch (SQLException e) {
-                throw new DaoException("Невозможно добавить соединение в пул", e);
+                logger.error("Невозможно добавить соединение в пул");
             }
         }
         return false;
@@ -81,16 +69,18 @@ public class ConnectionPool {
     public void addConnection(Connection connection) {
         if (CONNECTIONS.size() <= CONNECTION_COUNT) {
             if (checkConnection(connection)) {
-                logger.info("con add");
+                logger.info("Соединение добавлено");
                 CONNECTIONS.add(connection);
             }
-        } else logger.info("con not add bec ful pol");
+        } else {
+            logger.info("Пулл соединений полон, соединение не добавлено");
+        }
     }
 
     public Connection getConnection() {
         for (Connection connection : CONNECTIONS) {
             if (checkConnection(connection)) {
-                logger.info("con get");
+                logger.info("Соединение передано");
                 CONNECTIONS.remove(connection);
                 return connection;
             }

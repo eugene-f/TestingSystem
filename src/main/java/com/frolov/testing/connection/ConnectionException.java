@@ -1,4 +1,4 @@
-package com.frolov.testing;
+package com.frolov.testing.connection;
 
 public class ConnectionException extends RuntimeException {
 

@@ -203,25 +203,36 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
     public BaseUser mapToEntity(ResultSet set) {
         BaseUser baseUser = null;
         try {
+            set.next();
+            long id = set.getLong("ID");
+            long typeId = set.getLong("TYPE_ID");
+            String firstName = set.getString("FIRST_NAME");
+            String lastName = set.getString("LAST_NAME");
+            String email = set.getString("EMAIL");
+            String passwordHash = set.getString("PASSWORD_HASH");
+            boolean deleted = set.getBoolean("DELETED");
+
 //            set.next(); // fixme: double set iteration
-            switch (UserType.values()[((int)set.getLong("TYPE_ID"))]) {
+            switch (UserType.values()[(int) typeId]) {
                 case Admin:
-                    baseUser = new Admin(null);
+                    baseUser = new Admin(email);
                     break;
                 case Tutor:
-                    baseUser = new Tutor(null, null);
+                    baseUser = new Tutor(email, null);
                     break;
                 case Student:
-                    baseUser = new Student(null, null);
+                    baseUser = new Student(email, null);
                     break;
             }
 //            if (baseUser != null) { // todo: delete if check because all type values be cased
-                baseUser.setId(set.getLong("ID"));
-                baseUser.setFirstName(set.getString("FIRST_NAME"));
-                baseUser.setPasswordHash(set.getString("PASSWORD_HASH"));
-                baseUser.setDeleted(set.getBoolean("DELETED"));
+                baseUser.setId(id);
+                baseUser.setFirstName(firstName);
+                baseUser.setLastName(lastName);
+                baseUser.setPasswordHash(passwordHash);
+                baseUser.setDeleted(deleted);
 //            }
         } catch (SQLException e) {
+            logger.info("Ошибка при маппинге");
             e.printStackTrace();
         }
         return baseUser;

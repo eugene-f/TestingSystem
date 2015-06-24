@@ -1,4 +1,4 @@
-package com.frolov.testing;
+package com.frolov.testing.connection;
 
 import java.sql.*;
 import java.util.Map;
