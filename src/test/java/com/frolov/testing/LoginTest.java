@@ -3,21 +3,19 @@ package com.frolov.testing;
 import com.frolov.testing.connection.ConnectionPool;
 import com.frolov.testing.dao.DaoFactory;
 import com.frolov.testing.dao.jdbc.dao.JdbcAnswerDao;
-import com.frolov.testing.dao.jdbc.dao.JdbcTestDao;
 import com.frolov.testing.dao.jdbc.dao.JdbcUserDao;
 import com.frolov.testing.entity.test.Answer;
 import com.frolov.testing.entity.test.Question;
 import com.frolov.testing.entity.user.Admin;
 import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Tutor;
-import com.frolov.testing.action.Account;
-import com.frolov.testing.factory.TestFactory;
-import com.frolov.testing.servlet.TestingSystem;
+import com.frolov.testing.action.AccountActions;
 import com.thedeanda.lorem.Lorem;
 import org.boon.Boon;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
@@ -44,8 +42,7 @@ public class LoginTest {
         user.setPasswordHash("qwerty");
         user.setFirstName("Robert");
         user.setLastName("Ray");
-        TestingSystem.USER_LIST.add(user);
-        assertTrue(Account.checkUserByEmail(user.getEmail()));
+        assertTrue(AccountActions.checkUserByEmail(user.getEmail()));
     }
 
     @Test
@@ -75,15 +72,6 @@ public class LoginTest {
     }
 
     @Test
-    public void addTest() {
-        com.frolov.testing.entity.test.Test test = TestFactory.createTest();
-
-        DaoFactory instance = DaoFactory.getInstance(DaoFactory.Type.Jdbc);
-        JdbcTestDao jdbcTestDao = instance.create(JdbcTestDao.class);
-        jdbcTestDao.insert(test);
-    }
-
-    @Test
     public void addAnswer() {
         Question question = new Question(null);
         question.setId(ConstantContainer.RANDOM.nextLong());
@@ -105,6 +93,40 @@ public class LoginTest {
         Iterable<Answer> all = answerDao.getAll();
         for (Answer answer : all) {
             System.out.println(Boon.toPrettyJson(answer));
+        }
+    }
+
+    @Test
+    public void testJdbcDao() {
+        DaoFactory instance = DaoFactory.getInstance(DaoFactory.Type.Jdbc);
+        JdbcUserDao jdbcUserDao = instance.create(JdbcUserDao.class);
+        jdbcUserDao.setConnection(jdbcUserDao.getConnection());
+        BaseUser byEmail = jdbcUserDao.findByEmail("Ethan_Nash@gmail.com");
+        System.out.println(Boon.toPrettyJson(byEmail));
+    }
+
+    @Test
+    public void testConnectionPool() {
+        ConnectionPool instance1 = ConnectionPool.getInstance();
+        ConnectionPool instance2 = ConnectionPool.getInstance();
+        ConnectionPool instance3 = ConnectionPool.getInstance();
+
+        System.out.println(instance1.hashCode());
+        System.out.println(instance2.hashCode());
+        System.out.println(instance3.hashCode());
+        System.out.println(instance1.equals(instance3));
+
+        try {
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+            instance1.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
