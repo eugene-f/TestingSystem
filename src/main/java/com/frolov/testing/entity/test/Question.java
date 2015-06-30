@@ -58,4 +58,5 @@ public class Question extends BaseEntity {
     public void setCorrectAnswer(Answer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
+
 }

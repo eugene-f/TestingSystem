@@ -71,4 +71,5 @@ public class Configuration extends BaseEntity {
     public void setTakeAgain(boolean takeAgain) {
         this.takeAgain = takeAgain;
     }
+
 }

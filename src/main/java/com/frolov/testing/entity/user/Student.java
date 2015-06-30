@@ -15,18 +15,18 @@ import java.util.List;
  */
 public class Student extends BaseUser {
 
-    private static final UserType TYPE_STUDENT = UserType.Student;
+    private static final UserType TYPE = UserType.Student;
     private final Group group;
     private List<Session> sessions = new ArrayList<>();
     private List<Test> toPassTests = new ArrayList<>();
 
     public Student(String email, Group group) {
-        super(TYPE_STUDENT, email);
+        super(TYPE, email);
         this.group = group;
     }
 
     public Student(String email, String passwordHash, Group group) {
-        super(TYPE_STUDENT, email, passwordHash);
+        super(TYPE, email, passwordHash);
         this.group = group;
     }
 

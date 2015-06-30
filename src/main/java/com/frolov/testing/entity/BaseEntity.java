@@ -14,10 +14,6 @@ public abstract class BaseEntity {
     public BaseEntity() {
     }
 
-//    public BaseEntity(Long id) {
-//        this.id = id;
-//    }
-
     public UUID getUuid() {
         return uuid;
     }

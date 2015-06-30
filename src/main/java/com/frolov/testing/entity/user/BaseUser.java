@@ -18,8 +18,6 @@ public abstract class BaseUser extends BaseEntity {
     private String lastName;
     private String passwordHash;
 
-    // todo: make constructor with all class fields
-
     public BaseUser(UserType type, String email) {
         this.type = type;
         this.email = email;

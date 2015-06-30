@@ -14,18 +14,18 @@ import java.util.List;
  */
 public class Tutor extends BaseUser {
 
-    private static final UserType TYPE_TUTOR = UserType.Tutor;
+    private static final UserType TYPE = UserType.Tutor;
     private final Department department;
     private List<Test> createdTests = new ArrayList<>();
     private List<Session> completedSessions = new ArrayList<>();
 
     public Tutor(String email, Department department) {
-        super(TYPE_TUTOR, email);
+        super(TYPE, email);
         this.department = department;
     }
 
     public Tutor(String email, String passwordHash, Department department) {
-        super(TYPE_TUTOR, email, passwordHash);
+        super(TYPE, email, passwordHash);
         this.department = department;
     }
 

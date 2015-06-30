@@ -14,7 +14,8 @@ public class Session extends BaseEntity {
 
     private final Test test;
     private final Student student;
-    private final Date startDate; // todo: add finished time
+    private final Date startDate;
+//    private long finalTimeMillis; // todo: add finished time
     private Map<Question, Answer> studentAnswers = new HashMap<>(); // todo: select solution
     private Byte percentResult;
     private boolean finished;
@@ -22,12 +23,7 @@ public class Session extends BaseEntity {
     public Session(Test test, Student student, Date startDate) {
         this.test = test;
         this.student = student;
-        this.startDate = startDate == null ? new Date() : startDate; // for set Date from database
-//        if (startDate == null) {
-//            this.startDate = new Date();
-//        } else {
-//            this.startDate = startDate;
-//        }
+        this.startDate = (startDate == null) ? new Date() : startDate;
     }
 
     public Test getTest() {

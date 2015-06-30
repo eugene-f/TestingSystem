@@ -38,4 +38,5 @@ public class Faculty extends BaseEntity {
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
+
 }

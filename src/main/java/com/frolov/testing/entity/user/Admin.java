@@ -5,10 +5,10 @@ package com.frolov.testing.entity.user;
  */
 public class Admin extends BaseUser {
 
-    private static final UserType TYPE_ADMIN = UserType.Admin;
+    private static final UserType TYPE = UserType.Admin;
 
     public Admin(String email) {
-        super(TYPE_ADMIN, email);
+        super(TYPE, email);
     }
 
 }
