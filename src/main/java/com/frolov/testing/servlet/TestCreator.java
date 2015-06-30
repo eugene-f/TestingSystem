@@ -1,5 +1,12 @@
 package com.frolov.testing.servlet;
 
+import com.frolov.testing.action.AccountActions;
+import com.frolov.testing.dao.DaoFactory;
+import com.frolov.testing.dao.interfaces.DisciplineDao;
+import com.frolov.testing.entity.test.Discipline;
+import com.frolov.testing.entity.test.Test;
+import com.frolov.testing.entity.user.Tutor;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,13 +19,21 @@ import java.io.IOException;
 public class TestCreator extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
-        String discipline = request.getParameter("discipline");
-        String minutesToPass = request.getParameter("minutesToPass");
+        String disciplineName = request.getParameter("discipline");
         String questionCount = request.getParameter("questionCount");
         String answerCount = request.getParameter("answerCount");
         String publicated = request.getParameter("publicated");
 
+        DisciplineDao disciplineDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(DisciplineDao.class);
+        Discipline discipline = disciplineDao.findByName(disciplineName);
+
+        Test test = new Test((Tutor) AccountActions.getCurrentUser());
+        test.setName(title);
+        test.setDiscipline(discipline);
+        test.setPublicated(false);
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/create_questions.jsp");
+        request.setAttribute("test", test);
         request.setAttribute("question_count", questionCount);
         request.setAttribute("answer_count", answerCount);
         requestDispatcher.forward(request, response);

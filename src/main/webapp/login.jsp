@@ -8,7 +8,7 @@
     <form name="loginForm" method="post" action="/login">
         <input type="email" name="email" placeholder="E-mail"><br>
         <input type="password" name="password" placeholder="Password"><br>
-        <input type="submit" value="Log"><br>
+        <input type="submit" value="Login"><br>
     </form>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.frolov.testing.servlet;
 
+import com.frolov.testing.action.AccountActions;
 import org.boon.Boon;
 
 import javax.servlet.ServletException;
@@ -18,6 +19,6 @@ public class Account extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter printWriter = response.getWriter();
-        printWriter.println(Boon.toPrettyJson(TestingSystem.CURRENT_USER));
+        printWriter.println(Boon.toPrettyJson(AccountActions.getCurrentUser()));
     }
 }
