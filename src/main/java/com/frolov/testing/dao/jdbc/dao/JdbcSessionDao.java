@@ -3,6 +3,7 @@ package com.frolov.testing.dao.jdbc.dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.DaoFactory;
 import com.frolov.testing.dao.interfaces.SessionDao;
+import com.frolov.testing.dao.jdbc.JdbcAbstractBaseDao;
 import com.frolov.testing.dao.jdbc.JdbcBaseDao;
 import com.frolov.testing.dao.jdbc.JdbcMapper;
 import com.frolov.testing.entity.test.Session;
@@ -15,84 +16,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JdbcSessionDao extends JdbcBaseDao<Session> implements SessionDao, JdbcMapper<Session> {
+public class JdbcSessionDao extends JdbcAbstractBaseDao<Session> implements SessionDao {
 
     private static final String TABLE_NAME = "SESSIONS";
 
-    private static final String GET_ALL = "SELECT * FROM " + TABLE_NAME;
     private static final String INSERT = "INSERT INTO " + TABLE_NAME + " " +
             "(ID, TEST_ID, STUDENT_ID, START_DATE, RESULT, FINISHED, DELETED) " +
             "VALUES (NULL, ?, ?, ?, ?, ?, ?)";
-    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME + " " +
-            " WHERE ID = ?";
-    private static final String UPDATE = ""; // todo: write update script
-    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME + " " +
-            " WHERE ID = ?";
     private static final String FIND_BY_TEST_ID = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE TEST_ID = ?";
     private static final String FIND_BY_STUDENT_ID = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE STUDENT_ID = ?";
 
     public JdbcSessionDao() {
-    }
-
-    @Override
-    public String getTableName() {
-        return TABLE_NAME;
-    }
-
-    @Override
-    public Iterable<Session> getAll() throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(GET_ALL)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return mapToEntityList(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException();
-        }
-//        return null;
-    }
-
-    @Override
-    public Session insert(Session entity) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(INSERT)) {
-            mapToStatement(entity, preparedStatement);
-            preparedStatement.execute();
-//            return entity; // fixme: return User with Id
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Session findById(Long id) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_ID)) {
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return mapToEntity(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;    }
-
-    @Override
-    public Session update(Session entity) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(UPDATE)) {
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new DaoException();
-        }
-        return null;    }
-
-    @Override
-    public boolean deleteById(Long id) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(DELETE_BY_ID)) {
-            preparedStatement.setLong(1, id);
-            return preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+        super(TABLE_NAME, INSERT);
     }
 
     @Override

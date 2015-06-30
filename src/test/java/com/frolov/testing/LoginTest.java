@@ -50,11 +50,10 @@ public class LoginTest {
         JdbcUserDao userDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc)
                 .create(JdbcUserDao.class);
 
-        Admin admin = new Admin("admin@tessys.com");
+        Admin admin = new Admin("admin1@tessys.com", "qwerty");
         admin.setId(null);
         admin.setFirstName(Lorem.getFirstName());
         admin.setLastName(Lorem.getLastName());
-        admin.setPasswordHash("qwerty");
         admin.setDeleted(false);
 
         userDao.insert(admin);

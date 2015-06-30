@@ -1,5 +1,6 @@
 package com.frolov.testing.connection;
 
+import com.frolov.testing.dao.jdbc.JdbcProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,18 +8,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class ConnectionPool {
+public /*abstract*/ class ConnectionPool {
 
     private static final Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
     private static final ConnectionPool instance = new ConnectionPool();
-
-    private static final ResourceBundle database = ResourceBundle.getBundle("database");
-    private static final String URL = database.getString("url");
-    private static final String USERNAME = database.getString("username");
-    private static final String PASSWORD = database.getString("password");
 
     private static final ArrayList<Connection> CONNECTIONS = new ArrayList<>();
     private static final int CONNECTION_COUNT = 5;
@@ -41,7 +36,11 @@ public class ConnectionPool {
     private static Connection createConnection() {
 //        Connection connection;
         try {
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Connection connection = DriverManager.getConnection(
+                    JdbcProperties.getURL(),
+                    JdbcProperties.getUSERNAME(),
+                    JdbcProperties.getPASSWORD()
+            );
             logger.info("con create");
             return connection; //
         } catch (SQLException e) {
@@ -51,7 +50,7 @@ public class ConnectionPool {
 //        return connection;
     }
 
-    private boolean checkConnection(Connection connection) {
+    private static boolean checkConnection(Connection connection) {
         if (connection != null) {
             try {
                 if (!connection.isClosed()) {
@@ -66,7 +65,7 @@ public class ConnectionPool {
         return false;
     }
 
-    public void addConnection(Connection connection) {
+    public static void addConnection(Connection connection) {
         if (CONNECTIONS.size() <= CONNECTION_COUNT) {
             if (checkConnection(connection)) {
                 logger.info("Соединение добавлено");
@@ -77,7 +76,7 @@ public class ConnectionPool {
         }
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         for (Connection connection : CONNECTIONS) {
             if (checkConnection(connection)) {
                 logger.info("Соединение передано");

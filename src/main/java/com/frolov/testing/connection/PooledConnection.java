@@ -1,23 +1,23 @@
 package com.frolov.testing.connection;
 
+import com.frolov.testing.dao.jdbc.JdbcProperties;
+
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.concurrent.Executor;
 
 public class PooledConnection implements Connection {
 
-    private static final ResourceBundle database = ResourceBundle.getBundle("database");
-    private static final String DRIVER = database.getString("driver_class");
-    private static final String URL = database.getString("url");
-    private static final String USERNAME = database.getString("username");
-    private static final String PASSWORD = database.getString("password");
     private final Connection connection;
 
     public PooledConnection() {
         try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(
+                    JdbcProperties.getURL(),
+                    JdbcProperties.getUSERNAME(),
+                    JdbcProperties.getPASSWORD()
+            );
         } catch (SQLException e) {
             throw new ConnectionException("Невозможно создать пуллированное соединение", e);
         }

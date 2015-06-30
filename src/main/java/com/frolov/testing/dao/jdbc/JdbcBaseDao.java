@@ -15,16 +15,11 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 
     protected static final Logger logger = LoggerFactory.getLogger(JdbcBaseDao.class);
 
-    private /*final*/ String tableName; // todo: make abstract
+//    private /*final*/ String tableName; // todo: make abstract
 
-    private /*final*/ Connection connection; // todo: make final
+    private Connection connection;
 
     public JdbcBaseDao() {
-    }
-
-    public JdbcBaseDao(Connection connection) {
-        setConnection(connection);
-//        this.connection = connection;
     }
 
     public Connection getConnection() {

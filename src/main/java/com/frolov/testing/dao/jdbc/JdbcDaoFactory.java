@@ -4,24 +4,25 @@ import com.frolov.testing.connection.ConnectionPool;
 import com.frolov.testing.dao.Dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.DaoFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Driver;
 import java.sql.DriverManager;
 
 public class JdbcDaoFactory extends DaoFactory {
 
+    private static final Logger logger = LoggerFactory.getLogger(JdbcDaoFactory.class);
+
 //    Connection connection;
 
     private static final JdbcDaoFactory INSTANCE = new JdbcDaoFactory();
 
-    private static final String DRIVER = "org.h2.Driver";
-//    private static final ResourceBundle database = ResourceBundle.getBundle("database");
-//    private static final String DRIVER = database.getString("driver_class");
-
     private static void loadDriverClass() {
         try {
-            Class.forName(DRIVER);
-            Driver driver = (Driver) Class.forName(DRIVER).newInstance();
+            String driverName = JdbcProperties.getDRIVER();
+            Class.forName(driverName);
+            Driver driver = (Driver) Class.forName(driverName).newInstance();
             DriverManager.registerDriver(driver);
         } catch (Exception e) {
             throw new DaoException("Невозможно загрузить класс драйвера", e);
@@ -44,8 +45,8 @@ public class JdbcDaoFactory extends DaoFactory {
         } catch (Exception e) {
             throw new DaoException("Невозможно создать DAO для класса " + daoClass, e);
         }
-        ((JdbcBaseDao) dao).setConnection(ConnectionPool.getInstance().getConnection());
-//        ((NewJdbcBaseDao) dao).setConnection(ConnectionPool.getInstance().getConnection());
+//        ((JdbcBaseDao) dao).setConnection(ConnectionPool.getInstance().getConnection());
+        ((JdbcAbstractBaseDao) dao).setConnection(ConnectionPool.getInstance().getConnection());
         return dao;
     }
 

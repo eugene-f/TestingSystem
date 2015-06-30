@@ -7,8 +7,8 @@ public class Admin extends BaseUser {
 
     private static final UserType TYPE = UserType.Admin;
 
-    public Admin(String email) {
-        super(TYPE, email);
+    public Admin(String email, String password) {
+        super(TYPE, email, password);
     }
 
 }

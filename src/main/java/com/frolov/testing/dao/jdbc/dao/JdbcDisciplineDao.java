@@ -2,6 +2,7 @@ package com.frolov.testing.dao.jdbc.dao;
 
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.interfaces.DisciplineDao;
+import com.frolov.testing.dao.jdbc.JdbcAbstractBaseDao;
 import com.frolov.testing.dao.jdbc.JdbcBaseDao;
 import com.frolov.testing.dao.jdbc.JdbcMapper;
 import com.frolov.testing.entity.test.Discipline;
@@ -11,84 +12,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JdbcDisciplineDao extends JdbcBaseDao<Discipline> implements DisciplineDao, JdbcMapper<Discipline> {
+public class JdbcDisciplineDao extends JdbcAbstractBaseDao<Discipline> implements DisciplineDao {
 
     private static final String TABLE_NAME = "DISCIPLINES";
 
-    private static final String GET_ALL = "SELECT * FROM " + TABLE_NAME;
     private static final String INSERT = "INSERT INTO " + TABLE_NAME + " " +
             "(ID, NAME, DELETED)" + " " +
             "VALUES (NULL, ?, ?)";
-    private static final String FIND_BY_ID = "SELECT * FROM " + TABLE_NAME + " " +
-            "WHERE ID = ?";
-    private static final String UPDATE = ""; // todo: write update script
-    private static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME + " " +
-            "WHERE ID = ?";
     private static final String FIND_BY_NAME = "SELECT * FROM " + TABLE_NAME + " " +
             "WHERE NAME = ?";
 
-    public JdbcDisciplineDao(Connection connection) {
-        super(connection);
+    public JdbcDisciplineDao() {
+        super(TABLE_NAME, INSERT);
     }
-
-    @Override
-    public String getTableName() {
-        return TABLE_NAME;
-    }
-
-    @Override
-    public Iterable<Discipline> getAll() throws DaoException {
-        try (PreparedStatement statement = getConnection().prepareStatement(GET_ALL)) {
-            ResultSet resultSet = statement.executeQuery();
-            return mapToEntityList(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException();
-        }
-    }
-
-    @Override
-    public Discipline insert(Discipline entity) throws DaoException {
-        try (PreparedStatement statement = getConnection().prepareStatement(INSERT)) {
-            mapToStatement(entity, statement);
-            boolean execute = statement.execute();
-            return entity; // fixme: set id to entity
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Discipline findById(Long id) throws DaoException {
-        try (PreparedStatement statement = getConnection().prepareStatement(FIND_BY_ID)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            return mapToEntity(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;    }
-
-    @Override
-    public Discipline update(Discipline entity) throws DaoException {
-        try (PreparedStatement statement = getConnection().prepareStatement(UPDATE)) {
-            int i = statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException();
-        }
-        return null;
-    }
-
-    @Override
-    public boolean deleteById(Long id) throws DaoException {
-        try (PreparedStatement statement = getConnection().prepareStatement(DELETE_BY_ID)) {
-            statement.setLong(1, id);
-            boolean execute = statement.execute();
-            return execute;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;    }
 
     @Override
     public Discipline findByName(String name) throws DaoException {

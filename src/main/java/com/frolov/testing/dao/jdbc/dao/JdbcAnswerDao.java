@@ -3,7 +3,7 @@ package com.frolov.testing.dao.jdbc.dao;
 import com.frolov.testing.dao.DaoException;
 import com.frolov.testing.dao.DaoFactory;
 import com.frolov.testing.dao.interfaces.AnswerDao;
-import com.frolov.testing.dao.jdbc.NewJdbcBaseDao;
+import com.frolov.testing.dao.jdbc.JdbcAbstractBaseDao;
 import com.frolov.testing.entity.test.Answer;
 import com.frolov.testing.entity.test.Question;
 
@@ -12,25 +12,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JdbcAnswerDao extends NewJdbcBaseDao<Answer> implements AnswerDao {
+public class JdbcAnswerDao extends JdbcAbstractBaseDao<Answer> implements AnswerDao {
 
     private static final String TABLE_NAME = "ANSWERS";
     private static final String INSERT = "INSERT INTO" + " " + TABLE_NAME + " " +
-    "(ID, QUESTION_ID, CONTENT, CORRECT, DELETED)" + " " +
-    "VALUES (NULL, ?, ?, ?, ?)";
+            "(ID, QUESTION_ID, CONTENT, CORRECT, DELETED)" + " " +
+            "VALUES (NULL, ?, ?, ?, ?)";
+
     private static final String FIND_BY_QUESTION_ID = "SELECT * FROM " + TABLE_NAME + " " + "WHERE QUESTION_ID = ?";
     private static final String FIND_CORRECT_BY_QUESTION_ID = "SELECT * FROM " + TABLE_NAME + " " + "WHERE ID = ? AND CORRECT = TRUE";
 
     public JdbcAnswerDao() {
         super(TABLE_NAME, INSERT);
-    }
-
-    public JdbcAnswerDao(String tableName, String sqlInsert) {
-        super(tableName, sqlInsert);
-    }
-
-    public JdbcAnswerDao(Connection connection, String tableName, String sqlInsert) {
-        super(connection, tableName, sqlInsert);
     }
 
     @Override
@@ -93,5 +86,4 @@ public class JdbcAnswerDao extends NewJdbcBaseDao<Answer> implements AnswerDao {
         }
         return null;
     }
-
 }
