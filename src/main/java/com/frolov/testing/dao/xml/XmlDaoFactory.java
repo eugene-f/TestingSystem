@@ -19,10 +19,6 @@ public class XmlDaoFactory extends DaoFactory {
         T dao;
         try {
             dao = daoClass.newInstance();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
         } catch (Exception e) {
             throw new DaoException("XmlDaoFactory.createXmlDao()", e);
         }
@@ -30,13 +26,8 @@ public class XmlDaoFactory extends DaoFactory {
     }
 
     @Override
-    public <T extends /*JdbcBaseDao*/ Dao> T create(Class<T> daoClass) {
+    public <T extends Dao> T create(Class<T> daoClass) {
         return null;
     }
-
-//    @Override
-//    public <T extends Dao> T create(Class<T> daoClass) {
-//        return null;
-//    }
 
 }

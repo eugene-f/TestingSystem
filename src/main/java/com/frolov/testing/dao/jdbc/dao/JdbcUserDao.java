@@ -112,9 +112,9 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
 
     @Override
     public BaseUser findByEmail(String email) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement statement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
             return mapToEntity(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -203,7 +203,7 @@ public class JdbcUserDao extends JdbcBaseDao<BaseUser> implements UserDao, JdbcM
     public BaseUser mapToEntity(ResultSet set) {
         BaseUser baseUser = null;
         try {
-            set.next();
+//            set.next();
             long id = set.getLong("ID");
             long typeId = set.getLong("TYPE_ID");
             String firstName = set.getString("FIRST_NAME");

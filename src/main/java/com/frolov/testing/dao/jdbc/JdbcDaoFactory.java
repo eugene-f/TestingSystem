@@ -37,7 +37,7 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public <T extends /*JdbcBaseDao*/ Dao> T create(Class<T> daoClass) {
+    public <T extends Dao> T create(Class<T> daoClass) {
         T dao;
         try {
             dao = daoClass.newInstance();
