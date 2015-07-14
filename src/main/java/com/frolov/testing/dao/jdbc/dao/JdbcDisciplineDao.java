@@ -51,19 +51,23 @@ public class JdbcDisciplineDao extends JdbcAbstractBaseDao<Discipline> implement
 
     @Override
     public Discipline mapToEntity(ResultSet set) {
-        Discipline discipline = null;
         try {
-            long id = set.getLong("ID");
-            String name = set.getString("NAME");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                String name = set.getString("NAME");
+                boolean deleted = set.getBoolean("DELETED");
 
-            discipline = new Discipline(name);
-            discipline.setId(id);
-            discipline.setDeleted(deleted);
+                Discipline discipline = new Discipline(name);
+                discipline.setId(id);
+                discipline.setDeleted(deleted);
+                return discipline;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return discipline;
+        return null;
     }
 
 }

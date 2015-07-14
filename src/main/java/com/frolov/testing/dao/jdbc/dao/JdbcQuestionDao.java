@@ -57,26 +57,30 @@ public class JdbcQuestionDao extends JdbcAbstractBaseDao<Question> implements Qu
     @Override
     public Question mapToEntity(ResultSet set) {
         try {
-            long id = set.getLong("ID");
-            long testId = set.getLong("TEST_ID");
-            String content = set.getString("CONTENT");
-            long correctAnswerId = set.getLong("CORRECT_ANSWER_ID");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                long testId = set.getLong("TEST_ID");
+                String content = set.getString("CONTENT");
+                long correctAnswerId = set.getLong("CORRECT_ANSWER_ID");
+                boolean deleted = set.getBoolean("DELETED");
 
-            JdbcTestDao testDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcTestDao.class);
-            Test test = testDao.findById(testId);
+                JdbcTestDao testDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcTestDao.class);
+                Test test = testDao.findById(testId);
 
-            JdbcAnswerDao answerDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcAnswerDao.class);
-            Iterable<Answer> answers = answerDao.findByQuestionId(id);
-            Answer correctAnswer = answerDao.findById(correctAnswerId);
+                JdbcAnswerDao answerDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcAnswerDao.class);
+                Iterable<Answer> answers = answerDao.findByQuestionId(id);
+                Answer correctAnswer = answerDao.findById(correctAnswerId);
 
-            Question question = new Question(test);
-            question.setId(id);
-            question.setContent(content);
-            question.setAnswers((List<Answer>) answers);
-            question.setCorrectAnswer(correctAnswer);
-            question.setDeleted(deleted);
-            return question;
+                Question question = new Question(test);
+                question.setId(id);
+                question.setContent(content);
+                question.setAnswers((List<Answer>) answers);
+                question.setCorrectAnswer(correctAnswer);
+                question.setDeleted(deleted);
+                return question;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

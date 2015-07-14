@@ -15,12 +15,26 @@ public interface JdbcMapper<T extends BaseEntity> {
     T mapToEntity(ResultSet set);
 
     default List<T> mapToEntityList(ResultSet set) throws SQLException {
+
         List<T> list = new ArrayList<>();
-        while (set.next()) { // fixme: double set iteration
-//            set.previous();
-            list.add(mapToEntity(set));
+
+//        while (set.next()) { // fixme: double set iteration
+////            set.previous();
+//            list.add(mapToEntity(set));
+//        }
+
+        T entity = null;
+        entity = mapToEntity(set);
+        if (entity == null) {
+            return null;
+        } else {
+            while (entity != null) {
+                list.add(entity);
+                entity = mapToEntity(set);
+            }
+            return list;
         }
-        return list;
+
     }
 
 }

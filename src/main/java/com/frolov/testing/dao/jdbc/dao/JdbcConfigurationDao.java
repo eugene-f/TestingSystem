@@ -59,34 +59,38 @@ public class JdbcConfigurationDao extends JdbcAbstractBaseDao<Configuration> imp
 
     @Override
     public Configuration mapToEntity(ResultSet set) {
-        Configuration configuration = null;
         try {
-            long id = set.getLong("ID");
-            long test_id = set.getLong("TEST_ID");
-            byte minutes_to_pass = set.getByte("MINUTES_TO_PASS");
-            byte question_count_to_view = set.getByte("QUESTION_COUNT_TO_VIEW");
-            boolean shuffle_question = set.getBoolean("SHUFFLE_QUESTION");
-            boolean shuffle_answer = set.getBoolean("SHUFFLE_ANSWER");
-            boolean show_correct = set.getBoolean("SHOW_CORRECT");
-            boolean take_again = set.getBoolean("TAKE_AGAIN");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                long test_id = set.getLong("TEST_ID");
+                byte minutes_to_pass = set.getByte("MINUTES_TO_PASS");
+                byte question_count_to_view = set.getByte("QUESTION_COUNT_TO_VIEW");
+                boolean shuffle_question = set.getBoolean("SHUFFLE_QUESTION");
+                boolean shuffle_answer = set.getBoolean("SHUFFLE_ANSWER");
+                boolean show_correct = set.getBoolean("SHOW_CORRECT");
+                boolean take_again = set.getBoolean("TAKE_AGAIN");
+                boolean deleted = set.getBoolean("DELETED");
 
-            JdbcTestDao testDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcTestDao.class);
-            Test test = testDao.findById(id);
+                JdbcTestDao testDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcTestDao.class);
+                Test test = testDao.findById(id);
 
-            configuration = new Configuration(test); // fixme: loop
-            configuration.setId(test_id);
-            configuration.setMinutesToPass(minutes_to_pass);
-            configuration.setQuestionCountToView(question_count_to_view);
-            configuration.setShuffleQuestion(shuffle_question);
-            configuration.setShuffleAnswer(shuffle_answer);
-            configuration.setShowCorrect(show_correct);
-            configuration.setTakeAgain(take_again);
-            configuration.setDeleted(deleted);
+                Configuration configuration = new Configuration(test); // fixme: loop
+                configuration.setId(test_id);
+                configuration.setMinutesToPass(minutes_to_pass);
+                configuration.setQuestionCountToView(question_count_to_view);
+                configuration.setShuffleQuestion(shuffle_question);
+                configuration.setShuffleAnswer(shuffle_answer);
+                configuration.setShowCorrect(show_correct);
+                configuration.setTakeAgain(take_again);
+                configuration.setDeleted(deleted);
+                return configuration;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return configuration;
+        return null;
     }
 
 }

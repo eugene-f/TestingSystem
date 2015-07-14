@@ -66,21 +66,25 @@ public class JdbcAnswerDao extends JdbcAbstractBaseDao<Answer> implements Answer
     @Override
     public Answer mapToEntity(ResultSet set) {
         try {
-            long id = set.getLong("ID");
-            long questionId = set.getLong("QUESTION_ID");
-            String content = set.getString("CONTENT");
-            boolean correct = set.getBoolean("CORRECT");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                long questionId = set.getLong("QUESTION_ID");
+                String content = set.getString("CONTENT");
+                boolean correct = set.getBoolean("CORRECT");
+                boolean deleted = set.getBoolean("DELETED");
 
-            JdbcQuestionDao questionDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcQuestionDao.class);
-            Question question = questionDao.findById(questionId);
+                JdbcQuestionDao questionDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcQuestionDao.class);
+                Question question = questionDao.findById(questionId);
 
-            Answer answer = new Answer(question);
-            answer.setId(id);
-            answer.setContent(content);
-            answer.setCorrect(correct);
-            answer.setDeleted(deleted);
-            return answer;
+                Answer answer = new Answer(question);
+                answer.setId(id);
+                answer.setContent(content);
+                answer.setCorrect(correct);
+                answer.setDeleted(deleted);
+                return answer;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

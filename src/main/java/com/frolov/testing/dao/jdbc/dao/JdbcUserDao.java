@@ -10,6 +10,7 @@ import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.entity.user.UserType;
+import org.boon.Boon;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -131,41 +132,45 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
 
     @Override
     public BaseUser mapToEntity(ResultSet set) {
-        BaseUser baseUser = null;
         try {
-//            set.next();
-            long id = set.getLong("ID");
-            long typeId = set.getLong("TYPE_ID");
-            String firstName = set.getString("FIRST_NAME");
-            String lastName = set.getString("LAST_NAME");
-            String email = set.getString("EMAIL");
-            String passwordHash = set.getString("PASSWORD_HASH");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                long typeId = set.getLong("TYPE_ID");
+                String firstName = set.getString("FIRST_NAME");
+                String lastName = set.getString("LAST_NAME");
+                String email = set.getString("EMAIL");
+                String passwordHash = set.getString("PASSWORD_HASH");
+                boolean deleted = set.getBoolean("DELETED");
 
-//            set.next(); // fixme: double set iteration
-            switch (UserType.values()[(int) typeId]) {
-                case Admin:
-                    baseUser = new Admin(email);
-                    break;
-                case Tutor:
-                    baseUser = new Tutor(email, null);
-                    break;
-                case Student:
-                    baseUser = new Student(email, null);
-                    break;
+                BaseUser baseUser = null;
+                switch (UserType.values()[(int) typeId]) {
+                    case Admin:
+                        baseUser = new Admin(email, passwordHash);
+                        break;
+                    case Tutor:
+                        baseUser = new Tutor(email, null);
+                        break;
+                    case Student:
+                        baseUser = new Student(email, null);
+                        break;
+                }
+
+                if (baseUser != null) { // todo: delete if check because all type values be cased
+                    baseUser.setId(id);
+                    baseUser.setFirstName(firstName);
+                    baseUser.setLastName(lastName);
+                    baseUser.setPasswordHash(passwordHash);
+                    baseUser.setDeleted(deleted);
+                }
+                return baseUser;
             }
-//            if (baseUser != null) { // todo: delete if check because all type values be cased
-                baseUser.setId(id);
-                baseUser.setFirstName(firstName);
-                baseUser.setLastName(lastName);
-                baseUser.setPasswordHash(passwordHash);
-                baseUser.setDeleted(deleted);
-//            }
         } catch (SQLException e) {
             logger.info("Ошибка при маппинге");
             e.printStackTrace();
         }
-        return baseUser;
+        return null;
     }
 
 }

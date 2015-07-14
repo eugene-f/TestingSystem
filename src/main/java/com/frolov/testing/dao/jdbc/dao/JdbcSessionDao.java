@@ -74,27 +74,30 @@ public class JdbcSessionDao extends JdbcAbstractBaseDao<Session> implements Sess
     @Override
     public Session mapToEntity(ResultSet set) {
         try {
-            long id = set.getLong("ID");
-            long testId = set.getLong("TEST_ID");
-            long studentId = set.getLong("STUDENT_ID");
-            Date startDate = set.getDate("START_DATE");
-            byte result = set.getByte("RESULT");
-            boolean finished = set.getBoolean("FINISHED");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                long testId = set.getLong("TEST_ID");
+                long studentId = set.getLong("STUDENT_ID");
+                Date startDate = set.getDate("START_DATE");
+                byte result = set.getByte("RESULT");
+                boolean finished = set.getBoolean("FINISHED");
+                boolean deleted = set.getBoolean("DELETED");
 
-            JdbcTestDao testDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcTestDao.class);
-            Test test = testDao.findById(testId);
+                JdbcTestDao testDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcTestDao.class);
+                Test test = testDao.findById(testId);
 
-            JdbcUserDao userDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
-            BaseUser user = userDao.findById(studentId); // fixme: correct cast to student
+                JdbcUserDao userDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
+                BaseUser user = userDao.findById(studentId); // fixme: correct cast to student
 
-            Session session = new Session(test, (Student) user, startDate);
-            session.setId(id);
-            session.setPercentResult(result);
-            session.setFinished(finished);
-            session.setDeleted(deleted);
-
-            return session;
+                Session session = new Session(test, (Student) user, startDate);
+                session.setId(id);
+                session.setPercentResult(result);
+                session.setFinished(finished);
+                session.setDeleted(deleted);
+                return session;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

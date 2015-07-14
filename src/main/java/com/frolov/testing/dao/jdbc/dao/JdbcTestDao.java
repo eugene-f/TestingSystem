@@ -88,37 +88,41 @@ public class JdbcTestDao extends JdbcAbstractBaseDao<Test> implements TestDao {
 
     @Override
     public Test mapToEntity(ResultSet set) {
-        Test test = null;
         try {
-            long id = set.getLong("ID");
-            long author_id = set.getLong("AUTHOR_ID");
-            String name = set.getString("NAME");
-            long discipline_id = set.getLong("DISCIPLINE_ID");
-            long configuration_id = set.getLong("CONFIGURATION_ID");
-            boolean publicated = set.getBoolean("PUBLICATED");
-            boolean deleted = set.getBoolean("DELETED");
+            if (!set.next()) {
+                return null;
+            } else {
+                long id = set.getLong("ID");
+                long author_id = set.getLong("AUTHOR_ID");
+                String name = set.getString("NAME");
+                long discipline_id = set.getLong("DISCIPLINE_ID");
+                long configuration_id = set.getLong("CONFIGURATION_ID");
+                boolean publicated = set.getBoolean("PUBLICATED");
+                boolean deleted = set.getBoolean("DELETED");
 
-            JdbcUserDao userDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
-            BaseUser user = userDao.findById(author_id);
-            Tutor tutor = (Tutor) user;
+                JdbcUserDao userDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
+                BaseUser user = userDao.findById(author_id);
+                Tutor tutor = (Tutor) user;
 
-            JdbcDisciplineDao disciplineDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcDisciplineDao.class);
-            Discipline discipline = disciplineDao.findById(discipline_id);
+                JdbcDisciplineDao disciplineDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcDisciplineDao.class);
+                Discipline discipline = disciplineDao.findById(discipline_id);
 
-            JdbcConfigurationDao configurationDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcConfigurationDao.class);
-            Configuration configuration = configurationDao.findById(configuration_id);
+                JdbcConfigurationDao configurationDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcConfigurationDao.class);
+                Configuration configuration = configurationDao.findById(configuration_id);
 
-            test = new Test(tutor);
-            test.setId(id);
-            test.setName(name);
-            test.setDiscipline(discipline);
-            test.setConfiguration(configuration);
-            test.setPublicated(publicated);
-            test.setDeleted(deleted);
+                Test test = new Test(tutor);
+                test.setId(id);
+                test.setName(name);
+                test.setDiscipline(discipline);
+                test.setConfiguration(configuration);
+                test.setPublicated(publicated);
+                test.setDeleted(deleted);
+                return test;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return test;
+        return null;
     }
 
 }

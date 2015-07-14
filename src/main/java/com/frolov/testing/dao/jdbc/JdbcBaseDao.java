@@ -15,8 +15,6 @@ public abstract class JdbcBaseDao<T extends BaseEntity> implements Dao<T> {
 
     protected static final Logger logger = LoggerFactory.getLogger(JdbcBaseDao.class);
 
-//    private /*final*/ String tableName; // todo: make abstract
-
     private Connection connection;
 
     public JdbcBaseDao() {
