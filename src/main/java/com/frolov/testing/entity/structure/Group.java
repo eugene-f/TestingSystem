@@ -6,10 +6,6 @@ import com.frolov.testing.entity.user.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Содержит студентов
- * Для группы тьютором может назначаться тесты для прохождения
- */
 public class Group extends BaseEntity {
 
     private final Faculty faculty;

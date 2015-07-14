@@ -7,12 +7,6 @@ import com.frolov.testing.entity.structure.Group;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Принадлежит определенной группе
- * Может проходить тесты
- * Может просматривать результаты прохождения тестов
- * Может добавлять тесты в список для прохождения
- */
 public class Student extends BaseUser {
 
     private static final UserType TYPE = UserType.Student;

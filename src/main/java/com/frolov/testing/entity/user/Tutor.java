@@ -7,11 +7,6 @@ import com.frolov.testing.entity.structure.Department;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Создает тесты
- * Просмативает результаты прохождения созданных тестов
- * Назначать группам или отдельным студентам тесты для прохождения
- */
 public class Tutor extends BaseUser {
 
     private static final UserType TYPE = UserType.Tutor;

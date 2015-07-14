@@ -6,11 +6,6 @@ import com.frolov.testing.entity.user.Tutor;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Создается тьютором, который является его автором
- * Содержит список вопросов
- * Принадлежить определенной категории
- */
 public class Test extends BaseEntity {
 
     private final Tutor author;

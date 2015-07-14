@@ -5,11 +5,6 @@ import com.frolov.testing.entity.BaseEntity;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Вопрос для теста
- * Содержит списов вариантов ответа
- * Содержит верный ответ
- */
 public class Question extends BaseEntity {
 
     private final Test test;

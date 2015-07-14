@@ -6,9 +6,6 @@ import com.frolov.testing.entity.user.Tutor;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Содержит тьюторов
- */
 public class Department extends BaseEntity {
 
     private final Faculty faculty;

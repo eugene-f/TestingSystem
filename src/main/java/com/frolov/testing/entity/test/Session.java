@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Содержит информацию о текущем тестировании и его результатах
- */
 public class Session extends BaseEntity {
 
     private final Test test;

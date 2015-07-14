@@ -2,10 +2,6 @@ package com.frolov.testing.entity.test;
 
 import com.frolov.testing.entity.BaseEntity;
 
-/**
- * Содержит параметры прохождения тестирования
- * Которые задаются тьютором перед публикацией теста
- */
 public class Configuration extends BaseEntity {
 
     private final Test test;

@@ -2,10 +2,6 @@ package com.frolov.testing.entity.test;
 
 import com.frolov.testing.entity.BaseEntity;
 
-/**
- * Ответ на вопрос
- * Может быть верным или нет
- */
 public class Answer extends BaseEntity {
 
     private final Question question;

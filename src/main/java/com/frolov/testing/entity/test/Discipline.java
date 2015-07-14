@@ -5,10 +5,6 @@ import com.frolov.testing.entity.BaseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Контейнер для классификации тестов по определенным темат
- * Содержит список тестов данной категории
- */
 public class Discipline extends BaseEntity {
 
     private String name;

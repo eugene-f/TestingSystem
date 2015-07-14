@@ -2,13 +2,6 @@ package com.frolov.testing.entity.user;
 
 import com.frolov.testing.entity.BaseEntity;
 
-/**
- * Пользователь системы
- * Разделяется на несколько типов:
- * --- Администратор = регистрирует тьюторов, управляет системой
- * --- Тьютор = создает тесты, просматривает результаты
- * --- Студент = проходит тестирование
- */
 public abstract class BaseUser extends BaseEntity {
 
     // todo: make synchronized registration
