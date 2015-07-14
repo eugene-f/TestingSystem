@@ -36,24 +36,27 @@ public class LoginTest {
 
     }
 
-    @Test
-    public void login() {
-        BaseUser user = new Tutor("Robert_Ray@gmail.com", null);
-        user.setPasswordHash("qwerty");
-        user.setFirstName("Robert");
-        user.setLastName("Ray");
-        assertTrue(AccountActions.checkUserByEmail(user.getEmail()));
-    }
+//    @Test
+//    public void login() {
+//        BaseUser user = new Tutor("Robert_Ray@gmail.com", null);
+//        user.setPasswordHash("qwerty");
+//        user.setFirstName("Robert");
+//        user.setLastName("Ray");
+//        assertTrue(AccountActions.checkUserByEmail(user.getEmail()));
+//    }
 
     @Test
     public void addUser() {
         JdbcUserDao userDao = DaoFactory.getInstance(DaoFactory.Type.Jdbc)
                 .create(JdbcUserDao.class);
 
-        Admin admin = new Admin("admin1@tessys.com", "qwerty");
+        String firstName = Lorem.getFirstName();
+        String lastName = Lorem.getLastName();
+
+        Admin admin = new Admin(firstName + "_" + lastName + "@tessys.com", "qwerty");
         admin.setId(null);
-        admin.setFirstName(Lorem.getFirstName());
-        admin.setLastName(Lorem.getLastName());
+        admin.setFirstName(firstName);
+        admin.setLastName(lastName);
         admin.setDeleted(false);
 
         userDao.insert(admin);
