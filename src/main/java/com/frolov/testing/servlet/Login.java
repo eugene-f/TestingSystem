@@ -20,9 +20,10 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
 
         if (AccountActions.login(email, password)) {
-            response.sendRedirect("/account");
+            request.getSession().setAttribute("user", AccountActions.getCurrentUser());
+            response.sendRedirect("/user");
         } else {
-            printWriter.println("You have entered incorrect email or password");
+            printWriter.println("Incorrect email or password");
         }
     }
 

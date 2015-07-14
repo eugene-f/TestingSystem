@@ -1,6 +1,7 @@
 package com.frolov.testing.servlet;
 
 import com.frolov.testing.action.AccountActions;
+import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.UserType;
 
 import javax.servlet.RequestDispatcher;
@@ -24,7 +25,7 @@ public class Registration extends HttpServlet {
         String confirmPassword = request.getParameter("confirmPassword");
         String userType = request.getParameter("userType");
 
-        UserType type = null; // fixme
+        UserType type = null;
         switch (userType) {
             case "admin": type = UserType.Admin; break;
             case "tutor": type = UserType.Tutor; break;
@@ -33,13 +34,14 @@ public class Registration extends HttpServlet {
 
         if (AccountActions.dbGetUserByEmail(email) == null) {
             if (password.equals(confirmPassword)) {
-                AccountActions.createUser(type, firstName, lastName, email, password);
+                BaseUser user = AccountActions.createUser(type, firstName, lastName, email, password);
+                AccountActions.setCurrentUser(user);
                 response.sendRedirect("/account");
             } else {
-                printWriter.println("Password does not match");
+                printWriter.println("Пароли не совпадают");
             }
         } else {
-            printWriter.println("This email is already registered in the system\n");
+            printWriter.println("Пользователь с таким email уже зарегестрирован");
         }
     }
 
