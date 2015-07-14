@@ -7,6 +7,7 @@ import com.frolov.testing.entity.user.BaseUser;
 import com.frolov.testing.entity.user.Student;
 import com.frolov.testing.entity.user.Tutor;
 import com.frolov.testing.entity.user.UserType;
+import org.boon.Boon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,16 +28,17 @@ public abstract class AccountActions {
 
     public static boolean login(String email, String password) {
         BaseUser user = dbGetUserByEmail(email);
+        LOGGER.info(Boon.toPrettyJson(user));
         if (user != null) {
             if (checkPasswordByUser(user, password)) {
                 setCurrentUser(user);
-                LOGGER.info("Пользователь вошел в систему");
+                LOGGER.info("User login");
                 return true;
             } else {
-                LOGGER.info("Не верный пароль");
+                LOGGER.info("Incorrect password");
             }
         } else {
-            LOGGER.info("Такого пользователя не существует");
+            LOGGER.info("User not found");
         }
         return false;
     }
@@ -50,20 +52,17 @@ public abstract class AccountActions {
     }
 
     public static BaseUser createUser(UserType type, String firstName, String lastName, String email, String password) {
-        BaseUser user = null;
+        BaseUser user;
         switch (type) {
             case Admin: user = new Admin(email, password); break;
             case Tutor: user = new Tutor(email, password, null); break;
             case Student: user = new Student(email, password, null); break;
-            // return;
+            default: return null;
         }
-        if (user != null) {
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPasswordHash(password);
-            dbInsertUser(user);
-            setCurrentUser(user);
-        }
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+//        user.setPasswordHash(password);
+        dbInsertUser(user);
         return user;
     }
 
