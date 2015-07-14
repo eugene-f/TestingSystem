@@ -1,0 +1,18 @@
+<form name="loginForm" method="post" action="/login">
+    <md-input-container class="md-icon-float" flex>
+        <label>Электронная почта</label>
+        <md-icon>mail</md-icon>
+        <input type="email" name="email">
+    </md-input-container>
+    <md-input-container class="md-icon-float" flex>
+        <label>Пароль</label>
+        <md-icon>lock</md-icon>
+        <input type="password" name="password">
+    </md-input-container>
+    <md-checkbox aria-label="RememberMe">Запомнить меня</md-checkbox>
+    <div class="md-actions" layout="row" layout-align="end">
+        <md-button type="submit" ng-click="answer('useful')" class="md-raised md-accent">
+            Войти
+        </md-button>
+    </div>
+</form>

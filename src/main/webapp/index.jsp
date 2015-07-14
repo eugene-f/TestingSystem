@@ -1,15 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="text" type="java.lang.String"--%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Testing System</title>
+    <meta charset="UTF-8">
+    <title>Contester</title>
+    <%@ include file="/dependencies.html" %>
 </head>
-<body>
-    <h1>Testing System</h1>
-    <h5>${text}</h5>
-    <br><br><br>
-    <a href="/login">Login</a><br>
-    <a href="/registration">Registration</a><br>
+<body ng-app="app" ng-controller="AppCtrl" style="background-color: #E0E0E0">
+
+<div layout="column" layout-align="center center" layout-fill>
+    <md-card>
+        <md-toolbar class="md-card-image">
+            <div class="md-toolbar-tools">Вход</div>
+        </md-toolbar>
+        <md-card-content>
+            <%@ include file="components/login_form.html" %>
+        </md-card-content>
+    </md-card>
+    <md-button ng-click="showRegistrationDialog($event)">Регистрация</md-button>
+</div>
+
 </body>
 </html>

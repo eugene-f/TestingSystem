@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="user" type="com.frolov.testing.entity.user.BaseUser"--%>
-<%--@elvariable id="tutor" type="com.frolov.testing.entity.user.Tutor"--%>
 <html>
 <head>
     <title>Account</title>

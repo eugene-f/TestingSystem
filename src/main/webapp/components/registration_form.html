@@ -1,0 +1,42 @@
+<form name="registrationForm" method="post" action="/registration">
+    <md-input-container class="md-icon-float" flex>
+        <label>Имя</label>
+        <md-icon>account_circle</md-icon>
+        <input type="text" name="firstName">
+    </md-input-container>
+    <md-input-container class="md-icon-float" flex>
+        <label>Фамилия</label>
+        <md-icon></md-icon>
+        <input type="text" name="lastName">
+    </md-input-container>
+    <md-input-container class="md-icon-float" flex>
+        <label>Отчество</label>
+        <md-icon></md-icon>
+        <input type="text" name="fatherName">
+    </md-input-container>
+    <md-input-container class="md-icon-float" flex>
+        <label>Электронная почта</label>
+        <md-icon>mail</md-icon>
+        <input type="email" name="email">
+    </md-input-container>
+    <md-input-container class="md-icon-float" flex>
+        <label>Пароль</label>
+        <md-icon>lock</md-icon>
+        <input type="password" name="password">
+    </md-input-container>
+    <md-input-container class="md-icon-float" flex>
+        <label>Повторите пароль</label>
+        <md-icon></md-icon>
+        <input type="password" name="confirmPassword">
+    </md-input-container>
+    <md-radio-group>
+        <md-radio-button name="userType" value="student" class="md-primary">Студент</md-radio-button>
+        <md-radio-button name="userType" value="tutor" class="md-primary">Тьютор</md-radio-button>
+        <md-radio-button name="userType" value="admin" class="md-primary">Администратор</md-radio-button>
+    </md-radio-group>
+    <div layout="row" layout-align="end"> <!--class="md-actions"-->
+        <md-button type="submit" ng-click="answer('useful')" class="md-raised md-accent">
+            Зарегистрироваться
+        </md-button>
+    </div>
+</form>
