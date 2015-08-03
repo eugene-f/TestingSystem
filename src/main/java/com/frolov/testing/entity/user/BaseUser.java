@@ -8,6 +8,7 @@ public abstract class BaseUser extends BaseEntity {
     private final UserType type;
     private final String email; // todo: rename to 'login'
     private String firstName;
+    private String fatherName;
     private String lastName;
     private String passwordHash;
 
@@ -20,6 +21,10 @@ public abstract class BaseUser extends BaseEntity {
         this.type = type;
         this.email = email;
         this.passwordHash = passwordHash;
+    }
+
+    public String getFullName() {
+        return lastName + " " + firstName + " " + fatherName;
     }
 
     public UserType getType() {
@@ -36,6 +41,14 @@ public abstract class BaseUser extends BaseEntity {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 
     public String getLastName() {

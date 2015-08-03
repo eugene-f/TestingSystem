@@ -1,5 +1,6 @@
 package com.frolov.testing.action;
 
+import com.frolov.testing.Cookies;
 import com.frolov.testing.dao.DaoFactory;
 import com.frolov.testing.dao.jdbc.dao.JdbcUserDao;
 import com.frolov.testing.entity.user.Admin;
@@ -16,8 +17,6 @@ public abstract class AccountActions {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountActions.class);
     private static final JdbcUserDao JDBC_USER_DAO = DaoFactory.getInstance(DaoFactory.Type.Jdbc).create(JdbcUserDao.class);
 
-    public static BaseUser currentUser = null;
-
     public static BaseUser dbGetUserByEmail(String email) {
         return JDBC_USER_DAO.findByEmail(email);
     }
@@ -31,7 +30,7 @@ public abstract class AccountActions {
         LOGGER.info(Boon.toPrettyJson(user));
         if (user != null) {
             if (checkPasswordByUser(user, password)) {
-                setCurrentUser(user);
+                Cookies.setCurrentUser(user);
                 LOGGER.info("User login");
                 return true;
             } else {
@@ -64,14 +63,6 @@ public abstract class AccountActions {
 //        user.setPasswordHash(password);
         dbInsertUser(user);
         return user;
-    }
-
-    public static BaseUser getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(BaseUser currentUser) {
-        AccountActions.currentUser = currentUser;
     }
 
 }

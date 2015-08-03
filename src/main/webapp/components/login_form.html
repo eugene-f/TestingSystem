@@ -1,18 +1,23 @@
 <form name="loginForm" method="post" action="/login">
+
     <md-input-container class="md-icon-float" flex>
         <label>Электронная почта</label>
         <md-icon>mail</md-icon>
-        <input type="email" name="email">
+        <input type="email" name="email" required>
     </md-input-container>
+
     <md-input-container class="md-icon-float" flex>
         <label>Пароль</label>
         <md-icon>lock</md-icon>
-        <input type="password" name="password">
+        <input type="password" name="password" required>
     </md-input-container>
-    <md-checkbox aria-label="RememberMe">Запомнить меня</md-checkbox>
-    <div class="md-actions" layout="row" layout-align="end">
-        <md-button type="submit" ng-click="answer('useful')" class="md-raised md-accent">
+
+    <md-checkbox name="remember">Запомнить меня</md-checkbox>
+
+    <div class="md-actions" layout="row" layout-align="end center">
+        <md-button type="submit" ng-click="answer('useful')" class="md-accent md-raised">
             Войти
         </md-button>
     </div>
+
 </form>

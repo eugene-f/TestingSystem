@@ -1,17 +1,24 @@
-<md-toolbar>
+<md-toolbar class="md-whiteframe-z3">
+
     <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Menu">
+
+        <md-button class="md-icon-button">
             <md-icon>menu</md-icon>
             <md-tooltip>Меню</md-tooltip>
         </md-button>
+
         <span>Contester</span>
         <span flex></span>
+
         <!--<md-button ng-click="showRegistrationDialog($event)">Регистрация</md-button>-->
         <!--<md-button ng-click="showLoginDialog($event)" class="md-raised">Вход</md-button>-->
-        <md-button>О сервисе</md-button>
-        <md-button class="md-icon-button" aria-label="Options">
+
+        <md-button ng-click="showAboutDialog($event)">О сервисе</md-button>
+        <md-button class="md-icon-button">
             <md-icon>more_vert</md-icon>
             <md-tooltip>Действия</md-tooltip>
         </md-button>
+
     </div>
+
 </md-toolbar>

@@ -22,11 +22,13 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
     private static final String TABLE_NAME = "USERS";
 
     private static final String INSERT = "INSERT INTO " + TABLE_NAME + " " +
-            "(ID, TYPE_ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD_HASH, DELETED) " +
-            "VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+            "(ID, TYPE_ID, FIRST_NAME, FATHER_NAME, LAST_NAME, EMAIL, PASSWORD_HASH, DELETED) " +
+            "VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_EMAIL = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE EMAIL = ?";
     private static final String FIND_BY_FIRST_NAME = "SELECT * FROM " + TABLE_NAME + " " +
+            " WHERE FIRST_NAME = ?";
+    private static final String FIND_BY_FATHER_NAME = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE FIRST_NAME = ?";
     private static final String FIND_BY_LAST_NAME = "SELECT * FROM " + TABLE_NAME + " " +
             " WHERE LAST_NAME = ?";
@@ -55,7 +57,7 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
 
     @Override
     public BaseUser findByFirstName(String firstName) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FIRST_NAME)) {
             preparedStatement.setString(1, firstName);
             ResultSet resultSet = preparedStatement.executeQuery();
             return mapToEntity(resultSet);
@@ -66,8 +68,20 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
     }
 
     @Override
+    public BaseUser findByFatherName(String fatherName) throws DaoException {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FATHER_NAME)) {
+            preparedStatement.setString(1, fatherName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return mapToEntity(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public BaseUser findByLastName(String lastName) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_LAST_NAME)) {
             preparedStatement.setString(1, lastName);
             ResultSet resultSet = preparedStatement.executeQuery();
             return mapToEntity(resultSet);
@@ -79,7 +93,7 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
 
     @Override
     public BaseUser findByFullName(String fullName) throws DaoException {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_EMAIL)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(FIND_BY_FULL_NAME)) {
             preparedStatement.setString(1, fullName);
             ResultSet resultSet = preparedStatement.executeQuery();
             return mapToEntity(resultSet);
@@ -120,10 +134,11 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
         try {
             statement.setLong(1, entity.getType().ordinal());
             statement.setString(2, entity.getFirstName());
-            statement.setString(3, entity.getLastName());
-            statement.setString(4, entity.getEmail());
-            statement.setString(5, entity.getPasswordHash());
-            statement.setBoolean(6, entity.isDeleted());
+            statement.setString(3, entity.getFatherName());
+            statement.setString(4, entity.getLastName());
+            statement.setString(5, entity.getEmail());
+            statement.setString(6, entity.getPasswordHash());
+            statement.setBoolean(7, entity.isDeleted());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -139,6 +154,7 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
                 long id = set.getLong("ID");
                 long typeId = set.getLong("TYPE_ID");
                 String firstName = set.getString("FIRST_NAME");
+                String fatherName = set.getString("FATHER_NAME");
                 String lastName = set.getString("LAST_NAME");
                 String email = set.getString("EMAIL");
                 String passwordHash = set.getString("PASSWORD_HASH");
@@ -160,6 +176,7 @@ public class JdbcUserDao extends JdbcAbstractBaseDao<BaseUser> implements UserDa
                 if (baseUser != null) { // todo: delete if check because all type values be cased
                     baseUser.setId(id);
                     baseUser.setFirstName(firstName);
+                    baseUser.setFatherName(fatherName);
                     baseUser.setLastName(lastName);
                     baseUser.setPasswordHash(passwordHash);
                     baseUser.setDeleted(deleted);

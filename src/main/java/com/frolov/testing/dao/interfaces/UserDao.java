@@ -27,6 +27,8 @@ public interface UserDao extends Dao<BaseUser> {
 
     BaseUser findByFirstName(String firstName) throws DaoException;
 
+    BaseUser findByFatherName(String firstName) throws DaoException;
+
     BaseUser findByLastName(String lastName) throws DaoException;
 
     BaseUser findByFullName(String fullName) throws DaoException;

@@ -4,7 +4,7 @@
 
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <span>Вход</span>
+            <span>Создание теста</span>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="answer('not applicable')">
                 <md-icon>cancel</md-icon>
@@ -13,7 +13,7 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <%@ include file="login_form.html" %>
+        <%@ include file="create_test_form.jsp" %>
     </md-dialog-content>
 
 </md-dialog>

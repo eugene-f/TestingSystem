@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<md-dialog flex="33">
+<md-dialog flex="66">
 
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <span>Вход</span>
+            <span>Название теста</span>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="answer('not applicable')">
                 <md-icon>cancel</md-icon>
@@ -13,7 +13,7 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <%@ include file="login_form.html" %>
+        <%@ include file="solve_test_form.jsp" %>
     </md-dialog-content>
 
 </md-dialog>
