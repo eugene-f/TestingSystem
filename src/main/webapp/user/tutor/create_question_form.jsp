@@ -2,13 +2,17 @@
 <%--@elvariable id="question_count" type="java.lang.String"--%>
 <%--@elvariable id="answer_count" type="java.lang.String"--%>
 
-<c:set var="answerCount" value="5"></c:set>
+<%--<c:set var="questionCount" value="5"></c:set>--%>
+<%--<c:set var="answerCount" value="5"></c:set>--%>
 
-<form name="createTestForm" method="post" action="/create-questions">
+<c:set var="questionCount" value="${question_count}"></c:set>
+<c:set var="answerCount" value="${answer_count}"></c:set>
+
+<form name="createQuestionForm" method="post" action="/fill-test">
 
     <md-tabs md-dynamic-height md-border-bottom>
 
-        <c:forEach var="questionNumber" begin="1" end="${answerCount}">
+        <c:forEach var="questionNumber" begin="1" end="${questionCount}">
 
         <md-tab label="${questionNumber}">
 
@@ -44,7 +48,9 @@
     </md-tabs>
 
     <div class="md-actions" layout="row" layout-align="end center">
-        <md-button type="submit" class="md-accent md-raised">Создать и продолжить</md-button>
+        <%--<md-button type="submit" class="md-accent md-raised">Создать и продолжить</md-button>--%>
+        <md-button type="submit" class="md-accent md-raised">Сохранить</md-button>
+
     </div>
 
 </form>

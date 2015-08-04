@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="questionCountBegin" value="5"></c:set>
+<c:set var="questionCountBegin" value="1"></c:set>
 <c:set var="questionCountEnd" value="25"></c:set>
 <c:set var="questionCountStep" value="5"></c:set>
 
-<c:set var="answerCountBegin" value="2"></c:set>
+<c:set var="answerCountBegin" value="1"></c:set>
 <c:set var="answerCountEnd" value="5"></c:set>
 <c:set var="answerCountStep" value="1"></c:set>
 
@@ -22,17 +22,17 @@
         <input type="text" name="discipline" required>
     </md-input-container>
 
-    <md-input-container class="md-icon-float" flex>
-        <label>Количество вопросов</label>
-        <md-icon>apps</md-icon>
-        <input type="number" name="questionCount" required>
-    </md-input-container>
+    <%--<md-input-container class="md-icon-float" flex>--%>
+        <%--<label>Количество вопросов</label>--%>
+        <%--<md-icon>apps</md-icon>--%>
+        <%--<input type="number" name="questionCount" required>--%>
+    <%--</md-input-container>--%>
 
-    <md-input-container class="md-icon-float" flex>
-        <label>Количество вариантов ответов</label>
-        <md-icon>list</md-icon>
-        <input type="number" name="answerCount" required>
-    </md-input-container>
+    <%--<md-input-container class="md-icon-float" flex>--%>
+        <%--<label>Количество вариантов ответов</label>--%>
+        <%--<md-icon>list</md-icon>--%>
+        <%--<input type="number" name="answerCount" required>--%>
+    <%--</md-input-container>--%>
 
     <div layout="column" layout-align="center center" layout-fill flex>
 
